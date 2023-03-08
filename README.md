@@ -26,6 +26,15 @@ MIT, see LICENSE file for full license text
 ## Software requirements
 Base R
 
+## Repository Structure
+
+* _README.md_ : Readme file
+* _LICENSE_ : License text
+* _.gitignore_ : Files not tracked by git
+* _data_ : Folder for raw data
+    - Contains raw data
+
+
 README
 This document describes how to the used in the publication INSERT TITLE HERE
 
@@ -48,4 +57,5 @@ It will import the age-depth models into R and save them as a workspace named â€
 This workspace contains all age-depth models used.
 4. Test modes of evolution
 Open the file "testModesOfEvolution.R" in R and run it.
-It will test how well the different modes of evolution are recognized in the different scenarios, and save the results as a workspace named "resultsTestModesOfEvo.Rdata"
+It will test how well the different modes of evolution are recognized in the different scenarios, and save the results as a workspace named "resultsTestModesOfEvo.Rdata".
+
