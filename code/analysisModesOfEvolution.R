@@ -400,6 +400,125 @@ for (scenario in scenarioNames){
 }
 
 
+#### Plot Mean AICweights ####
+modeCol=c("GRW"="red","URW"="blue","Stasis"=grey(0.5),"OU"="black")
+modeLwd=c("GRW"=4,"URW"=4,"Stasis"=4,"OU"=4)
+modeLty=c("GRW"=1,"URW"=1,"Stasis"=1,"OU"=1)
+for (scenario in scenarioNames){
+  for (simMode in simulatedEvoModes){
+    png(filename=paste("Simulated", simMode, "TimeDomainScenario",scenario,".png",sep=""))
+    plot(NULL,
+         xlim=c(1,length(noOfSamplingLoc)),
+         ylim=c(0,1),
+         ylab="mean AICweight",
+         xlab="",
+         main=paste("Simulated", simMode, "\nTimeScenario",scenario),
+         xaxt="n")
+    axis(side=1,
+         at=c(1:length(noOfSamplingLoc)),
+          labels=noOfSamplingLoc)
+    mtext("Time Series Length",side=1, line=2)
+    yval=rep(NA,length(noOfSamplingLoc))
+    for (retMode in testedEvoModes){
+      meanAICwt=c()
+      for (nsp in 1:length(noOfSamplingLoc) ){
+        meanAICwt[nsp]=mean(AkaikeWtArrayTime[scenario,noOfSamplingLoc[nsp],simMode,retMode,])
+      }
+      lines(x=seq(1,length(noOfSamplingLoc)),
+             y=meanAICwt,
+            col=modeCol[retMode],
+            lwd=modeLwd[retMode],
+            lty=modeLty[retMode])
+    }
+    legend("topright",
+           legend=testedEvoModes,
+           lwd = modeLwd,
+           col=modeCol,
+           lty=modeLty)
+    dev.off()
+  }
+}
+
+for (scenario in scenarioNames){
+  for (simMode in simulatedEvoModes){
+    png(filename=paste("Simulated", simMode, "StratScenario",scenario,".png",sep=""))
+    plot(NULL,
+         xlim=c(1,length(examinedBasinPositions)),
+         ylim=c(0,1),
+         ylab="mean AICweight",
+         xlab="",
+         main=paste("Simulated", simMode, "\nScenario",scenario),
+         xaxt="n")
+    axis(side=1,
+         at=c(1:length(examinedBasinPositions)),
+         labels=examinedBasinPositions)
+    mtext("Distance from Shore",side=1, line=2)
+    yval=rep(NA,length(examinedBasinPositions))
+    for (retMode in testedEvoModes){
+      meanAICwt=c()
+      for (nsp in 1:length(examinedBasinPositions) ){
+        meanAICwt[nsp]=mean(AkaikeWtArrayStrat[scenario,examinedBasinPositions[nsp],simMode,retMode,])
+      }
+      lines(x=seq(1,length(examinedBasinPositions)),
+            y=meanAICwt,
+            col=modeCol[retMode],
+            lwd=modeLwd[retMode],
+            lty=modeLty[retMode])
+    }
+    legend("topright",
+           legend=testedEvoModes,
+           lwd = modeLwd,
+           col=modeCol,
+           lty=modeLty)
+    dev.off()
+  }
+}
+
+#### Grouped Boxplots of AICweights ####
+simulatedEvoMode=simulatedEvoModes[1]
+scenario=scenarioNames[1]
+dirName="stratDomainBoxPlots"
+dir.create(dirName)
+for (scenario in scenarioNames){
+  for (simulatedEvoMode in simulatedEvoModes){
+    df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+    for (pos in examinedBasinPositions){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                               AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    p=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      labs(title = paste("Scenario ", scenario, ", simulated: ", simulatedEvoMode,sep=""), y="AIC weight")
+    fileName=paste("StratDomainScenario", scenario, "simulated", simulatedEvoMode,".png")
+    ggsave(filename = paste(dirName,"/",fileName,sep=""))
+  }
+}
+
+dirName="timeDomainBoxPlots"
+dir.create(dirName)
+for (scenario in scenarioNames){
+  for (simulatedEvoMode in simulatedEvoModes){
+    df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+    for (nsp in noOfSamplingLoc){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                               AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    p=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      labs(title = paste("Scenario ", scenario, ", simulated: ", simulatedEvoMode,sep=""), y="AIC weight")
+    fileName=paste("TimeDomainScenario", scenario, "simulated", simulatedEvoMode,".png")
+    ggsave(filename = paste(dirName,"/",fileName,sep=""))
+  }
+}
+
 ####
 
 # require(klaR)
@@ -414,3 +533,289 @@ for (scenario in scenarioNames){
 #           AkaikeWtArrayTime[scenario,nSamp,modeOfEvo,"GRW",],
 #           AkaikeWtArrayTime[scenario,nSamp,modeOfEvo,"URW",],
 #            AkaikeWtArrayTime[scenario,nSamp,modeOfEvo,"Stasis",])
+
+
+#### Create Tables ####
+dir.create(paste(getwd(),"/Tables",sep=""))
+## Table 1: Strong support in strat domain 
+scenario="A"
+sceTabA= cbind(strongSupportPropStrat[scenario,"2 km",,],strongSupportPropStrat[scenario,"6 km",,],strongSupportPropStrat[scenario,"8 km",,],strongSupportPropStrat[scenario,"10 km",,],strongSupportPropStrat[scenario,"12 km",,])
+scenario="B"
+sceTabB= cbind(strongSupportPropStrat[scenario,"2 km",,],strongSupportPropStrat[scenario,"6 km",,],strongSupportPropStrat[scenario,"8 km",,],strongSupportPropStrat[scenario,"10 km",,],strongSupportPropStrat[scenario,"12 km",,])
+sceTab=rbind(sceTabA,sceTabB)
+
+write.csv(100 * sceTab,file = "Tables/Table1_Raw.csv")
+
+## Table 2: Strong support in time domain
+scenario="A"
+sceTabTA=matrix(data=NA,ncol=4*4, nrow=length(noOfSamplingLoc),dimnames = list(noOfSamplingLoc,NULL))
+i=1
+name=c()
+for (simMode in simulatedEvoModes){
+  for (resMode in testedEvoModes){
+    name=c(name,paste(simMode,resMode))
+    sceTabTA[,i]=strongSupportPropTime[scenario,,simMode,resMode]
+    i=i+1
+  }
+}
+colnames(sceTabTA)=name
+write.csv(100 * sceTabTA,file = "Tables/Table2_Raw.csv")
+
+## Supp table 1
+scenario="B"
+sceTabTB=matrix(data=NA,ncol=4*4, nrow=length(noOfSamplingLoc),dimnames = list(noOfSamplingLoc,NULL))
+i=1
+name=c()
+for (simMode in simulatedEvoModes){
+  for (resMode in testedEvoModes){
+    name=c(name,paste(simMode,resMode))
+    sceTabTB[,i]=strongSupportPropTime[scenario,,simMode,resMode]
+    i=i+1
+  }
+}
+colnames(sceTabTB)=name
+write.csv(100 * sceTabTB,file = "Tables/Supp_Table1_Raw.csv")
+
+
+
+
+
+
+
+
+
+#### Grouped Boxplots of AICweights ####
+
+#Scenario A
+{
+### Stasis A ###
+simulatedEvoMode=simulatedEvoModes[1]
+scenario=scenarioNames[1]
+    df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+    for (pos in examinedBasinPositions){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                               AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+     Plot1=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
+### BM A ###
+    simulatedEvoMode=simulatedEvoModes[2]
+    scenario=scenarioNames[1]
+    df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+    for (pos in examinedBasinPositions){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                               AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    Plot2=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20),axis.title.y=element_blank())+
+      labs(title = paste("B. ", simulatedEvoMode,sep=""), x="Distance from shore")
+    
+    ### WBD A ###
+    simulatedEvoMode=simulatedEvoModes[3]
+    scenario=scenarioNames[1]
+    df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+    for (pos in examinedBasinPositions){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                               AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    Plot3=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+      labs(title = paste("C. ", simulatedEvoMode,sep=""), x="Distance from shore")
+
+    
+    ### SBD A ###
+    simulatedEvoMode=simulatedEvoModes[4]
+    scenario=scenarioNames[1]
+    df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+    for (pos in examinedBasinPositions){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                               AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    Plot4=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Distance from shore", fill= "Tested Mode")
+}
+
+#Scenario B
+{
+  ### Stasis B ###
+  simulatedEvoMode=simulatedEvoModes[1]
+  scenario=scenarioNames[2]
+  df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+  for (pos in examinedBasinPositions){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                             AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  Plot5=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    labs(title = paste("E. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
+  ### BM B ###
+  simulatedEvoMode=simulatedEvoModes[2]
+  scenario=scenarioNames[2]
+  df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+  for (pos in examinedBasinPositions){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                             AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  Plot6=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+    labs(title = paste("F. ", simulatedEvoMode,sep=""), x="Distance from shore")
+  
+  ### WBD B ###
+  simulatedEvoMode=simulatedEvoModes[3]
+  scenario=scenarioNames[2]
+  df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+  for (pos in examinedBasinPositions){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                             AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  Plot7=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+    labs(title = paste("G. ", simulatedEvoMode,sep=""), x="Distance from shore")
+  
+  
+  ### SBD B ###
+  simulatedEvoMode=simulatedEvoModes[4]
+  scenario=scenarioNames[2]
+  df=data.frame(position=NULL,testedMode=NULL,AIC=NULL)
+  for (pos in examinedBasinPositions){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+                             AIC=AkaikeWtArrayStrat[scenario,pos,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  Plot8=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    labs(title = paste("H. ", simulatedEvoMode,sep=""), x="Distance from shore",fill= "Tested Mode")
+}
+
+multiplot(Plot1,Plot5,Plot2,Plot6,Plot3,Plot7,Plot4,Plot8,cols=4) #The multiplot
+
+
+
+#Scenario Time
+{
+Scenario="time"
+
+### Time Stasis ###
+simulatedEvoMode=simulatedEvoModes[1]
+    df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+    for (nsp in noOfSamplingLoc){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                               AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    plotT1=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+
+    ### Time BM ###
+    simulatedEvoMode=simulatedEvoModes[2]
+    df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+    for (nsp in noOfSamplingLoc){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                               AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    plotT2=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
+    
+    ### Time WBM ###
+    simulatedEvoMode=simulatedEvoModes[3]
+    df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+    for (nsp in noOfSamplingLoc){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                               AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    plotT3=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+
+    
+    ### Time SBM ###
+    simulatedEvoMode=simulatedEvoModes[4]
+    df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+    for (nsp in noOfSamplingLoc){
+      for (testedEvoMode in testedEvoModes){
+        df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                               testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                               AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+        
+      }
+    }
+    plotT4=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+      geom_boxplot(outlier.shape = NA) +
+      scale_fill_brewer(palette="Spectral")+
+      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
+}
+
+multiplot(plotT1,plotT3,plotT2,plotT4,cols=2) #The multiplot
