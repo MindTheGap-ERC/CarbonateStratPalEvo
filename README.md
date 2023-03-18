@@ -21,7 +21,7 @@ Orcid: [0000-0003-1559-1838](https://orcid.org/0000-0003-1559-1838)
 
 ## License
 
-MIT, see LICENSE file for full license text
+Apache 2.0, see LICENSE file for full license text
 
 ## Software requirements
 Base R
@@ -29,7 +29,7 @@ Base R
 ## Repository Structure
 
 * _README.md_ : Readme file
-* _LICENSE_ : License text
+* _LICENSE_ : Apache 2.0 license text
 * _.gitignore_ : Files not tracked by git
 * _data_ : Folder for raw data
     - Contains raw data
