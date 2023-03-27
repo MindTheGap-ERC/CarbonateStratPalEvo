@@ -30,7 +30,9 @@ sea_level_interpol_1kyr <- approx(
   )
 )
 
-# convert age to time
+
+
+# convert age to time and normalize to mean eustatic sea level 0
 
 sl_for_carbocat <- data.frame(
   time_kyr = seq(
@@ -38,7 +40,7 @@ sl_for_carbocat <- data.frame(
     to = 2580,
     by = 1
   ),
-  sea_level_m = rev(sea_level_interpol_1kyr$y)
+  sea_level_m = rev(sea_level_interpol_1kyr$y) - mean(rev(sea_level_interpol_1kyr$y)) #normalize to 0
 )
 
 plot(
