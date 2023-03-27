@@ -27,6 +27,23 @@ Apache 2.0, see LICENSE file for full license text
 ## Software requirements
 
 Base R
+Packages _paleoTS_, _renv_, _DAIME_, _ggplot2_ and their dependencies
+
+## Usage
+
+First, install the _renv_ package by running the following code in R:
+
+    ``` R
+    if (!require("renv", quietly = TRUE)) install.packages("renv")
+    ```
+
+Then, open the Rproject file "stratigraphy_paper.Rproj". Next, run
+
+    ``` R
+    renv::restore()
+    ```
+
+This will install all required packages and their dependencies needed in the project.
 
 ## Repository Structure
 
