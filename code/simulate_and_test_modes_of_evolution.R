@@ -1,11 +1,7 @@
 #### load required packages ####
-if (!require("DAIME", quietly = TRUE)) install.packages("DAIME")
-if (!require("paleoTS", quietly = TRUE)) install.packages("paleoTS")
-require(DAIME)
-require(paleoTS)
 
 #### Import Age-Depth models ####
-load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
+load("data/R_outputs/age_depth_models.Rdata")
 
 #### Random Seed ####
 ## Fix seed for repeatibility & debugging
@@ -45,7 +41,7 @@ simulatedEvoModes <- sapply(EvoModes, function(x) x$name)
 scenarioNames <- c("A", "B")
 specimensPerSample <- 100 # no of specimens found at one sampling site
 interPopVar <- 0.1 # variance in traits at one sampling location around the simulated mean trait value
-noOfTests <- 4 # no of tests performed per basin position
+noOfTests <- 1 # no of tests performed per basin position
 
 ## for tests on the strat domain only
 examinedBasinPositions <- c("2 km", "6 km", "8 km", "10 km", "12 km") # distance from shore in km where the tests will be performed
@@ -271,32 +267,32 @@ noOfSamplingLoc <- c("5", "10", "15", "20", "25", "35", "50", "100", "200") # ho
         ...
       )
       # define paleoTS object
-      fossilTimeSeries <- as.paleoTS(
+      fossilTimeSeries <- paleoTS::as.paleoTS(
         mm = traitValInTime$traitValue,
         vv = rep(x = interPopVar, length.out = length(traitValInTime$traitValue)),
         nn = rep(x = specimensPerSample, length.out = length(traitValInTime$traitValue)),
         tt = traitValInTime$time
       )
 
-      w.grw <- fitSimple(
+      w.grw <- paleoTS::fitSimple(
         y = fossilTimeSeries,
         model = "GRW"
       ) # General Random walk (Brownian drift)
-      w.urw <- fitSimple(
+      w.urw <- paleoTS::fitSimple(
         y = fossilTimeSeries,
         model = "URW"
       ) # Unbiased Random Walk (Brownian motion)
-      w.stat <- fitSimple(
+      w.stat <- paleoTS::fitSimple(
         y = fossilTimeSeries,
         model = "Stasis"
       ) # Stasis
-      w.ou <- fitSimple(
+      w.ou <- paleoTS::fitSimple(
         y = fossilTimeSeries,
         model = "OU"
       ) # Ornstein-Uhlenbeck model
 
       # This compares the models, the most likely model has the highest akaike.wt and the smallest AICc values.
-      compared <- compareModels(w.grw,
+      compared <- paleoTS::compareModels(w.grw,
         w.urw,
         w.stat,
         w.ou,
@@ -394,7 +390,7 @@ save(testResultsStrat,
      noOfSamplingLoc,
      simulatedEvoModes,
      testedEvoModes,
-     file = "data/R_outputs/resultsTestModesOfEvolution.Rdata")
+     file = "data/R_outputs/results_modes_of_evolution.Rdata")
 
 
 #### Plot Age-Depth models ####

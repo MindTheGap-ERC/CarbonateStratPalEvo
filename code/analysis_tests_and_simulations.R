@@ -378,7 +378,7 @@ for (scenario in scenarioNames) {
         )
       }
     }
-    p <- ggplot(
+    p <- ggplot2::ggplot(
       df,
       aes(
         x = position,
@@ -419,7 +419,7 @@ for (scenario in scenarioNames) {
         )
       }
     }
-    p <- ggplot(
+    p <- ggplot2::ggplot(
       df,
       aes(
         x = nsp,
@@ -498,7 +498,7 @@ scenario=scenarioNames[1]
         
       }
     }
-     Plot1=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+     Plot1=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
@@ -515,7 +515,7 @@ scenario=scenarioNames[1]
         
       }
     }
-    Plot2=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    Plot2=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20),axis.title.y=element_blank())+
@@ -533,7 +533,7 @@ scenario=scenarioNames[1]
         
       }
     }
-    Plot3=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    Plot3=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
@@ -552,7 +552,7 @@ scenario=scenarioNames[1]
         
       }
     }
-    Plot4=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+    Plot4=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
@@ -574,7 +574,7 @@ scenario=scenarioNames[1]
       
     }
   }
-  Plot5=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+  Plot5=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
@@ -591,7 +591,7 @@ scenario=scenarioNames[1]
       
     }
   }
-  Plot6=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+  Plot6=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
@@ -609,7 +609,7 @@ scenario=scenarioNames[1]
       
     }
   }
-  Plot7=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+  Plot7=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
@@ -628,7 +628,7 @@ scenario=scenarioNames[1]
       
     }
   }
-  Plot8=ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
+  Plot8=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
     theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
@@ -655,7 +655,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
       }
     }
-    plotT1=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
@@ -672,7 +672,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
       }
     }
-    plotT2=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
@@ -690,7 +690,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
       }
     }
-    plotT3=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
@@ -708,7 +708,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
       }
     }
-    plotT4=ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
