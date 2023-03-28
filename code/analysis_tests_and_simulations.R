@@ -10,8 +10,8 @@ load("data/R_outputs/results_modes_of_evolution.Rdata")
 
 
 #### Basic Visuals: plot results in strat domain ####
-dist <- "2 km" # one of "2 km","6 km","8 km","10 km","12 km"
-scenario <- "A" # one of A","B"
+dist <- "12 km" # one of "2 km","6 km","8 km","10 km","12 km"
+scenario <- "B" # one of A","B"
 mode <- "strong Brownian drift" # one of "stasis","Brownian motion","weak Brownian drift","strong Brownian drift"
 run <- 1 # integer between 1 and noOfTests
 ## Age-depth model
