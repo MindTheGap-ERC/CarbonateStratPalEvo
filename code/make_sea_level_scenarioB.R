@@ -5,10 +5,12 @@
 # Extracted from supp. Info table S1
 data_imported <- read.csv(file = "data/miller_2020/Miller_et_al_2020_SL_from_table_S1.csv")
 
-# remove excess data (older than 3 Ma)
+# extract data necessary to cover Pleistocene
+rel_ind = 1:min(which(data_imported$Age_.ka.>2580))
+
 sea_level_miller_raw <- data.frame(
-  age_kyr = data_imported$Age_.ka.[data_imported$Age_.ka. < 3000],
-  sea_level_m = data_imported$Sea_level_.m.[data_imported$Age_.ka. < 3000]
+  age_kyr = data_imported$Age_.ka.[rel_ind],
+  sea_level_m = data_imported$Sea_level_.m.[rel_ind]
 )
 
 # plot temporal resolution
@@ -53,7 +55,7 @@ plot(
 
 write.table(
   x = sl_for_carbocat$sea_level_m,
-  file = "data/miller_2020/sea_level_scenarioB.txt",
+  file = "data/R_outputs/sea_level_scenarioB.txt",
   col.names = FALSE,
   row.names = FALSE
 )
