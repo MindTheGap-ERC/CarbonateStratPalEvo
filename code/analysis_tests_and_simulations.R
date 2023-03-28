@@ -6,7 +6,7 @@ require(grid)
 source("code/multiplot.R")
 
 #### load test results ####
-load("data/R_outputs/resultsTestModesOfEvolution.Rdata")
+load("data/R_outputs/results_modes_of_evolution.Rdata")
 
 
 #### Basic Visuals: plot results in strat domain ####
