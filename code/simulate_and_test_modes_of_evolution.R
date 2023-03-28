@@ -41,7 +41,7 @@ simulatedEvoModes <- sapply(EvoModes, function(x) x$name)
 scenarioNames <- c("A", "B")
 specimensPerSample <- 100 # no of specimens found at one sampling site
 interPopVar <- 0.1 # variance in traits at one sampling location around the simulated mean trait value
-noOfTests <- 1 # no of tests performed per basin position
+noOfTests <- 100 # no of tests performed per basin position
 
 ## for tests on the strat domain only
 examinedBasinPositions <- c("2 km", "6 km", "8 km", "10 km", "12 km") # distance from shore in km where the tests will be performed
@@ -392,17 +392,3 @@ save(testResultsStrat,
      testedEvoModes,
      file = "data/R_outputs/results_modes_of_evolution.Rdata")
 
-
-#### Plot Age-Depth models ####
-# for (scenario in scenarioNames){
-#   for (dist in examinedBasinPositions){
-#     jpeg(filename = paste("0 ADM scenario ",scenario, ", ",dist, " offshore.jpg",sep=""))
-#     plot(x=ageDepthModels[[scenario]][[dist]]$time,
-#          y=ageDepthModels[[scenario]][[dist]]$height,
-#          xlab = "Time [Ma]",
-#          ylab = "Height [m]",
-#          type = "l",
-#          main = paste("Scenario ", scenario,", ", dist, " offshore", sep = ""))
-#     dev.off()
-#   }
-# }
