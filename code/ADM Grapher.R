@@ -9,6 +9,8 @@ require(DAIME)
 require("ggplot2")
 require("RColorBrewer")
 
+#Creates the ADM for platform A
+{
 #### plot age model with erosion  for Basin A####
 # choose age model
 i=20
@@ -165,9 +167,10 @@ ADM_A=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         legend.box.background = element_rect(color="black", size=1)
           ) 
 ADM_A
+}
 
-
-
+#Creates the ADM for platform B
+{
 #### plot age model with erosion for Basin B####
 # choose age model
 i=20
@@ -196,7 +199,7 @@ i=60
 {
   AMTime=ageDepthModels$B[[i]]$time # extract time
   
-  AMHeight=ageDepthModels$A[[i]]$height # extract strat height
+  AMHeight=ageDepthModels$B[[i]]$height # extract strat height
   
   # times where the values of the age model is determined
   timesOfInterest=seq(0,max(AMTime),length.out=10000)
@@ -324,3 +327,4 @@ ADM_B=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         legend.box.background = element_rect(color="black", size=1)
   ) 
 ADM_B
+}
