@@ -1,10 +1,9 @@
 #Creates the trait value over height graphs for both platforms
 
 
-############# 1. Dependencies:###################################################
+# 1. Dependencies:
 #choose the platform:
-load("NewAgeModels.Rdata") #loads platform B
-load("syntheticAgeModels.RData") #Loads platform A
+load("data/R_outputs/age_depth_models.Rdata")
 
 myBM=function(t, mu=0, sigma=1){
   #Sort 't' and adds a vector "variance" with the same length as 't'
@@ -37,22 +36,22 @@ require("ggplot2")
 #You also need to load the function for the mode of evolution you want to test, in this case myBM.
 
 #There are also two other .R files required: Multiplot.R and ADM Grapher.R:
-source("ADM Grapher.R")
-source("Multiplot.R")
+source("code/ADM Grapher.R")
+source("code/Multiplot.R")
 
 
-############ 2. The forming of a full evolutionary record over time at all sampled locations.###########
+#9########### 2. The forming of a full evolutionary record over time at all sampled locations.###########
 {
 myTraitValues=c() #Creating vector myTraitValues
 myTraitValues$time=c() #Creating vector myTraitValues$time.
 allTimes=c() #Creating vector allTimes
 for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
   #Retrieving necessary values:
-  AMTime=ageModelList[[i]]$time # extract time
-  AMHeight=ageModelList[[i]]$height # extract strat height
+  AMTime=ageDepthModels$A[[i]]$time # extract time
+  AMHeight=ageDepthModels$A[[i]]$height # extract strat height
   
   #Calculating height steps every 0,5 meter.
-  myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by = 0.5)
+  myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by = 0.5)
   
   #Adjusting values to remove duplicates:
   adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -116,10 +115,10 @@ PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
 wantedDist=20  
 for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
   #Retrieving necessary values:
-  AMTime=ageModelList[[i]]$time # extract time
-  AMHeight=ageModelList[[i]]$height # extract strat height
+  AMTime=ageDepthModels$A[[i]]$time # extract time
+  AMHeight=ageDepthModels$A[[i]]$height # extract strat height
   #Calculating height steps every 0,5 meter.
-  myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by=0.5)
+  myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by=0.5)
   
   #Adjusting values to remove duplicates:
   adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -223,10 +222,10 @@ Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
 {wantedDist=60  
 for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
   #Retrieving necessary values:
-  AMTime=ageModelList[[i]]$time # extract time
-  AMHeight=ageModelList[[i]]$height # extract strat height
+  AMTime=ageDepthModels$A[[i]]$time # extract time
+  AMHeight=ageDepthModels$A[[i]]$height # extract strat height
   #Calculating height steps every 0,5 meter.
-  myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by=0.5)
+  myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by=0.5)
   
   #Adjusting values to remove duplicates:
   adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -330,10 +329,10 @@ Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
 {wantedDist=80  
   for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
     #Retrieving necessary values:
-    AMTime=ageModelList[[i]]$time # extract time
-    AMHeight=ageModelList[[i]]$height # extract strat height
+    AMTime=ageDepthModels$A[[i]]$time # extract time
+    AMHeight=ageDepthModels$A[[i]]$height # extract strat height
     #Calculating height steps every 0,5 meter.
-    myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by=0.5)
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by=0.5)
     
     #Adjusting values to remove duplicates:
     adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -437,10 +436,10 @@ Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
 {wantedDist=100  
   for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
     #Retrieving necessary values:
-    AMTime=ageModelList[[i]]$time # extract time
-    AMHeight=ageModelList[[i]]$height # extract strat height
+    AMTime=ageDepthModels$A[[i]]$time # extract time
+    AMHeight=ageDepthModels$A[[i]]$height # extract strat height
     #Calculating height steps every 0,5 meter.
-    myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by=0.5)
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by=0.5)
     
     #Adjusting values to remove duplicates:
     adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -544,10 +543,10 @@ Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
 {wantedDist=120  
   for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
     #Retrieving necessary values:
-    AMTime=ageModelList[[i]]$time # extract time
-    AMHeight=ageModelList[[i]]$height # extract strat height
+    AMTime=ageDepthModels$A[[i]]$time # extract time
+    AMHeight=ageDepthModels$A[[i]]$height # extract strat height
     #Calculating height steps every 0,5 meter.
-    myHeightsOfObservations=seq(0.5,max(ageModelList[[i]]$height)-(max(ageModelList[[i]]$height)/200),by=0.5)
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels$A[[i]]$height)-(max(ageDepthModels$A[[i]]$height)/200),by=0.5)
     
     #Adjusting values to remove duplicates:
     adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
@@ -649,5 +648,10 @@ Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
 }
 
 
-multiplot(ADM,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+End= multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
 
+ pdf(file = "figs/R/Figure_4.pdf", width= 10, height= 12)
+ 
+ multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+  dev.off()
+ 
