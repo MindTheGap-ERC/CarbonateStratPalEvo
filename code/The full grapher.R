@@ -45,7 +45,7 @@ myNormStasis <- function(t,mean = 0,sd = 1) {
   )
   traitList <- list(
     time = t,
-    traitValue = traitValues
+    TraitValue = traitValues
   )
   return(traitList)
 } #The formula for Stasis.
@@ -127,7 +127,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle("Trait values over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -242,7 +242,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -349,7 +349,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -456,7 +456,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -563,7 +563,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -744,7 +744,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle("Trait values over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -859,7 +859,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -966,7 +966,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -1073,7 +1073,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
@@ -1180,7 +1180,7 @@ source("code/Multiplot.R")
       
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.1)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
