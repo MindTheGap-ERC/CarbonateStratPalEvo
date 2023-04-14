@@ -2,6 +2,7 @@
 # install.packages(ggtern)
 require(paleoTS)
 require(grid)
+require("ggplot2")
 
 source("code/multiplot.R")
 
@@ -81,7 +82,7 @@ run <- 1 # integer between 1 and noOfTests
   )
 }
 
-# trait vlaues in time domain
+# trait values in time domain
 {
   plot(
     x = testResultsStrat[[scenario]][[dist]][[mode]][[run]]$inputData$time,
@@ -98,7 +99,7 @@ nSamp <- "50" # one of "5"   "10"  "15"  "20"  "25"  "35"  "50"  "100" "200"
 mode <- "stasis" # one of "stasis","Brownian motion","weak Brownian drift","strong Brownian drift"
 run <- 1 # integer between 1 and noOfTests
 
-# trait vlaues in time domain, classic representation
+# trait values in time domain, classic representation
 {
   plot(
     x = testResultsTime[[scenario]][[nSamp]][[mode]][[run]]$inputData$time,
@@ -120,7 +121,7 @@ run <- 1 # integer between 1 and noOfTests
     )
   )
 }
-# trait vlaues in time domain, paleoTS representation
+# trait values in time domain, paleoTS representation
 # note that the axis labels are hardcoded in the paleoTS package, and can not be changed via the "xlab"/"ylab" option
 {
   plot(
@@ -278,7 +279,7 @@ weakSupportPropStrat["B", , "strong Brownian drift", ]
 
 
 
-#### Time Domain: WHich models have strong support? ####
+#### Time Domain: Which models have strong support? ####
 # checks for which proportion of test runs there is strong support for a model, meaning AICweight > acceptanceTreshold
 acceptanceTreshold <- 0.9
 strongSupportPropTime <- array(NA,
@@ -482,8 +483,10 @@ write.csv(100 * sceTabTB,file = "tables/Supp_Table1_Raw.csv")
 
 
 
-#### Figs for publication: Grouped Boxplots of AICweights ####
+#### Figs for publication: Grouped Boxplots of AICweights (Figure 6, 7 & S9)####
 
+#AIC weights over height both scenarios (Figure 6)
+{
 #Scenario A
 {
 ### Stasis A ###
@@ -636,13 +639,19 @@ scenario=scenarioNames[1]
     labs(title = paste("H. ", simulatedEvoMode,sep=""), x="Distance from shore",fill= "Tested Mode")
 }
 
-multiplot(Plot1,Plot5,Plot2,Plot6,Plot3,Plot7,Plot4,Plot8,cols=4) #The multiplot
 
-
-
-#Scenario Time
 {
-Scenario="time"
+  pdf(file = paste("figs/R/Boxplot_Depth.pdf"), width= 25, height= 12)
+  
+  multiplot(Plot1,Plot5,Plot2,Plot6,Plot3,Plot7,Plot4,Plot8,cols=4) #The multiplot
+  dev.off()
+}
+}
+
+#Scenario Time, 2 Ma. (Figure 7)
+{
+{
+scenario=scenarioNames[1]
 
 ### Time Stasis ###
 simulatedEvoMode=simulatedEvoModes[1]
@@ -716,4 +725,95 @@ simulatedEvoMode=simulatedEvoModes[1]
       labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
-multiplot(plotT1,plotT3,plotT2,plotT4,cols=2) #The multiplot
+{
+  pdf(file = paste("figs/R/Boxplot_Time_2Ma.pdf"), width= 25, height= 12)
+  
+  multiplot(plotT1,plotT3,plotT2,plotT4,cols=2) #The multiplot
+  dev.off()
+}
+}
+
+#Scenario Time, 2.58 Ma. (Figure S9)
+{
+{
+  scenario=scenarioNames[2]
+  
+  ### Time Stasis ###
+  simulatedEvoMode=simulatedEvoModes[1]
+  df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+  for (nsp in noOfSamplingLoc){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                             AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+  
+  ### Time BM ###
+  simulatedEvoMode=simulatedEvoModes[2]
+  df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+  for (nsp in noOfSamplingLoc){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                             AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+    }
+  }
+  plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
+  
+  ### Time WBM ###
+  simulatedEvoMode=simulatedEvoModes[3]
+  df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+  for (nsp in noOfSamplingLoc){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                             AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+  
+  
+  ### Time SBM ###
+  simulatedEvoMode=simulatedEvoModes[4]
+  df=data.frame(nsp=NULL,testedMode=NULL,AIC=NULL)
+  for (nsp in noOfSamplingLoc){
+    for (testedEvoMode in testedEvoModes){
+      df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(AkaikeWtArrayTime[1,1,1,1,]))),
+                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayTime[1,1,1,1,])),
+                             AIC=AkaikeWtArrayTime[scenario,nsp,simulatedEvoMode,testedEvoMode,]))
+      
+    }
+  }
+  plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_brewer(palette="Spectral")+
+    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
+          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
+}
+
+{
+  pdf(file = paste("figs/R/Boxplot_Time_2,58Ma.pdf"), width= 25, height= 12)
+  
+  multiplot(plotT1,plotT3,plotT2,plotT4,cols=2) #The multiplot
+  dev.off()
+}
+}
+
