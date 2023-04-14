@@ -60,7 +60,7 @@ source("code/ADM Grapher.R")
 source("code/Multiplot.R")
 }
 
-#### Figs for publication: Trait value over height Stasis ####
+#### Figs for publication: Trait value over height Stasis (Figures S5 & S8)####
 {
   #Inputs for the correct simulated mode of evolution:
   Mode=myNormStasis
@@ -1303,7 +1303,7 @@ source("code/Multiplot.R")
   }
 }
 
-#### Figs for publication: Trait value over height Brownian motion ####
+#### Figs for publication: Trait value over height Brownian motion (Figures S4 & S7)####
 {
   #Inputs for the correct simulated mode of evolution:
   Mode=myBM
@@ -2546,7 +2546,7 @@ source("code/Multiplot.R")
   }
 }
 
-#### Figs for publication: Trait value over height Weak Brownian drift ####
+#### Figs for publication: Trait value over height Weak Brownian drift (Figures S3 & S6)####
 {
   #Inputs for the correct simulated mode of evolution:
   Mode=myBM
@@ -3789,7 +3789,7 @@ source("code/Multiplot.R")
   }
 }
 
-#### Figs for publication: Trait value over height Strong Brownian drift ####
+#### Figs for publication: Trait value over height Strong Brownian drift (Figures 4 & 5)####
 {
   Mode=myBM
   simulatedmode="Strong Brownian drift"
@@ -5030,3 +5030,4 @@ source("code/Multiplot.R")
     }
   }
 }
+
