@@ -5031,3 +5031,314 @@ source("code/Multiplot.R")
   }
 }
 
+
+
+#### Figs for publication: Trait value over time all modes (Figure S2)####
+{
+  #Choosing the basin:
+  p = "B"
+  #Creating the stasis graph:
+  {
+  Mode=myNormStasis
+  simulatedmode="Stasis"
+  Mean=0
+  Deviation=1
+  {
+    #1.1 The forming of a full evolutionary record over time at all sampled locations for stasis.#
+    {
+    myTraitValues=c() #Creating vector myTraitValues
+    myTraitValues$time=c() #Creating vector myTraitValues$time.
+    allTimes=c() #Creating vector allTimes
+    for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
+      allTimes=c(allTimes,transVal$time)
+    } 
+    #Removing all the times which apear more than once
+    adjustAllTimes=allTimes[!duplicated(allTimes)]
+    #Simulating a evolution through all found times
+    allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
+  }
+    
+    
+    #1.2 Making the trait values over time graph for stasis#
+  
+    
+    #This makes the 4 graphs detectable by ggplot
+    graphs=NA
+    graphs[1:length(allTraitValues1$TraitValue)]=1
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues5$TraitValue))]=5
+    #This puts all the values together for use in ggplot
+    full=NA
+    full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue,allTraitValues5$TraitValue)
+    #This makes sure the x values are coupled to the heights properly
+    Timespan=NA
+    Timespan=c(rep(allTraitValues1$time,5))
+    #This creates the labels for colours in the graph
+    Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)),rep("run 5",length(adjustAllTimes)))
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
+    
+    #The plot for all the four lines, forming one graph.
+    PlotST=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+      geom_line(size=0.1)+
+      ggtitle("Stasis over time")+ #for the title
+      xlab("Time (Myr)")+ # for the x axis label
+      ylab("Trait values")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size
+}
+}
+
+  #Creating the Brownian motion graph:
+  {
+  Mode=myBM
+  simulatedmode="Brownian motion"
+  Mean=0
+  Deviation=1
+
+  #1. The forming of a full evolutionary record over time at all sampled locations.#
+  {
+    myTraitValues=c() #Creating vector myTraitValues
+    myTraitValues$time=c() #Creating vector myTraitValues$time.
+    allTimes=c() #Creating vector allTimes
+    for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
+      allTimes=c(allTimes,transVal$time)
+    } 
+    #Removing all the times which apear more than once
+    adjustAllTimes=allTimes[!duplicated(allTimes)]
+    #Simulating a evolution through all found times
+    allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
+    
+    
+    
+    #2. Making the trait values over time graph#
+    #This makes the 4 graphs detectable by ggplot
+    graphs=NA
+    graphs[1:length(allTraitValues1$TraitValue)]=1
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues5$TraitValue))]=5
+    #This puts all the values together for use in ggplot
+    full=NA
+    full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue,allTraitValues5$TraitValue)
+    #This makes sure the x values are coupled to the heights properly
+    Timespan=NA
+    Timespan=c(rep(allTraitValues1$time,5))
+    #This creates the labels for colours in the graph
+    Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)),rep("run 5",length(adjustAllTimes)))
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
+    
+    #The plot for all the four lines, forming one graph.
+    PlotBMT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+      geom_line(size=1)+
+      ggtitle("Brownian motion over time")+ #for the title
+      xlab("Time (Myr)")+ # for the x axis label
+      ylab("Trait values")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+  }
+}
+
+  #Creating the weak Brownian drift graph:
+  {
+  Mode=myBM
+  simulatedmode="Weak Brownian drift"
+  Mean=5
+  Deviation=1
+
+    #1. The forming of a full evolutionary record over time at all sampled locations.#
+    {
+      myTraitValues=c() #Creating vector myTraitValues
+      myTraitValues$time=c() #Creating vector myTraitValues$time.
+      allTimes=c() #Creating vector allTimes
+      for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
+        #Retrieving necessary values:
+        AMTime=ageDepthModels[[p]][[i]]$time # extract time
+        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+        
+        #Calculating height steps every 0,5 meter.
+        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
+        
+        #Adjusting values to remove duplicates:
+        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
+        
+        #Transforming the times of observation into stratigraphic height.
+        transVal=pointtransform(points= myHeightsOfObservations,
+                                xdep=adjustAMHeight,
+                                ydep=adjustAMTime,
+                                direction="height to time", 
+                                depositionmodel = "age model")
+        #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
+        allTimes=c(allTimes,transVal$time)
+      } 
+      #Removing all the times which apear more than once
+      adjustAllTimes=allTimes[!duplicated(allTimes)]
+      #Simulating a evolution through all found times
+      allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
+      allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
+      allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
+      allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
+      allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
+      
+      
+      
+      #2. Making the trait values over time graph#
+      #This makes the 4 graphs detectable by ggplot
+      graphs=NA
+      graphs[1:length(allTraitValues1$TraitValue)]=1
+      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
+      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
+      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues5$TraitValue))]=5
+      #This puts all the values together for use in ggplot
+      full=NA
+      full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue,allTraitValues5$TraitValue)
+      #This makes sure the x values are coupled to the heights properly
+      Timespan=NA
+      Timespan=c(rep(allTraitValues1$time,5))
+      #This creates the labels for colours in the graph
+      Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)),rep("run 5",length(adjustAllTimes)))
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
+      
+      #The plot for all the four lines, forming one graph.
+      PlotWBDT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+        geom_line(size=1)+
+        ggtitle("Weak Brownian drift over time")+ #for the title
+        xlab("Time (Myr)")+ # for the x axis label
+        ylab("Trait values")+ # for the y axis label
+        theme_bw()+ #Makes the background white.
+        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+    }
+}
+
+  #Creating the strong Brownian drift graph:
+  {
+    Mode=myBM
+    simulatedmode="Strong Brownian drift"
+    Mean=10
+    Deviation=1
+  
+  #1. The forming of a full evolutionary record over time at all sampled locations.#
+  {
+    myTraitValues=c() #Creating vector myTraitValues
+    myTraitValues$time=c() #Creating vector myTraitValues$time.
+    allTimes=c() #Creating vector allTimes
+    for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
+      allTimes=c(allTimes,transVal$time)
+    } 
+    #Removing all the times which apear more than once
+    adjustAllTimes=allTimes[!duplicated(allTimes)]
+    #Simulating a evolution through all found times
+    allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
+    allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
+    
+    
+    
+    #2. Making the trait values over time graph#
+    #This makes the 4 graphs detectable by ggplot
+    graphs=NA
+    graphs[1:length(allTraitValues1$TraitValue)]=1
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+    graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues5$TraitValue))]=5
+    #This puts all the values together for use in ggplot
+    full=NA
+    full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue,allTraitValues5$TraitValue)
+    #This makes sure the x values are coupled to the heights properly
+    Timespan=NA
+    Timespan=c(rep(allTraitValues1$time,5))
+    #This creates the labels for colours in the graph
+    Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)),rep("run 5",length(adjustAllTimes)))
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
+    
+    #The plot for all the four lines, forming one graph.
+    PlotSBDT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+      geom_line(size=1)+
+      ggtitle("Strong Brownian drift over time")+ #for the title
+      xlab("Time (Myr)")+ # for the x axis label
+      ylab("Trait values")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+  }
+}
+
+  {
+    pdf(file = paste("figs/R/Multiplot_Time",p,".pdf"), width= 25, height= 12)
+  
+    multiplot(PlotST,PlotBMT,PlotWBDT,PlotSBDT,cols=2) #The multiplot
+    dev.off()
+  }
+}
