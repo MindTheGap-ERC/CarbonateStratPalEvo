@@ -506,7 +506,7 @@ scenario=scenarioNames[1]
      Plot1=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
       labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
 ### BM A ###
     simulatedEvoMode=simulatedEvoModes[2]
@@ -523,7 +523,7 @@ scenario=scenarioNames[1]
     Plot2=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20),axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8),axis.title.y=element_blank())+
       labs(title = paste("B. ", simulatedEvoMode,sep=""), x="Distance from shore")
     
     ### WBD A ###
@@ -541,7 +541,7 @@ scenario=scenarioNames[1]
     Plot3=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
       labs(title = paste("C. ", simulatedEvoMode,sep=""), x="Distance from shore")
 
     
@@ -560,8 +560,8 @@ scenario=scenarioNames[1]
     Plot4=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+            legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Distance from shore", fill= "Tested Mode")
 }
 
@@ -582,7 +582,7 @@ scenario=scenarioNames[1]
   Plot5=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
     labs(title = paste("E. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
   ### BM B ###
   simulatedEvoMode=simulatedEvoModes[2]
@@ -599,7 +599,7 @@ scenario=scenarioNames[1]
   Plot6=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
     labs(title = paste("F. ", simulatedEvoMode,sep=""), x="Distance from shore")
   
   ### WBD B ###
@@ -617,7 +617,7 @@ scenario=scenarioNames[1]
   Plot7=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
     labs(title = paste("G. ", simulatedEvoMode,sep=""), x="Distance from shore")
   
   
@@ -636,8 +636,8 @@ scenario=scenarioNames[1]
   Plot8=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+          legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("H. ", simulatedEvoMode,sep=""), x="Distance from shore",fill= "Tested Mode")
 }
 
@@ -669,7 +669,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
       labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
 
     ### Time BM ###
@@ -686,8 +686,8 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+            legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
     
     ### Time WBM ###
@@ -704,7 +704,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
       labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
 
     
@@ -722,8 +722,8 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-            legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+            legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
@@ -753,7 +753,7 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
     labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
   
   ### Time BM ###
@@ -769,8 +769,8 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+          legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
   
   ### Time WBM ###
@@ -787,7 +787,7 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(face="bold"),text = element_text(size = 20))+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
     labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
   
   
@@ -805,8 +805,8 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(face="bold"),text = element_text(size = 20),
-          legend.text = element_text(size = 10),legend.title = element_text(size = 10), axis.title.y=element_blank())+
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+          legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
@@ -919,7 +919,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -938,12 +938,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle("Trait values over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -1031,7 +1031,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1053,12 +1053,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -1138,7 +1138,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1160,12 +1160,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -1245,7 +1245,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1267,12 +1267,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -1352,7 +1352,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1374,12 +1374,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -1459,7 +1459,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1486,12 +1486,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS5_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -1536,7 +1536,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -1555,12 +1555,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle("Trait values over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -1648,7 +1648,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1670,12 +1670,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -1755,7 +1755,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1777,12 +1777,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -1862,7 +1862,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1884,12 +1884,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -1969,7 +1969,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -1991,12 +1991,12 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -2076,7 +2076,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2098,17 +2098,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
+        geom_line(size=0.25)+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS8_raw.pdf"), width=6.5, height = 7.5)
+      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       
-      multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -2162,7 +2162,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -2186,7 +2186,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -2274,7 +2274,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2301,7 +2301,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -2381,7 +2381,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2408,7 +2408,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -2488,7 +2488,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2515,7 +2515,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -2595,7 +2595,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2622,7 +2622,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -2702,7 +2702,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2729,12 +2729,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS4_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -2779,7 +2779,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -2803,7 +2803,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -2891,7 +2891,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -2918,7 +2918,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -2998,7 +2998,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3025,7 +3025,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -3105,7 +3105,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3132,7 +3132,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -3212,7 +3212,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3239,7 +3239,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -3319,7 +3319,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3346,12 +3346,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS7_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -3405,7 +3405,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -3429,7 +3429,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -3517,7 +3517,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3544,7 +3544,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -3624,7 +3624,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3651,7 +3651,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -3731,7 +3731,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3758,7 +3758,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -3838,7 +3838,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3865,7 +3865,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -3945,7 +3945,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -3972,12 +3972,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS3_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -4022,7 +4022,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -4046,7 +4046,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -4134,7 +4134,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4161,7 +4161,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4241,7 +4241,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4268,7 +4268,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -4348,7 +4348,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4375,7 +4375,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -4455,7 +4455,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4482,7 +4482,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -4562,7 +4562,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4589,12 +4589,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS6_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -4647,7 +4647,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -4671,7 +4671,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -4759,7 +4759,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4786,7 +4786,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4866,7 +4866,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -4893,7 +4893,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -4973,7 +4973,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5000,7 +5000,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -5080,7 +5080,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5107,7 +5107,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -5187,7 +5187,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5214,12 +5214,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -5264,7 +5264,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -5288,7 +5288,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -5376,7 +5376,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         # Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5403,7 +5403,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -5483,7 +5483,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5510,7 +5510,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -5590,7 +5590,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph#
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5617,7 +5617,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -5697,7 +5697,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5724,7 +5724,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -5804,7 +5804,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         
         
         #Making the trait values over time graph
-        #This makes the 4 graphs detectable by ggplot  
+        #This makes the 5 graphs detectable by ggplot  
         graphs=NA
         graphs[1:length(myTraitValues1$TraitValue)]=1
         graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$TraitValue))]=2
@@ -5831,12 +5831,12 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -5857,45 +5857,21 @@ simulatedEvoMode=simulatedEvoModes[1]
     {
       #1.1 The forming of a full evolutionary record over time at all sampled locations for stasis.#
       {
-        myTraitValues=c() #Creating vector myTraitValues
-        myTraitValues$time=c() #Creating vector myTraitValues$time.
-        allTimes=c() #Creating vector allTimes
-        for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
           #Retrieving necessary values:
-          AMTime=ageDepthModels[[p]][[i]]$time # extract time
-          AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-          
-          #Calculating height steps every 0,5 meter.
-          myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-          
-          #Adjusting values to remove duplicates:
-          adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-          adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
-          
-          #Transforming the times of observation into stratigraphic height.
-          transVal=pointtransform(points= myHeightsOfObservations,
-                                  xdep=adjustAMHeight,
-                                  ydep=adjustAMTime,
-                                  direction="height to time", 
-                                  depositionmodel = "age model")
-          #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
-          allTimes=c(allTimes,transVal$time)
-        } 
-        #Removing all the times which apear more than once
-        adjustAllTimes=allTimes[!duplicated(allTimes)]
+          AMTime=seq(0.01,2.58,by = 0.0129)
+          adjustAllTimes=AMTime
         #Simulating a evolution through all found times
-        allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
-        allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
-        allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
-        allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
-        allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
-      }
+        allTraitValues1=Mode(AMTime,Mean,Deviation)
+        allTraitValues2=Mode(AMTime,Mean,Deviation)
+        allTraitValues3=Mode(AMTime,Mean,Deviation)
+        allTraitValues4=Mode(AMTime,Mean,Deviation)
+        allTraitValues5=Mode(AMTime,Mean,Deviation)
+      
       
       
       #1.2 Making the trait values over time graph for stasis#
       
-      
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -5915,15 +5891,15 @@ simulatedEvoMode=simulatedEvoModes[1]
       
       #The plot for all the four lines, forming one graph.
       PlotST=ggplot(data = df, aes(x=x, y=y,col=Distance))+
-        geom_line(size=0.1)+
+        geom_line(size=0.25)+
         ggtitle("Stasis over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
   }
-  
+  }
   #Creating the Brownian motion graph:
   {
     Mode=myBM
@@ -5931,45 +5907,21 @@ simulatedEvoMode=simulatedEvoModes[1]
     Mean=0
     Deviation=1
     
-    #1. The forming of a full evolutionary record over time at all sampled locations.#
+    #1.1 The forming of a full evolutionary record over time at all sampled locations for stasis.#
     {
-      myTraitValues=c() #Creating vector myTraitValues
-      myTraitValues$time=c() #Creating vector myTraitValues$time.
-      allTimes=c() #Creating vector allTimes
-      for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
-        #Retrieving necessary values:
-        AMTime=ageDepthModels[[p]][[i]]$time # extract time
-        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-        
-        #Calculating height steps every 0,5 meter.
-        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-        
-        #Adjusting values to remove duplicates:
-        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
-        
-        #Transforming the times of observation into stratigraphic height.
-        transVal=pointtransform(points= myHeightsOfObservations,
-                                xdep=adjustAMHeight,
-                                ydep=adjustAMTime,
-                                direction="height to time", 
-                                depositionmodel = "age model")
-        #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
-        allTimes=c(allTimes,transVal$time)
-      } 
-      #Removing all the times which apear more than once
-      adjustAllTimes=allTimes[!duplicated(allTimes)]
+      #Retrieving necessary values:
+      AMTime=seq(0.01,2.58,by = 0.0129)
+      adjustAllTimes=AMTime
       #Simulating a evolution through all found times
-      allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
-      
+      allTraitValues1=Mode(AMTime,Mean,Deviation)
+      allTraitValues2=Mode(AMTime,Mean,Deviation)
+      allTraitValues3=Mode(AMTime,Mean,Deviation)
+      allTraitValues4=Mode(AMTime,Mean,Deviation)
+      allTraitValues5=Mode(AMTime,Mean,Deviation)
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -5994,7 +5946,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
@@ -6005,45 +5957,21 @@ simulatedEvoMode=simulatedEvoModes[1]
     Mean=5
     Deviation=1
     
-    #1. The forming of a full evolutionary record over time at all sampled locations.#
+    #1.1 The forming of a full evolutionary record over time at all sampled locations for stasis.#
     {
-      myTraitValues=c() #Creating vector myTraitValues
-      myTraitValues$time=c() #Creating vector myTraitValues$time.
-      allTimes=c() #Creating vector allTimes
-      for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
-        #Retrieving necessary values:
-        AMTime=ageDepthModels[[p]][[i]]$time # extract time
-        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-        
-        #Calculating height steps every 0,5 meter.
-        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-        
-        #Adjusting values to remove duplicates:
-        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
-        
-        #Transforming the times of observation into stratigraphic height.
-        transVal=pointtransform(points= myHeightsOfObservations,
-                                xdep=adjustAMHeight,
-                                ydep=adjustAMTime,
-                                direction="height to time", 
-                                depositionmodel = "age model")
-        #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
-        allTimes=c(allTimes,transVal$time)
-      } 
-      #Removing all the times which apear more than once
-      adjustAllTimes=allTimes[!duplicated(allTimes)]
+      #Retrieving necessary values:
+      AMTime=seq(0.01,2.58,by = 0.0129)
+      adjustAllTimes=AMTime
       #Simulating a evolution through all found times
-      allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
-      
+      allTraitValues1=Mode(AMTime,Mean,Deviation)
+      allTraitValues2=Mode(AMTime,Mean,Deviation)
+      allTraitValues3=Mode(AMTime,Mean,Deviation)
+      allTraitValues4=Mode(AMTime,Mean,Deviation)
+      allTraitValues5=Mode(AMTime,Mean,Deviation)
       
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -6068,7 +5996,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
@@ -6079,45 +6007,20 @@ simulatedEvoMode=simulatedEvoModes[1]
     Mean=10
     Deviation=1
     
-    #1. The forming of a full evolutionary record over time at all sampled locations.#
+    #1.1 The forming of a full evolutionary record over time at all sampled locations for stasis.#
     {
-      myTraitValues=c() #Creating vector myTraitValues
-      myTraitValues$time=c() #Creating vector myTraitValues$time.
-      allTimes=c() #Creating vector allTimes
-      for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
-        #Retrieving necessary values:
-        AMTime=ageDepthModels[[p]][[i]]$time # extract time
-        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-        
-        #Calculating height steps every 0,5 meter.
-        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-        
-        #Adjusting values to remove duplicates:
-        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is du(plicated
-        
-        #Transforming the times of observation into stratigraphic height.
-        transVal=pointtransform(points= myHeightsOfObservations,
-                                xdep=adjustAMHeight,
-                                ydep=adjustAMTime,
-                                direction="height to time", 
-                                depositionmodel = "age model")
-        #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
-        allTimes=c(allTimes,transVal$time)
-      } 
-      #Removing all the times which apear more than once
-      adjustAllTimes=allTimes[!duplicated(allTimes)]
+      #Retrieving necessary values:
+      AMTime=seq(0.01,2.58,by = 0.0129)
+      adjustAllTimes=AMTime
       #Simulating a evolution through all found times
-      allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
-      allTraitValues5=Mode(adjustAllTimes,Mean,Deviation)
-      
-      
+      allTraitValues1=Mode(AMTime,Mean,Deviation)
+      allTraitValues2=Mode(AMTime,Mean,Deviation)
+      allTraitValues3=Mode(AMTime,Mean,Deviation)
+      allTraitValues4=Mode(AMTime,Mean,Deviation)
+      allTraitValues5=Mode(AMTime,Mean,Deviation)
       
       #2. Making the trait values over time graph#
-      #This makes the 4 graphs detectable by ggplot
+      #This makes the 5 graphs detectable by ggplot
       graphs=NA
       graphs[1:length(allTraitValues1$TraitValue)]=1
       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
@@ -6142,14 +6045,14 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait values")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 20), legend.position="none",plot.title = element_text(size=15)) #Changes text size 
+        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
   {
-    pdf(file = paste("figs/R/figS2_raw.pdf"), width=6.5, height = 3.25)
+    pdf(file = paste("figs/R/figS2_raw.pdf"), width=6.5, height = 5)
     
-    multiplot(PlotST,PlotBMT,PlotWBDT,PlotSBDT,cols=2) #The multiplot
+    multiplot(PlotST,PlotWBDT,PlotBMT,PlotSBDT,cols=2) #The multiplot
     dev.off()
   }
 }

@@ -156,15 +156,15 @@ ADM_A=ggplot(data = df, aes(x=x, y=y,col=Distance))+
   ylab("Stratigraphic Height (m)")+ # for the y axis label
   theme_bw()+ #Makes the background white.
   scale_colour_discrete(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"))+
-  theme(text = element_text(size = 20),#Changes text size
-        plot.title = element_text(size=15),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 10),
+  theme(text = element_text(size = 8),#Changes text size
+        plot.title = element_text(size=10),
+        legend.text = element_text(size = 3),
+        legend.title = element_text(size = 3),
         legend.position = c(0.005, .99),
         legend.justification = c("left", "top"),
         legend.box.just = "left",
-        legend.margin = margin(6, 6, 6, 6),
-        legend.box.background = element_rect(color="black", size=1)
+        legend.margin = margin(3, 3, 3, 3),
+        legend.box.background = element_rect(color="black", size=0.5)
           ) 
 ADM_A
 }
@@ -316,15 +316,15 @@ ADM_B=ggplot(data = df, aes(x=x, y=y,col=Distance))+
   ylab("Stratigraphic Height (m)")+ # for the y axis label
   theme_bw()+ #Makes the background white.
   scale_colour_discrete(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"))+
-  theme(text = element_text(size = 20),#Changes text size
-        plot.title = element_text(size=15),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 10),
+  theme(text = element_text(size = 8),#Changes text size
+        plot.title = element_text(size=10),
+        legend.text = element_text(size = 3),
+        legend.title = element_text(size = 3),
         legend.position = c(0.005, .99),
         legend.justification = c("left", "top"),
         legend.box.just = "left",
-        legend.margin = margin(6, 6, 6, 6),
-        legend.box.background = element_rect(color="black", size=1)
+        legend.margin = margin(3, 3, 3, 3),
+        legend.box.background = element_rect(color="black", size=0.5)
   ) 
 ADM_B
 }
