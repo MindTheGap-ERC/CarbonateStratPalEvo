@@ -643,7 +643,7 @@ scenario=scenarioNames[1]
 
 
 {
-  pdf(file = paste("figs/R/fig6_raw.pdf"), width= 25, height= 12)
+  pdf(file = paste("figs/R/fig6_raw.pdf"), width=6.5, height = 3.25)
   
   multiplot(Plot1,Plot5,Plot2,Plot6,Plot3,Plot7,Plot4,Plot8,cols=4) #The multiplot
   dev.off()
@@ -728,7 +728,7 @@ simulatedEvoMode=simulatedEvoModes[1]
 }
 
 {
-  pdf(file = paste("figs/R/fig7_raw.pdf"), width= 25, height= 12)
+  pdf(file = paste("figs/R/fig7_raw.pdf"), width=6.5, height = 3.25)
   print(multiplot(plotT1,plotT3,plotT2,plotT4,cols=2))#The multiplot
   dev.off()
 }
@@ -811,7 +811,7 @@ simulatedEvoMode=simulatedEvoModes[1]
 }
 
 {
-  pdf(file = paste("figs/R/figS9_raw.pdf"), width= 25, height= 12)
+  pdf(file = paste("figs/R/figS9_raw.pdf"), width=6.5, height = 3.25)
   
   multiplot(plotT1,plotT3,plotT2,plotT4,cols=2) #The multiplot
   dev.off()
@@ -1489,7 +1489,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS5_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS5_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -2106,7 +2106,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS8_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS8_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -2732,7 +2732,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS4_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS4_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -3349,7 +3349,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS7_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS7_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -3975,7 +3975,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS3_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS3_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -4592,7 +4592,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/figS6_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/figS6_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -5217,7 +5217,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/fig4_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_A,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -5834,7 +5834,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         theme(text = element_text(size = 20),legend.position="none",plot.title = element_text(size=15)) #Changes text size
     }
     {
-      pdf(file = paste("figs/R/fig5_raw.pdf"), width= 10, height= 12)
+      pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 7.5)
       
       multiplot(ADM_B,PlotTT,NA,Plot1,Plot2,Plot3,Plot4,Plot5,cols=3) #The multiplot
       dev.off()
@@ -6147,9 +6147,10 @@ simulatedEvoMode=simulatedEvoModes[1]
   }
   
   {
-    pdf(file = paste("figs/R/figS2_raw.pdf"), width= 25, height= 12)
+    pdf(file = paste("figs/R/figS2_raw.pdf"), width=6.5, height = 3.25)
     
     multiplot(PlotST,PlotBMT,PlotWBDT,PlotSBDT,cols=2) #The multiplot
     dev.off()
   }
 }
+
