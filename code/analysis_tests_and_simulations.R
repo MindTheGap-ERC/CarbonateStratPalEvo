@@ -939,9 +939,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
-        ggtitle("Trait values over time")+ #for the title
+         labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -1054,9 +1055,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1161,9 +1163,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1268,9 +1271,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1375,9 +1379,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1482,16 +1487,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS5_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -1556,9 +1562,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -1671,9 +1678,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1778,9 +1786,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1885,9 +1894,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -1992,9 +2002,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -2099,15 +2110,16 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS8_raw.pdf"), width=6.5, height = 7.5)
-      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       
       dev.off()
     }
@@ -2182,9 +2194,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -2297,9 +2310,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -2404,9 +2418,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -2511,9 +2526,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -2618,9 +2634,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -2725,16 +2742,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS4_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -2799,9 +2817,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -2914,9 +2933,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3021,9 +3041,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3128,9 +3149,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3235,9 +3257,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3342,16 +3365,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS7_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -3425,9 +3449,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -3540,9 +3565,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3647,9 +3673,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3754,9 +3781,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3861,9 +3889,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -3968,16 +3997,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS3_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -4042,9 +4072,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -4157,9 +4188,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4264,9 +4296,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4371,9 +4404,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4478,9 +4512,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4585,16 +4620,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS6_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -4667,9 +4703,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -4782,9 +4819,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4889,9 +4927,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -4996,9 +5035,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5103,9 +5143,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5210,16 +5251,17 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_A,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
@@ -5284,9 +5326,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
-        ggtitle("Trait values over time")+ #for the title
+        labs(tag = "B")+
+        ggtitle("Time domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
@@ -5399,9 +5442,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5506,9 +5550,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5613,9 +5658,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot3=ggplot(data = df4, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5720,9 +5766,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot4=ggplot(data = df5, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5827,22 +5874,21 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       Plot5=ggplot(data = df6, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 7.5)
       
-      multiplot(ADM_B,Plot1,Plot4,PlotTT,Plot2,Plot5,NA,Plot3,cols=3) #The multiplot
+      multiplot(ADM_B,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
       dev.off()
     }
   }
 }
-
-
 
 #### Figs for publication: Trait value over time all modes (Figure S2)####
 {
@@ -5892,9 +5938,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotST=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
+        labs(tag = "A")+
         ggtitle("Stasis over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
@@ -5942,9 +5989,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotBMT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "B")+
         ggtitle("Brownian motion over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
@@ -5992,9 +6040,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotWBDT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "C")+
         ggtitle("Weak Brownian drift over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
@@ -6041,9 +6090,10 @@ simulatedEvoMode=simulatedEvoModes[1]
       #The plot for all the four lines, forming one graph.
       PlotSBDT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
+        labs(tag = "D")+
         ggtitle("Strong Brownian drift over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait values")+ # for the y axis label
+        ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }

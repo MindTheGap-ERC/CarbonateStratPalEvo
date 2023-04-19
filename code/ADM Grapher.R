@@ -151,20 +151,21 @@ df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
 #The plot for all the four lines, forming one graph.
 ADM_A=ggplot(data = df, aes(x=x, y=y,col=Distance))+
   geom_path(size=1)+
-  ggtitle("Time found in platform A")+ #for the title
+  labs(tag = "A")+
+  ggtitle("Age-Depth Model")+ #for the title
   xlab("Time (Myr)")+ # for the x axis label
   ylab("Stratigraphic Height (m)")+ # for the y axis label
   theme_bw()+ #Makes the background white.
   scale_colour_discrete(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"))+
-  theme(text = element_text(size = 8),#Changes text size
+  theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),#Changes text size
         plot.title = element_text(size=10),
         legend.text = element_text(size = 3),
         legend.title = element_text(size = 3),
         legend.position = c(0.005, .99),
         legend.justification = c("left", "top"),
         legend.box.just = "left",
-        legend.margin = margin(3, 3, 3, 3),
-        legend.box.background = element_rect(color="black", size=0.5)
+        legend.margin = margin(2, 2, 2, 2),
+        legend.box.background = element_rect(color="black", size=0.25)
           ) 
 ADM_A
 }
@@ -311,20 +312,21 @@ HeightV=AMHiatusesRemoved$height
 #The plot for all the four lines, forming one graph.
 ADM_B=ggplot(data = df, aes(x=x, y=y,col=Distance))+
   geom_path(size=1)+
-  ggtitle("Time found in platform B")+ #for the title
+  labs(tag = "A")+
+  ggtitle("Age-Depth Model")+ #for the title
   xlab("Time (Myr)")+ # for the x axis label
   ylab("Stratigraphic Height (m)")+ # for the y axis label
   theme_bw()+ #Makes the background white.
   scale_colour_discrete(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"))+
-  theme(text = element_text(size = 8),#Changes text size
+  theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),#Changes text size
         plot.title = element_text(size=10),
         legend.text = element_text(size = 3),
         legend.title = element_text(size = 3),
         legend.position = c(0.005, .99),
         legend.justification = c("left", "top"),
         legend.box.just = "left",
-        legend.margin = margin(3, 3, 3, 3),
-        legend.box.background = element_rect(color="black", size=0.5)
+        legend.margin = margin(2, 2, 2, 2),
+        legend.box.background = element_rect(color="black", size=0.25)
   ) 
 ADM_B
 }
