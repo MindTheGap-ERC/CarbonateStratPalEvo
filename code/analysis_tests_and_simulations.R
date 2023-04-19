@@ -523,7 +523,7 @@ scenario=scenarioNames[1]
     Plot2=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8),axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),axis.title.y=element_blank())+
       labs(title = paste("B. ", simulatedEvoMode,sep=""), x="Distance from shore")
     
     ### WBD A ###
@@ -541,7 +541,7 @@ scenario=scenarioNames[1]
     Plot3=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
       labs(title = paste("C. ", simulatedEvoMode,sep=""), x="Distance from shore")
 
     
@@ -560,7 +560,7 @@ scenario=scenarioNames[1]
     Plot4=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Distance from shore", fill= "Tested Mode")
 }
@@ -599,7 +599,7 @@ scenario=scenarioNames[1]
   Plot6=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
     labs(title = paste("F. ", simulatedEvoMode,sep=""), x="Distance from shore")
   
   ### WBD B ###
@@ -617,7 +617,7 @@ scenario=scenarioNames[1]
   Plot7=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
     labs(title = paste("G. ", simulatedEvoMode,sep=""), x="Distance from shore")
   
   
@@ -636,7 +636,7 @@ scenario=scenarioNames[1]
   Plot8=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("H. ", simulatedEvoMode,sep=""), x="Distance from shore",fill= "Tested Mode")
 }
@@ -686,7 +686,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
     
@@ -722,7 +722,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
@@ -769,7 +769,7 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
   
@@ -805,7 +805,7 @@ simulatedEvoMode=simulatedEvoModes[1]
   plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
@@ -944,7 +944,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -1060,7 +1060,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -1168,7 +1168,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -1276,7 +1276,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -1384,7 +1384,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -1492,7 +1492,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS5_raw.pdf"), width=6.5, height = 7.5)
@@ -1567,7 +1567,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -1683,7 +1683,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -1791,7 +1791,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -1899,7 +1899,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -2007,7 +2007,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -2115,7 +2115,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS8_raw.pdf"), width=6.5, height = 7.5)
@@ -2199,7 +2199,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -2315,7 +2315,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -2423,7 +2423,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -2531,7 +2531,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -2639,7 +2639,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -2747,7 +2747,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS4_raw.pdf"), width=6.5, height = 7.5)
@@ -2822,7 +2822,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -2938,7 +2938,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -3046,7 +3046,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -3154,7 +3154,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -3262,7 +3262,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -3370,7 +3370,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS7_raw.pdf"), width=6.5, height = 7.5)
@@ -3454,7 +3454,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -3570,7 +3570,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -3678,7 +3678,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -3786,7 +3786,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -3894,7 +3894,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -4002,7 +4002,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS3_raw.pdf"), width=6.5, height = 7.5)
@@ -4077,7 +4077,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -4193,7 +4193,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4301,7 +4301,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -4409,7 +4409,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -4517,7 +4517,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -4625,7 +4625,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS6_raw.pdf"), width=6.5, height = 7.5)
@@ -4708,7 +4708,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -4824,7 +4824,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4932,7 +4932,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -5040,7 +5040,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -5148,7 +5148,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -5256,7 +5256,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 7.5)
@@ -5331,7 +5331,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
       
       
       
@@ -5447,7 +5447,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -5555,7 +5555,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -5663,7 +5663,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -5771,7 +5771,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -5879,7 +5879,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Height (m)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 7.5)
@@ -5943,7 +5943,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size
     }
   }
   }
@@ -5994,7 +5994,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
@@ -6045,7 +6045,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
@@ -6095,7 +6095,7 @@ simulatedEvoMode=simulatedEvoModes[1]
         xlab("Time (Myr)")+ # for the x axis label
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
     }
   }
   
