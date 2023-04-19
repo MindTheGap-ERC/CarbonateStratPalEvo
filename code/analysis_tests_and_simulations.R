@@ -505,9 +505,10 @@ scenario=scenarioNames[1]
     }
      Plot1=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+       labs(tag = "A")+
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-      labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
+      labs(title = paste(simulatedEvoMode), y="AIC weight", x="Distance from shore")
 ### BM A ###
     simulatedEvoMode=simulatedEvoModes[2]
     scenario=scenarioNames[1]
@@ -522,9 +523,10 @@ scenario=scenarioNames[1]
     }
     Plot2=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "B")+
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),axis.title.y=element_blank())+
-      labs(title = paste("B. ", simulatedEvoMode,sep=""), x="Distance from shore")
+      labs(title = paste(simulatedEvoMode), x="Distance from shore")
     
     ### WBD A ###
     simulatedEvoMode=simulatedEvoModes[3]
@@ -540,9 +542,10 @@ scenario=scenarioNames[1]
     }
     Plot3=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "C")+
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
-      labs(title = paste("C. ", simulatedEvoMode,sep=""), x="Distance from shore")
+      labs(title = paste(simulatedEvoMode), x="Distance from shore")
 
     
     ### SBD A ###
@@ -559,10 +562,14 @@ scenario=scenarioNames[1]
     }
     Plot4=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "D")+
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-      labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Distance from shore", fill= "Tested Mode")
+      theme(legend.key.size = unit(0.4, 'cm'), 
+            legend.key.height = unit(0.3, 'cm'), 
+            legend.key.width = unit (0.3, 'cm') )+
+      labs(title = paste(simulatedEvoMode), x="Distance from shore", fill= "Tested Mode")
 }
 
 #Scenario B
@@ -581,9 +588,10 @@ scenario=scenarioNames[1]
   }
   Plot5=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "E")+
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-    labs(title = paste("E. ", simulatedEvoMode,sep=""), y="AIC weight", x="Distance from shore")
+    labs(title = paste(simulatedEvoMode), y="AIC weight", x="Distance from shore")
   ### BM B ###
   simulatedEvoMode=simulatedEvoModes[2]
   scenario=scenarioNames[2]
@@ -598,9 +606,10 @@ scenario=scenarioNames[1]
   }
   Plot6=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "F")+
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
-    labs(title = paste("F. ", simulatedEvoMode,sep=""), x="Distance from shore")
+    labs(title = paste(simulatedEvoMode), x="Distance from shore")
   
   ### WBD B ###
   simulatedEvoMode=simulatedEvoModes[3]
@@ -616,9 +625,10 @@ scenario=scenarioNames[1]
   }
   Plot7=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "G")+
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
-    labs(title = paste("G. ", simulatedEvoMode,sep=""), x="Distance from shore")
+    labs(title = paste(simulatedEvoMode), x="Distance from shore")
   
   
   ### SBD B ###
@@ -635,10 +645,14 @@ scenario=scenarioNames[1]
   }
   Plot8=ggplot2::ggplot(df, aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "H")+
     scale_fill_brewer(palette="Spectral")+
     theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-    labs(title = paste("H. ", simulatedEvoMode,sep=""), x="Distance from shore",fill= "Tested Mode")
+    theme(legend.key.size = unit(0.4, 'cm'), 
+          legend.key.height = unit(0.3, 'cm'), 
+          legend.key.width = unit (0.3, 'cm') )+
+    labs(title = paste(simulatedEvoMode), x="Distance from shore",fill= "Tested Mode")
 }
 
 
@@ -668,9 +682,10 @@ simulatedEvoMode=simulatedEvoModes[1]
     }
     plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "A")+
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-      labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+      labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
 
     ### Time BM ###
     simulatedEvoMode=simulatedEvoModes[2]
@@ -685,10 +700,11 @@ simulatedEvoMode=simulatedEvoModes[1]
     }
     plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "B")+
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-      labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
+      labs(title = paste(simulatedEvoMode),  x="Number of Sampling Points", fill= "Tested Mode")
     
     ### Time WBM ###
     simulatedEvoMode=simulatedEvoModes[3]
@@ -703,9 +719,10 @@ simulatedEvoMode=simulatedEvoModes[1]
     }
     plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "C")+
       scale_fill_brewer(palette="Spectral")+
       theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-      labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+      labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
 
     
     ### Time SBM ###
@@ -721,10 +738,11 @@ simulatedEvoMode=simulatedEvoModes[1]
     }
     plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
       geom_boxplot(outlier.shape = NA) +
+      labs(tag = "D")+
       scale_fill_brewer(palette="Spectral")+
       theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-      labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
+      labs(title = paste(simulatedEvoMode), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
 {
@@ -752,9 +770,10 @@ simulatedEvoMode=simulatedEvoModes[1]
   }
   plotT1=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "A")+
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-    labs(title = paste("A. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+    labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
   
   ### Time BM ###
   simulatedEvoMode=simulatedEvoModes[2]
@@ -768,10 +787,11 @@ simulatedEvoMode=simulatedEvoModes[1]
   }
   plotT2=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "B")+
     scale_fill_brewer(palette="Spectral")+
     theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-    labs(title = paste("B. ", simulatedEvoMode,sep=""),  x="Number of Sampling Points", fill= "Tested Mode")
+    labs(title = paste(simulatedEvoMode),  x="Number of Sampling Points", fill= "Tested Mode")
   
   ### Time WBM ###
   simulatedEvoMode=simulatedEvoModes[3]
@@ -786,9 +806,10 @@ simulatedEvoMode=simulatedEvoModes[1]
   }
   plotT3=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "C")+
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
-    labs(title = paste("C. ", simulatedEvoMode,sep=""), y="AIC weight", x="Number of Sampling Points")
+    labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
   
   
   ### Time SBM ###
@@ -804,10 +825,11 @@ simulatedEvoMode=simulatedEvoModes[1]
   }
   plotT4=ggplot2::ggplot(df, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA) +
+    labs(tag = "D")+
     scale_fill_brewer(palette="Spectral")+
     theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-    labs(title = paste("D. ", simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
+    labs(title = paste(simulatedEvoMode), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
 {
@@ -945,11 +967,6 @@ simulatedEvoMode=simulatedEvoModes[1]
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
-      
-      
-      
-      
-      
     }
     
     #3.1. The plotting of the evolution as found in at distance 20

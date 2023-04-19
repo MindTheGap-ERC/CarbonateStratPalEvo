@@ -157,7 +157,8 @@ ADM_A=ggplot(data = df, aes(x=x, y=y,col=Distance))+
   ylab("Stratigraphic Height (m)")+ # for the y axis label
   theme_bw()+ #Makes the background white.
   scale_colour_brewer(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"),palette="Set1")+
-  theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),#Changes text size
+  theme(text = element_text(size = 8), 
+        plot.tag = element_text(face = "bold"),
         plot.title = element_text(size=10),
         legend.key.size = unit(1, 'cm'), 
         legend.key.height = unit(0.1, 'cm'), 
