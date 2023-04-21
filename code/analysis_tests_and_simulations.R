@@ -829,7 +829,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     scale_fill_brewer(palette="Spectral")+
     theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
-    labs(title = paste(simulatedEvoMode), x="Number of Sampling Points", fill= "Tested Mode")
+    labs(title = paste(simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
 
 {
@@ -938,24 +938,25 @@ simulatedEvoMode=simulatedEvoModes[1]
       allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
       allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
       
-      
+      SmallallTraitValues1=approx(allTraitValues1$TraitValue,allTraitValues1$time, n=200)
+
       
       #2. Making the trait values over time graph#
       #This makes the 5 graphs detectable by ggplot
       graphs=NA
-      graphs[1:length(allTraitValues1$TraitValue)]=1
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+      graphs[1:length(SmallallTraitValues1$x)]=1
+
       #This puts all the values together for use in ggplot
       full=NA
-      full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue)
+      full=c(SmallallTraitValues1$x)
       #This makes sure the x values are coupled to the heights properly
       Timespan=NA
-      Timespan=c(rep(allTraitValues1$time,4))
+      Timespan=c(rep(SmallallTraitValues1$y,1))
       #This creates the labels for colours in the graph
-      Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)))
+      Label=c(rep("run 1",length(SmallallTraitValues1$x)))
       #Creates a dataframe with all the earlier info
+    
+      
       df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
       
       #The plot for all the four lines, forming one graph.
@@ -1556,24 +1557,25 @@ simulatedEvoMode=simulatedEvoModes[1]
       allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
       allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
       
+      SmallallTraitValues1=approx(allTraitValues1$TraitValue,allTraitValues1$time, n=200)
       
       
       #2. Making the trait values over time graph#
       #This makes the 5 graphs detectable by ggplot
       graphs=NA
-      graphs[1:length(allTraitValues1$TraitValue)]=1
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$TraitValue))]=2
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$TraitValue))]=3
-      graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$TraitValue))]=4
+      graphs[1:length(SmallallTraitValues1$x)]=1
+      
       #This puts all the values together for use in ggplot
       full=NA
-      full=c(allTraitValues1$TraitValue,allTraitValues2$TraitValue,allTraitValues3$TraitValue,allTraitValues4$TraitValue)
+      full=c(SmallallTraitValues1$x)
       #This makes sure the x values are coupled to the heights properly
       Timespan=NA
-      Timespan=c(rep(allTraitValues1$time,4))
+      Timespan=c(rep(SmallallTraitValues1$y,1))
       #This creates the labels for colours in the graph
-      Label=c(rep("run 1",length(adjustAllTimes)),rep("run 2",length(adjustAllTimes)),rep("run 3",length(adjustAllTimes)),rep("run 4",length(adjustAllTimes)))
+      Label=c(rep("run 1",length(SmallallTraitValues1$x)))
       #Creates a dataframe with all the earlier info
+      
+      
       df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
       
       #The plot for all the four lines, forming one graph.
@@ -1585,11 +1587,6 @@ simulatedEvoMode=simulatedEvoModes[1]
         ylab("Trait value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
         theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
-      
-      
-      
-      
-      
     }
     
     #3.1. The plotting of the evolution as found in at distance 20
