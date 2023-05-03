@@ -37,7 +37,7 @@ run <- 1 # integer between 1 and noOfTests
     y = testResultsStrat[[scenario]][[dist]][[mode]][[run]]$inputData$traitValue,
     type = "l",
     xlab = "Height [m]",
-    ylab = "Trait value",
+    ylab = "Trait Value",
     main = paste("Trait values in stratigraphic domain, scenario ", scenario, ", ", dist, " offshore \n", mode, ", run no. ", run, sep = "")
   )
   # add AICweights
@@ -68,7 +68,7 @@ run <- 1 # integer between 1 and noOfTests
     cex = 1.4
   )
   mtext(
-    text = "Trait value",
+    text = "Trait Value",
     side = 2,
     line = 2,
     cex = 1.4
@@ -93,7 +93,7 @@ run <- 1 # integer between 1 and noOfTests
     y = testResultsStrat[[scenario]][[dist]][[mode]][[run]]$inputData$traitValue,
     type = "l",
     xlab = "Time [Ma]",
-    ylab = "Trait value",
+    ylab = "Trait Value",
     main = paste("Trait values in time domain, scenario ", scenario, "\n", mode, ", run no. ", run, sep = "")
   )
 }
@@ -110,7 +110,7 @@ run <- 1 # integer between 1 and noOfTests
     y = testResultsTime[[scenario]][[nSamp]][[mode]][[run]]$inputData$traitValue,
     type = "l",
     xlab = "Time [Ma]",
-    ylab = "Trait value",
+    ylab = "Trait Value",
     main = paste("Trait values in time domain \n", nSamp, " samples, equidistantly distributed over ", maxTimes[[scenario]], " Ma", "\n", mode, ", run no. ", run, sep = "")
   )
   # add legend
@@ -140,7 +140,7 @@ run <- 1 # integer between 1 and noOfTests
     cex = 1.4
   )
   mtext(
-    text = "Trait value",
+    text = "Trait Value",
     side = 2,
     line = 2,
     cex = 1.4
@@ -527,7 +527,7 @@ scenario=scenarioNames[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "B")+
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),axis.title.y=element_blank())+
       labs(title = paste(simulatedEvoMode), x="Distance from shore")
     
     ### WBD A ###
@@ -546,7 +546,7 @@ scenario=scenarioNames[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "C")+
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
+      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), axis.title.y=element_blank())+
       labs(title = paste(simulatedEvoMode), x="Distance from shore")
 
     
@@ -566,7 +566,7 @@ scenario=scenarioNames[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "D")+
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       theme(legend.key.size = unit(0.4, 'cm'), 
             legend.key.height = unit(0.3, 'cm'), 
@@ -610,7 +610,7 @@ scenario=scenarioNames[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "F")+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), axis.title.y=element_blank())+
     labs(title = paste(simulatedEvoMode), x="Distance from shore")
   
   ### WBD B ###
@@ -629,7 +629,7 @@ scenario=scenarioNames[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "G")+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), axis.title.y=element_blank())+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), axis.title.y=element_blank())+
     labs(title = paste(simulatedEvoMode), x="Distance from shore")
   
   
@@ -649,7 +649,7 @@ scenario=scenarioNames[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "H")+
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     theme(legend.key.size = unit(0.4, 'cm'), 
           legend.key.height = unit(0.3, 'cm'), 
@@ -704,7 +704,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "B")+
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste(simulatedEvoMode),  x="Number of Sampling Points", fill= "Tested Mode")
     
@@ -742,7 +742,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "D")+
       scale_fill_brewer(palette="Spectral")+
-      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+      theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
             legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
       labs(title = paste(simulatedEvoMode), x="Number of Sampling Points", fill= "Tested Mode")
 }
@@ -791,7 +791,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "B")+
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste(simulatedEvoMode),  x="Number of Sampling Points", fill= "Tested Mode")
   
@@ -829,7 +829,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "D")+
     scale_fill_brewer(palette="Spectral")+
-    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"),
+    theme(plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
           legend.text = element_text(size = 5),legend.title = element_text(size = 5), axis.title.y=element_blank())+
     labs(title = paste(simulatedEvoMode,sep=""), x="Number of Sampling Points", fill= "Tested Mode")
 }
@@ -1040,12 +1040,13 @@ load("data/R_outputs/age_depth_models.Rdata")
     labs(tag = "A")+
     ggtitle("Age-Depth Model")+ #for the title
     xlab("Time (Myr)")+ # for the x axis label
-    ylab("Stratigraphic Height (m)")+ # for the y axis label
+    ylab("Height (m)")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     scale_colour_brewer(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"),palette="Set1")+
     theme(text = element_text(size = 8), 
-          plot.tag = element_text(face = "bold"),
-          plot.title = element_text(size=10),
+          plot.tag = element_text(face = "bold"), 
+          plot.tag.position = c(0.01, 0.98),
+          plot.title = element_text(size=9), 
           legend.key.size = unit(1, 'cm'), 
           legend.key.height = unit(0.1, 'cm'), 
           legend.key.width = unit(1, 'cm'), 
@@ -1205,11 +1206,12 @@ load("data/R_outputs/age_depth_models.Rdata")
     labs(tag = "A")+
     ggtitle("Age-Depth Model")+ #for the title
     xlab("Time (Myr)")+ # for the x axis label
-    ylab("Stratigraphic Height (m)")+ # for the y axis label
+    ylab("Height (m)")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     scale_colour_brewer(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"),palette="Set1")+
     theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),#Changes text size
-          plot.title = element_text(size=10),
+          plot.title = element_text(size=9), 
+          plot.tag.position = c(0.01, 0.98),
           legend.key.size = unit(1, 'cm'), 
           legend.key.height = unit(0.1, 'cm'), 
           legend.key.width = unit(1, 'cm'), 
@@ -1295,11 +1297,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
          labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
     }
     
     #3.1. The plotting of the evolution as found in at distance 20
@@ -1408,9 +1410,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -1516,9 +1518,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -1624,9 +1626,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -1732,9 +1734,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -1840,9 +1842,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS5_raw.pdf"), width=6.5, height = 7.5)
@@ -1914,11 +1916,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=0.25)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
     }
     
     #3.1. The plotting of the evolution as found in at distance 20
@@ -2027,9 +2029,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -2135,9 +2137,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -2243,9 +2245,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -2351,9 +2353,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -2459,9 +2461,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS8_raw.pdf"), width=6.5, height = 7.5)
@@ -2541,11 +2543,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -2659,9 +2661,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -2767,9 +2769,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -2875,9 +2877,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -2983,9 +2985,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -3091,9 +3093,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS4_raw.pdf"), width=6.5, height = 7.5)
@@ -3164,11 +3166,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -3282,9 +3284,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -3390,9 +3392,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -3498,9 +3500,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -3606,9 +3608,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -3714,9 +3716,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS7_raw.pdf"), width=6.5, height = 7.5)
@@ -3796,11 +3798,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -3914,9 +3916,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4022,9 +4024,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -4130,9 +4132,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -4238,9 +4240,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -4346,9 +4348,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS3_raw.pdf"), width=6.5, height = 7.5)
@@ -4419,11 +4421,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -4537,9 +4539,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -4645,9 +4647,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -4753,9 +4755,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -4861,9 +4863,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -4969,9 +4971,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/figS6_raw.pdf"), width=6.5, height = 7.5)
@@ -5050,11 +5052,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -5168,9 +5170,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -5276,9 +5278,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -5384,9 +5386,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -5492,9 +5494,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -5600,9 +5602,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 7.5)
@@ -5673,11 +5675,11 @@ load("data/R_outputs/age_depth_models.Rdata")
       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
         geom_line(size=1)+
         labs(tag = "B")+
-        ggtitle("Time domain")+ #for the title
+        ggtitle("Time Domain")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
       
       
@@ -5791,9 +5793,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.2. The plotting of the evolution as found in at distance 60
     {wantedDist=60  
@@ -5899,9 +5901,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.3. The plotting of the evolution as found in at distance 80
     {wantedDist=80  
@@ -6007,9 +6009,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "E")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.4. The plotting of the evolution as found in at distance 100
     {wantedDist=100  
@@ -6115,9 +6117,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "F")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     #3.5. The plotting of the evolution as found in at distance 120
     {wantedDist=120  
@@ -6223,9 +6225,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "G")+
         ggtitle(paste("Distance From Shore: ", as.character(wantedDist/10), " km", sep=""))+ #for the title
         xlab("Height (m)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"),legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
     }
     {
       pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 7.5)
@@ -6287,9 +6289,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "A")+
         ggtitle("Stasis over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=9), plot.tag.position = c(0.01, 0.98)) #Changes text size
     }
   }
   }
@@ -6338,9 +6340,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "B")+
         ggtitle("Brownian motion over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=9), plot.tag.position = c(0.01, 0.98)) #Changes text size 
     }
   }
   
@@ -6389,9 +6391,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "C")+
         ggtitle("Weak Brownian drift over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=9), plot.tag.position = c(0.01, 0.98)) #Changes text size 
     }
   }
   
@@ -6439,9 +6441,9 @@ load("data/R_outputs/age_depth_models.Rdata")
         labs(tag = "D")+
         ggtitle("Strong Brownian drift over time")+ #for the title
         xlab("Time (Myr)")+ # for the x axis label
-        ylab("Trait value")+ # for the y axis label
+        ylab("Trait Value")+ # for the y axis label
         theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=10)) #Changes text size 
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), legend.position="none",plot.title = element_text(size=9), plot.tag.position = c(0.01, 0.98)) #Changes text size 
     }
   }
   
