@@ -509,7 +509,7 @@ scenario=scenarioNames[1]
       geom_boxplot(outlier.shape = NA) +
        labs(tag = "A")+
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+      theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),text = element_text(size = 8))+
       labs(title = paste(simulatedEvoMode), y="AIC weight", x="Distance from shore")
 ### BM A ###
     simulatedEvoMode=simulatedEvoModes[2]
@@ -592,7 +592,7 @@ scenario=scenarioNames[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "E")+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98))+
     labs(title = paste(simulatedEvoMode), y="AIC weight", x="Distance from shore")
   ### BM B ###
   simulatedEvoMode=simulatedEvoModes[2]
@@ -686,7 +686,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "A")+
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+      theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
       labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
 
     ### Time BM ###
@@ -723,7 +723,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       geom_boxplot(outlier.shape = NA) +
       labs(tag = "C")+
       scale_fill_brewer(palette="Spectral")+
-      theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+      theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
       labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
 
     
@@ -774,7 +774,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "A")+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+    theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
     labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
   
   ### Time BM ###
@@ -810,7 +810,7 @@ simulatedEvoMode=simulatedEvoModes[1]
     geom_boxplot(outlier.shape = NA) +
     labs(tag = "C")+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 10),text = element_text(size = 8))+
+    theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
     labs(title = paste(simulatedEvoMode), y="AIC weight", x="Number of Sampling Points")
   
   
