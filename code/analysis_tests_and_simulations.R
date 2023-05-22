@@ -6634,7 +6634,7 @@ load("data/R_outputs/age_depth_models.Rdata")
     xlab("Time Difference (Myr)")+ # for the x axis label
     ylab("Number")+ # for the y axis label
     theme_bw()+ #Makes the background white.
-    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+    theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
 {
   
@@ -6689,7 +6689,7 @@ load("data/R_outputs/age_depth_models.Rdata")
     xlab("Time Difference (Myr)")+ # for the x axis label
     ylab("Number")+ # for the y axis label
     theme_bw()+ #Makes the background white.
-    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+    theme(text = element_text(size = 6),axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
 {
   
@@ -6744,7 +6744,7 @@ load("data/R_outputs/age_depth_models.Rdata")
     xlab("Time Difference (Myr)")+ # for the x axis label
     ylab("Number")+ # for the y axis label
     theme_bw()+ #Makes the background white.
-    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+    theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
 {
   
@@ -6799,8 +6799,10 @@ load("data/R_outputs/age_depth_models.Rdata")
     xlab("Time Difference (Myr)")+ # for the x axis label
     ylab("Number")+ # for the y axis label
     theme_bw()+ #Makes the background white.
-    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+    theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
+  
+  PlotA=arrangeGrob(Plot1,Plot2,Plot3,Plot4,Plot5, ncol=5,left="Scenario A")
   #Basin B
 {
     p="B"
@@ -6910,7 +6912,7 @@ load("data/R_outputs/age_depth_models.Rdata")
       xlab("Time Difference (Myr)")+ # for the x axis label
       ylab("Number")+ # for the y axis label
       theme_bw()+ #Makes the background white.
-      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+      theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
 {
     
@@ -6965,7 +6967,7 @@ load("data/R_outputs/age_depth_models.Rdata")
       xlab("Time Difference (Myr)")+ # for the x axis label
       ylab("Number")+ # for the y axis label
       theme_bw()+ #Makes the background white.
-      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+      theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
 {
     
@@ -7020,7 +7022,7 @@ load("data/R_outputs/age_depth_models.Rdata")
       xlab("Time Difference (Myr)")+ # for the x axis label
       ylab("Number")+ # for the y axis label
       theme_bw()+ #Makes the background white.
-      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+      theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
 {
     
@@ -7075,14 +7077,16 @@ load("data/R_outputs/age_depth_models.Rdata")
       xlab("Time Difference (Myr)")+ # for the x axis label
       ylab("Number")+ # for the y axis label
       theme_bw()+ #Makes the background white.
-      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+      theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
-  
+  PlotB=arrangeGrob(Plot6,Plot7,Plot8,Plot9,Plot10, ncol=5, left="Scenario B")
   #The multiplot
+
+
   {
     pdf(file = paste("figs/R/fig_raw.pdf"), width=6.5, height = 5)
     
-    multiplot(Plot1,Plot6,Plot2,Plot7,Plot3,Plot8,Plot4,Plot9,Plot5,Plot10,cols=5) #The multiplot
+    PlotFull=grid.arrange(PlotA,PlotB, ncol=1,heights = c(5, 5)) #The multiplot
     dev.off()
   }
 }
