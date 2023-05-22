@@ -726,6 +726,7 @@ simulatedEvoMode=simulatedEvoModes[1]
       theme(legend.position="none", plot.title =element_text(size = 10), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
       labs(title = paste("Stasis"), y="AIC weight", x="Number of Sampling Points")+
       scale_y_continuous(limits=c(0,1))
+      
 
     ### Time BM ###
     simulatedEvoMode=simulatedEvoModes[2]
@@ -6515,6 +6516,573 @@ load("data/R_outputs/age_depth_models.Rdata")
     pdf(file = paste("figs/R/figS2_raw.pdf"), width=6.5, height = 5)
     
     multiplot(PlotST,PlotWBDT,PlotBMT,PlotSBDT,cols=2) #The multiplot
+    dev.off()
+  }
+}
+
+
+#### Figs for publication: Time elapsed between samples (Figure ?)####
+
+#Creating the time elapsed between samples:
+{
+  #Basin A
+{
+  p="A"
+  wantedDist=20  
+  for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+    #Retrieving necessary values:
+    AMTime=ageDepthModels[[p]][[i]]$time # extract time
+    AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+    #Calculating height steps every 0,5 meter.
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+    
+    #Adjusting values to remove duplicates:
+    adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+    adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+    
+    #Transforming the times of observation into stratigraphic height.
+    transVal=pointtransform(points= myHeightsOfObservations,
+                            xdep=adjustAMHeight,
+                            ydep=adjustAMTime,
+                            direction="height to time", 
+                            depositionmodel = "age model")
+
+    
+    
+    #Calculating traitvalues over time and adding time and height to myTraitValues.
+    myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+    
+    myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+
+    myTraitValues$time=transVal$time #adding the respective times to the list
+
+    #This makes sure the x values are coupled to the heights properly
+    
+  Gap=NA
+    for (i in 1:length(myTraitValues$time)) { 
+      Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+         
+    
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Gap)
+    return(df)
+  }
+  
+  
+  #The plot for all the four lines, forming one graph.
+  Plot1=ggplot(data = df, aes(x=x))+ 
+    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    labs(tag = "A")+
+    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+    ggtitle(paste( as.character(wantedDist/10)," km", sep=""))+ #for the title
+    xlab("Time Difference (Myr)")+ # for the x axis label
+    ylab("Number")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+}
+{
+
+  wantedDist=60  
+  for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+    #Retrieving necessary values:
+    AMTime=ageDepthModels[[p]][[i]]$time # extract time
+    AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+    #Calculating height steps every 0,5 meter.
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+    
+    #Adjusting values to remove duplicates:
+    adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+    adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+    
+    #Transforming the times of observation into stratigraphic height.
+    transVal=pointtransform(points= myHeightsOfObservations,
+                            xdep=adjustAMHeight,
+                            ydep=adjustAMTime,
+                            direction="height to time", 
+                            depositionmodel = "age model")
+    
+    
+    
+    #Calculating traitvalues over time and adding time and height to myTraitValues.
+    myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+    
+    myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+    
+    myTraitValues$time=transVal$time #adding the respective times to the list
+    
+    #This makes sure the x values are coupled to the heights properly
+    
+    Gap=NA
+    for (i in 1:length(myTraitValues$time)) { 
+      Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+    }
+    
+    
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Gap)
+    return(df)
+  }
+  
+  
+  #The plot for all the four lines, forming one graph.
+  Plot2=ggplot(data = df, aes(x=x))+ 
+    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    labs(tag = "B")+
+    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+    ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    xlab("Time Difference (Myr)")+ # for the x axis label
+    ylab("Number")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+}
+{
+  
+  wantedDist=80  
+  for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+    #Retrieving necessary values:
+    AMTime=ageDepthModels[[p]][[i]]$time # extract time
+    AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+    #Calculating height steps every 0,5 meter.
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+    
+    #Adjusting values to remove duplicates:
+    adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+    adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+    
+    #Transforming the times of observation into stratigraphic height.
+    transVal=pointtransform(points= myHeightsOfObservations,
+                            xdep=adjustAMHeight,
+                            ydep=adjustAMTime,
+                            direction="height to time", 
+                            depositionmodel = "age model")
+    
+    
+    
+    #Calculating traitvalues over time and adding time and height to myTraitValues.
+    myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+    
+    myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+    
+    myTraitValues$time=transVal$time #adding the respective times to the list
+    
+    #This makes sure the x values are coupled to the heights properly
+    
+    Gap=NA
+    for (i in 1:length(myTraitValues$time)) { 
+      Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+    }
+    
+    
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Gap)
+    return(df)
+  }
+  
+  
+  #The plot for all the four lines, forming one graph.
+  Plot3=ggplot(data = df, aes(x=x))+ 
+    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    labs(tag = "C")+
+    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+    ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    xlab("Time Difference (Myr)")+ # for the x axis label
+    ylab("Number")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+}
+{
+  
+  wantedDist=100  
+  for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+    #Retrieving necessary values:
+    AMTime=ageDepthModels[[p]][[i]]$time # extract time
+    AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+    #Calculating height steps every 0,5 meter.
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+    
+    #Adjusting values to remove duplicates:
+    adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+    adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+    
+    #Transforming the times of observation into stratigraphic height.
+    transVal=pointtransform(points= myHeightsOfObservations,
+                            xdep=adjustAMHeight,
+                            ydep=adjustAMTime,
+                            direction="height to time", 
+                            depositionmodel = "age model")
+    
+    
+    
+    #Calculating traitvalues over time and adding time and height to myTraitValues.
+    myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+    
+    myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+    
+    myTraitValues$time=transVal$time #adding the respective times to the list
+    
+    #This makes sure the x values are coupled to the heights properly
+    
+    Gap=NA
+    for (i in 1:length(myTraitValues$time)) { 
+      Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+    }
+    
+    
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Gap)
+    return(df)
+  }
+  
+  
+  #The plot for all the four lines, forming one graph.
+  Plot4=ggplot(data = df, aes(x=x))+ 
+    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    labs(tag = "D")+
+    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+    ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    xlab("Time Difference (Myr)")+ # for the x axis label
+    ylab("Number")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+}
+{
+  
+  wantedDist=120  
+  for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+    #Retrieving necessary values:
+    AMTime=ageDepthModels[[p]][[i]]$time # extract time
+    AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+    #Calculating height steps every 0,5 meter.
+    myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+    
+    #Adjusting values to remove duplicates:
+    adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+    adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+    
+    #Transforming the times of observation into stratigraphic height.
+    transVal=pointtransform(points= myHeightsOfObservations,
+                            xdep=adjustAMHeight,
+                            ydep=adjustAMTime,
+                            direction="height to time", 
+                            depositionmodel = "age model")
+    
+    
+    
+    #Calculating traitvalues over time and adding time and height to myTraitValues.
+    myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+    
+    myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+    
+    myTraitValues$time=transVal$time #adding the respective times to the list
+    
+    #This makes sure the x values are coupled to the heights properly
+    
+    Gap=NA
+    for (i in 1:length(myTraitValues$time)) { 
+      Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+    }
+    
+    
+    #Creates a dataframe with all the earlier info
+    df=data.frame(x=Gap)
+    return(df)
+  }
+  
+  
+  #The plot for all the four lines, forming one graph.
+  Plot5=ggplot(data = df, aes(x=x))+ 
+    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    labs(tag = "E")+
+    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+    ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    xlab("Time Difference (Myr)")+ # for the x axis label
+    ylab("Number")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+}
+  #Basin B
+{
+    p="B"
+    wantedDist=20  
+    for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      
+      
+      
+      #Calculating traitvalues over time and adding time and height to myTraitValues.
+      myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+      
+      myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+      
+      myTraitValues$time=transVal$time #adding the respective times to the list
+      
+      #This makes sure the x values are coupled to the heights properly
+      
+      Gap=NA
+      for (i in 1:length(myTraitValues$time)) { 
+        Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+      
+      
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Gap)
+      return(df)
+    }
+    
+    
+    #The plot for all the four lines, forming one graph.
+    Plot6=ggplot(data = df, aes(x=x))+ 
+      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+      labs(tag = "F")+
+      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+      xlab("Time Difference (Myr)")+ # for the x axis label
+      ylab("Number")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  }
+{
+    
+    wantedDist=60  
+    for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      
+      
+      
+      #Calculating traitvalues over time and adding time and height to myTraitValues.
+      myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+      
+      myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+      
+      myTraitValues$time=transVal$time #adding the respective times to the list
+      
+      #This makes sure the x values are coupled to the heights properly
+      
+      Gap=NA
+      for (i in 1:length(myTraitValues$time)) { 
+        Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+      
+      
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Gap)
+      return(df)
+    }
+    
+    
+    #The plot for all the four lines, forming one graph.
+    Plot7=ggplot(data = df, aes(x=x))+ 
+      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+      labs(tag = "G")+
+      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+      xlab("Time Difference (Myr)")+ # for the x axis label
+      ylab("Number")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  }
+{
+    
+    wantedDist=80  
+    for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      
+      
+      
+      #Calculating traitvalues over time and adding time and height to myTraitValues.
+      myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+      
+      myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+      
+      myTraitValues$time=transVal$time #adding the respective times to the list
+      
+      #This makes sure the x values are coupled to the heights properly
+      
+      Gap=NA
+      for (i in 1:length(myTraitValues$time)) { 
+        Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+      
+      
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Gap)
+      return(df)
+    }
+    
+    
+    #The plot for all the four lines, forming one graph.
+    Plot8=ggplot(data = df, aes(x=x))+ 
+      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+      labs(tag = "H")+
+      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+      xlab("Time Difference (Myr)")+ # for the x axis label
+      ylab("Number")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  }
+{
+    
+    wantedDist=100  
+    for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      
+      
+      
+      #Calculating traitvalues over time and adding time and height to myTraitValues.
+      myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+      
+      myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+      
+      myTraitValues$time=transVal$time #adding the respective times to the list
+      
+      #This makes sure the x values are coupled to the heights properly
+      
+      Gap=NA
+      for (i in 1:length(myTraitValues$time)) { 
+        Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+      
+      
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Gap)
+      return(df)
+    }
+    
+    
+    #The plot for all the four lines, forming one graph.
+    Plot9=ggplot(data = df, aes(x=x))+ 
+      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+      labs(tag = "I")+
+      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+      xlab("Time Difference (Myr)")+ # for the x axis label
+      ylab("Number")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  }
+{
+    
+    wantedDist=120  
+    for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
+      #Retrieving necessary values:
+      AMTime=ageDepthModels[[p]][[i]]$time # extract time
+      AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
+      #Calculating height steps every 0,5 meter.
+      myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
+      
+      #Adjusting values to remove duplicates:
+      adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
+      adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
+      
+      #Transforming the times of observation into stratigraphic height.
+      transVal=pointtransform(points= myHeightsOfObservations,
+                              xdep=adjustAMHeight,
+                              ydep=adjustAMTime,
+                              direction="height to time", 
+                              depositionmodel = "age model")
+      
+      
+      
+      #Calculating traitvalues over time and adding time and height to myTraitValues.
+      myTraitValues=c()#Creating the vector so that all other values get inputted correctly
+      
+      myTraitValues$height=myHeightsOfObservations #Adding the respective heights to the list
+      
+      myTraitValues$time=transVal$time #adding the respective times to the list
+      
+      #This makes sure the x values are coupled to the heights properly
+      
+      Gap=NA
+      for (i in 1:length(myTraitValues$time)) { 
+        Gap[i]=myTraitValues$time[i+1]-myTraitValues$time[i]
+      }
+      
+      
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Gap)
+      return(df)
+    }
+    
+    
+    #The plot for all the four lines, forming one graph.
+    Plot10=ggplot(data = df, aes(x=x))+ 
+      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+      labs(tag = "J")+
+      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+      xlab("Time Difference (Myr)")+ # for the x axis label
+      ylab("Number")+ # for the y axis label
+      theme_bw()+ #Makes the background white.
+      theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  }
+  
+  #The multiplot
+  {
+    pdf(file = paste("figs/R/fig_raw.pdf"), width=6.5, height = 5)
+    
+    multiplot(Plot1,Plot6,Plot2,Plot7,Plot3,Plot8,Plot4,Plot9,Plot5,Plot10,cols=5) #The multiplot
     dev.off()
   }
 }
