@@ -6571,13 +6571,14 @@ load("data/R_outputs/age_depth_models.Rdata")
   
   
   #The plot for all the four lines, forming one graph.
-  Plot1=ggplot(data = df, aes(x=x))+ 
-    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+  Plot1=ggplot(data = df, aes(x=x, y = ..density..))+ 
+    geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
     labs(tag = "A")+
-    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
     ggtitle(paste( as.character(wantedDist/10)," km", sep=""))+ #for the title
+    scale_x_continuous(limits=c(-0.01,0.6))+
+    scale_y_continuous(limits=c(-0.01,100))+
     xlab("Time Difference (Myr)")+ # for the x axis label
-    ylab("Number")+ # for the y axis label
+    ylab("Probability")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
@@ -6626,13 +6627,14 @@ load("data/R_outputs/age_depth_models.Rdata")
   
   
   #The plot for all the four lines, forming one graph.
-  Plot2=ggplot(data = df, aes(x=x))+ 
-    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+  Plot2=ggplot(data = df, aes(x=x, y = ..density..))+ 
+    geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
     labs(tag = "B")+
-    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
     ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    scale_x_continuous(limits=c(-0.01,0.6))+
+    scale_y_continuous(limits=c(-0.01,100))+
     xlab("Time Difference (Myr)")+ # for the x axis label
-    ylab("Number")+ # for the y axis label
+    ylab("Probability")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
@@ -6681,13 +6683,14 @@ load("data/R_outputs/age_depth_models.Rdata")
   
   
   #The plot for all the four lines, forming one graph.
-  Plot3=ggplot(data = df, aes(x=x))+ 
-    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+  Plot3=ggplot(data = df, aes(x=x, y = ..density..))+ 
+    geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
     labs(tag = "C")+
-    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
     ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    scale_x_continuous(limits=c(-0.01,0.6))+
+    scale_y_continuous(limits=c(-0.01,100))+
     xlab("Time Difference (Myr)")+ # for the x axis label
-    ylab("Number")+ # for the y axis label
+    ylab("Probability")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6),axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
@@ -6736,13 +6739,14 @@ load("data/R_outputs/age_depth_models.Rdata")
   
   
   #The plot for all the four lines, forming one graph.
-  Plot4=ggplot(data = df, aes(x=x))+ 
-    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+  Plot4=ggplot(data = df, aes(x=x, y = ..density..))+ 
+    geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
     labs(tag = "D")+
-    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
     ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    scale_x_continuous(limits=c(-0.01,0.6))+
+    scale_y_continuous(limits=c(-0.01,100))+
     xlab("Time Difference (Myr)")+ # for the x axis label
-    ylab("Number")+ # for the y axis label
+    ylab("Probability")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
@@ -6791,13 +6795,14 @@ load("data/R_outputs/age_depth_models.Rdata")
   
   
   #The plot for all the four lines, forming one graph.
-  Plot5=ggplot(data = df, aes(x=x))+ 
-    geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+  Plot5=ggplot(data = df, aes(x=x, y = ..density..))+ 
+    geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
     labs(tag = "E")+
-    scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
     ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
+    scale_x_continuous(limits=c(-0.01,0.6))+
+    scale_y_continuous(limits=c(-0.01,100))+
     xlab("Time Difference (Myr)")+ # for the x axis label
-    ylab("Number")+ # for the y axis label
+    ylab("Probability")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
 }
@@ -6849,13 +6854,14 @@ load("data/R_outputs/age_depth_models.Rdata")
     
     
     #The plot for all the four lines, forming one graph.
-    Plot6=ggplot(data = df, aes(x=x))+ 
-      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    Plot6=ggplot(data = df, aes(x=x, y = ..density..))+ 
+      geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
       labs(tag = "F")+
-      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      scale_x_continuous(limits=c(-0.01,0.6))+
+      scale_y_continuous(limits=c(-0.01,100))+
       ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
       xlab("Time Difference (Myr)")+ # for the x axis label
-      ylab("Number")+ # for the y axis label
+      ylab("Probability")+ # for the y axis label
       theme_bw()+ #Makes the background white.
       theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
@@ -6904,13 +6910,14 @@ load("data/R_outputs/age_depth_models.Rdata")
     
     
     #The plot for all the four lines, forming one graph.
-    Plot7=ggplot(data = df, aes(x=x))+ 
-      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    Plot7=ggplot(data = df, aes(x=x, y = ..density..))+ 
+      geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
       labs(tag = "G")+
-      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      scale_x_continuous(limits=c(-0.01,0.6))+
+      scale_y_continuous(limits=c(-0.01,100))+      
       ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
       xlab("Time Difference (Myr)")+ # for the x axis label
-      ylab("Number")+ # for the y axis label
+      ylab("Probability")+ # for the y axis label
       theme_bw()+ #Makes the background white.
       theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
@@ -6959,13 +6966,14 @@ load("data/R_outputs/age_depth_models.Rdata")
     
     
     #The plot for all the four lines, forming one graph.
-    Plot8=ggplot(data = df, aes(x=x))+ 
-      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    Plot8=ggplot(data = df, aes(x=x, y = ..density..))+ 
+      geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
       labs(tag = "H")+
-      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      scale_x_continuous(limits=c(-0.01,0.6))+
+      scale_y_continuous(limits=c(-0.01,100))+      
       ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
       xlab("Time Difference (Myr)")+ # for the x axis label
-      ylab("Number")+ # for the y axis label
+      ylab("Probability")+ # for the y axis label
       theme_bw()+ #Makes the background white.
       theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
@@ -7014,13 +7022,14 @@ load("data/R_outputs/age_depth_models.Rdata")
     
     
     #The plot for all the four lines, forming one graph.
-    Plot9=ggplot(data = df, aes(x=x))+ 
-      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    Plot9=ggplot(data = df, aes(x=x, y = ..density..))+ 
+      geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
       labs(tag = "I")+
-      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      scale_x_continuous(limits=c(-0.01,0.6))+
+      scale_y_continuous(limits=c(-0.01,100))+
       ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
       xlab("Time Difference (Myr)")+ # for the x axis label
-      ylab("Number")+ # for the y axis label
+      ylab("Probability")+ # for the y axis label
       theme_bw()+ #Makes the background white.
       theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
@@ -7069,13 +7078,14 @@ load("data/R_outputs/age_depth_models.Rdata")
     
     
     #The plot for all the four lines, forming one graph.
-    Plot10=ggplot(data = df, aes(x=x))+ 
-      geom_histogram(binwidth = 0.001,color="darkgreen",fill="lightgreen")+
+    Plot10=ggplot(data = df, aes(x=x, y = ..density..))+ 
+      geom_histogram(binwidth = 0.01,color="darkgreen",fill="lightgreen")+
       labs(tag = "J")+
-      scale_x_continuous(breaks=c(0,0.02,0.04,0.06,0.08,0.1),limits=c(0,0.1))+
+      scale_x_continuous(limits=c(-0.01,0.6))+
+      scale_y_continuous(limits=c(-0.01,100))+
       ggtitle(paste(as.character(wantedDist/10), " km", sep=""))+ #for the title
       xlab("Time Difference (Myr)")+ # for the x axis label
-      ylab("Number")+ # for the y axis label
+      ylab("Probability")+ # for the y axis label
       theme_bw()+ #Makes the background white.
       theme(text = element_text(size = 6), axis.title.y=element_blank(), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
   }
