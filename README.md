@@ -1,8 +1,14 @@
-# Stratigraphy Paper
+# CarboStratPalEvo
 
-The code for "Identification of the mode of evolution in incomplete carbonate successions"
+Repository for "Identification of the mode of evolution in incomplete carbonate successions".
 
 ## Authors
+
+__Niklas Hohmann__
+Utrecht University  
+email: n.hohmann [at] uu.nl  
+Web page: [uu.nl/staff/NHohmann](uu.nl/staff/NHohmann)  
+Orcid: [0000-0003-1559-1838](https://orcid.org/0000-0003-1559-1838)
 
 __Jan Roel Koelewijn__  
 Utrecht University  
@@ -14,30 +20,18 @@ email: e.b.jarochowska [at] uu.nl
 Web page: [uu.nl/staff/EBJarochowska](https://www.uu.nl/staff/EBJarochowska)  
 Orcid: [0000-0001-8937-9405](https://orcid.org/0000-0001-8937-9405)
 
-__Niklas Hohmann__
-Utrecht University  
-email: n.hohmann@uu.nl  
-Web page: [uu.nl/staff/NHohmann](uu.nl/staff/NHohmann)  
-Orcid: [0000-0003-1559-1838](https://orcid.org/0000-0003-1559-1838)
-
 ## License
 
 Apache 2.0, see LICENSE file for full license text
 
 ## Software requirements
 
-Base R
-Packages _paleoTS_, _renv_, _DAIME_, _ggplot2_ and their dependencies
+Base _R_ and _Rstudio_.  
+Packages _paleoTS_, _renv_, _DAIME_, _ggplot2_ and their dependencies.
 
 ## Usage
 
-First, install the _renv_ package by running the following code in R:
-
-``` R
-if (!require("renv", quietly = TRUE)) install.packages("renv")
-```
-
-Then, open the Rproject file "stratigraphy_paper.Rproj". Next, run
+Open the Rproject file "stratigraphy_paper.Rproj" in _Rstudio_. This will bootstrap the _renv_ package if it is not installed yet. Next, run
 
 ``` R
 renv::restore()

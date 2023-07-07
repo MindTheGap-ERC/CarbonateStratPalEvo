@@ -48,14 +48,17 @@ ageDepthModels <- list(
 save(ageDepthModels, file = "data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 
 #### visual check ####
-scenario <- "B" # "A" or "B"
-dist <- "11 km"
-
-plot(
-  x = ageDepthModels[[scenario]][[dist]]$time,
-  y = ageDepthModels[[scenario]][[dist]]$height,
-  xlab = "Time [Ma]",
-  ylab = "Height [m]",
-  type = "l",
-  main = paste("Scenario ", scenario, ", ", dist, " offshore", sep = "")
-)
+plot_adm = FALSE
+if (plot_adm){
+  scenario <- "B" # "A" or "B"
+  dist <- "11 km"
+  
+  plot(
+    x = ageDepthModels[[scenario]][[dist]]$time,
+    y = ageDepthModels[[scenario]][[dist]]$height,
+    xlab = "Time [Ma]",
+    ylab = "Height [m]",
+    type = "l",
+    main = paste("Scenario ", scenario, ", ", dist, " offshore", sep = "")
+  )
+}

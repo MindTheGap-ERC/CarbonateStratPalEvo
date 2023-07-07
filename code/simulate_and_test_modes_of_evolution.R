@@ -1,5 +1,3 @@
-#### load required packages ####
-
 #### Import Age-Depth models ####
 load("data/R_outputs/age_depth_models.Rdata")
 
@@ -22,7 +20,7 @@ EvoModes[[2]] <- list(
   name = "Brownian motion",
   mode = "BD",
   params = c(0, 1)
-) # B<M with mean zero and variance 1
+) # BM with mean zero and variance 1
 EvoModes[[3]] <- list(
   name = "weak Brownian drift",
   mode = "BD",
