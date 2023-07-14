@@ -8,11 +8,10 @@ require("RColorBrewer")
 require("ggrepel")  
 require("gridExtra")
 
-source("code/multiplot.R")
 
 #### load test results & platform data####
 load("data/R_outputs/results_modes_of_evolution.Rdata")
-load("data/R_outputs/age_depth_models.Rdata")
+
 
 
 #### Basic Visuals: plot results in strat domain ####
