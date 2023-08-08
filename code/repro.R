@@ -7,7 +7,7 @@ source("code/utils.R")
 ## import ADMs from matlab
 source("code/process_adm_from_matlab.R")
 
-run_sim_and_test = TRUE
+run_sim_and_test = FALSE
 
 if(run_sim_and_test){
   #! Warning, will take hours of computation time

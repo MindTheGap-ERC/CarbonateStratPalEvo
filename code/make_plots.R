@@ -29,20 +29,7 @@ get_AIC_scenario = function(scenario, simulated_mode){
   #' @return An object that can be passed to ggplot to generate boxplots of AIC in strat. domain
 }
 
-get_AIC_time = function(times, simulated_mode){
-  #' 
-  #' @title Get AIC vals from model output for plotting
-  #' 
-  #' @param times: char vector, subset of noOfSamplingLoc: number of sampling points
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
-  #' 
-  #' @description combine outputs from the the function get_AIC_no_of_sampl_loc
-  #' 
-  #' @return An object that can be passed to ggplot to generate boxplots of AIC in time domain
-}
-
-get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode){
+get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode, scenario){
   #' 
   #' @title get AIC from test results for specified number of sampling locatinos
   #' 
@@ -54,6 +41,20 @@ get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode){
   #' 
   stopifnot(no_of_sampl_loc %in% noOfSamplingLoc) # check if data from sampl. location is available
 }
+
+get_AIC_time = function(no_of_sampl_loc, simulated_mode, scenario){
+  #' 
+  #' @title Get AIC vals from model output for plotting
+  #' 
+  #' @param no_of_sampl_loc: char vector, subset of noOfSamplingLoc: number of sampling points
+  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
+  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' 
+  #' @description combine outputs from the the function get_AIC_no_of_sampl_loc
+  #' 
+  #' @return An object that can be passed to ggplot to generate boxplots of AIC in time domain
+}
+
 
 #### Figure 4 ####
 ts_lengths = as.character(ts_length_mat["A",])
