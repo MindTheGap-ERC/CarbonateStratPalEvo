@@ -4,6 +4,15 @@ source("code/utils.R")
 #### fix random seed for debugging
 set.seed(1)
 
+#### Load required packages
+require(DAIME)
+require(paleoTS)
+require(grid)
+require("ggplot2")
+require("RColorBrewer")
+require("ggrepel")  
+require("gridExtra")
+
 #### load data ####
 load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 load("data/R_outputs/results_modes_of_evolution.Rdata")
@@ -11,13 +20,13 @@ load("data/R_outputs/results_modes_of_evolution.Rdata")
 #### Helper functions ####
 get_AIC_scenario = function(scenario, simulated_mode){
   #' 
-  #' @title Get AIC vals from model outpur for plotting
+  #' @title Get AIC vals from model output for plotting
   #' 
   #' @param scenario: "A" or "B": the scenario of interest
   #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
   #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' 
-  #' @return An opject that can be passed to ggplot to generate boxplots of AIC in strat domain
+  #' @return An object that can be passed to ggplot to generate boxplots of AIC in strat. domain
 }
 
 get_AIC_time = function(times, simulated_mode){
