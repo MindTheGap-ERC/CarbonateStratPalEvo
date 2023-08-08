@@ -1,6 +1,12 @@
+## set seed for repeatibility
+set.seed(1)
 
+## load utility functions
+source("code/utils.R")
 
-set.seed(42)
+## import ADMs from matlab
+source("code/process_adm_from_matlab.R")
+
 run_sim_and_test = TRUE
 
 if(run_sim_and_test){

@@ -1,11 +1,5 @@
-#### import utility functions ####
-source("code/utils.R")
-
-#### process adms ####
-source("code/process_adm_from_matlab.R")
-
 #### Import Age-Depth models ####
-load("data/R_outputs/age_depth_models.Rdata")
+load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 
 #### Modes of evolution that will be simulated for ####
 # name is the name used for output
@@ -41,7 +35,7 @@ simulatedEvoModes <- sapply(EvoModes, function(x) x$name)
 scenarioNames <- c("A", "B")
 specimensPerSample <- 100 # no of specimens found at one sampling site
 interPopVar <- 0.1 # variance in traits at one sampling location around the simulated mean trait value
-noOfTests <- 200 # no of tests performed per basin position
+noOfTests <- 100 # no of tests performed per basin position
 
 examinedBasinPositions <- c("2 km", "6 km", "8 km", "10 km", "12 km") # distance from shore in km where the tests will be performed
 distanceBetweenSamples <- 1 # m between sampling sites in the section
@@ -75,7 +69,7 @@ for (dist in examinedBasinPositions){
 # time series length for benchmarks in time domain
 noOfSamplingLoc_time = c("5", "10", "15", "20", "25", "35", "50", "100", "200")
 
-# time series length for time domain, incl. direct comparisosns
+# time series length for time domain, incl. direct comparisons
 noOfSamplingLoc <- as.character(unique(sort(c(as.vector(ts_length_mat),as.numeric(noOfSamplingLoc_time))))) # how long is the time series? Times sampled are given by seq(0,maxTimes[[X]],length.out=noOfSamplingLoc[i])
 
 
