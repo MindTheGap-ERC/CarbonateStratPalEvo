@@ -10,8 +10,15 @@ source("code/process_adm_from_matlab.R")
 run_sim_and_test = TRUE
 
 if(run_sim_and_test){
+  #! Warning, will take hours of computation time
   source("code/simulate_and_test_modes_of_evolution.R")
 }
+
+make_plots = FALSE
+if(make_plots){
+  source("code/make_plots.R")
+}
+
 
 
 #### determine incompletenss at locatinos 
