@@ -55,6 +55,9 @@ get_AIC_time = function(no_of_sampl_loc, simulated_mode, scenario){
   #' @return An object that can be passed to ggplot to generate boxplots of AIC in time domain
 }
 
+# the idea is that we can use the code as follows:
+# data = get_AIC_time
+# ggplot(data,your arguments her)
 
 #### Figure 4 ####
 ts_lengths = as.character(ts_length_mat["A",])
