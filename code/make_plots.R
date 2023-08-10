@@ -34,11 +34,11 @@ get_AIC_scenario = function(basin, simulated_mode){
     data = NA,
     dim = c(length(scenarioNames), length(examinedBasinPositions), length(simulatedEvoModes), length(testedEvoModes), noOfTests),
     dimnames = list(
-      scenarioNames,
-      examinedBasinPositions,
-      simulatedEvoModes,
-      testedEvoModes,
-      NULL
+      "scenario" = scenarioNames,
+      "basin_positions" = examinedBasinPositions,
+      "simulated_evo_modes" = simulatedEvoModes,
+      "tested_evo_modes" = testedEvoModes,
+      "test" = NULL
     )
   )
 
