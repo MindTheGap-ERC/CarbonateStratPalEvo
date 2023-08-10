@@ -23,7 +23,7 @@ get_AIC_scenario = function(basin, simulated_mode){
   #' 
   #' @title Get AIC vals from model output for plotting
   #' 
-  #' @param basin: "A" or "B": the scenario of interest. Named 'basin' instead of 'scenario due to the second already being used.
+  #' @param basin: "A" or "B": the scenario of interest. 
   #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
   #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' 
@@ -32,28 +32,24 @@ get_AIC_scenario = function(basin, simulated_mode){
 #Creating an array ready for all the input data:
   AkaikeWtArrayStrat <- array( 
     data = NA,
-    dim = c(length(scenarioNames), length(examinedBasinPositions), length(simulatedEvoModes), length(testedEvoModes), noOfTests),
+    dim = c(length(examinedBasinPositions), length(testedEvoModes), noOfTests),
     dimnames = list(
-      "scenario" = scenarioNames,
       "basin_positions" = examinedBasinPositions,
-      "simulated_evo_modes" = simulatedEvoModes,
       "tested_evo_modes" = testedEvoModes,
       "test" = NULL
     )
   )
 
 #This part fills the just created array with the Akaike data:
-  for (scenario in scenarioNames) { 
+
     for (dist in examinedBasinPositions) {
-      for (trueMode in simulatedEvoModes) {
         for (resMode in testedEvoModes) {
           for (i in 1:noOfTests) {
-            AkaikeWtArrayStrat[scenario, dist, trueMode, resMode, i] <- testResultsStrat[[scenario]][[dist]][[trueMode]][[i]]$testRes$modelFits[resMode, "Akaike.wt"]
+            AkaikeWtArrayStrat[dist, resMode, i] <- testResultsStrat[[basin]][[dist]][[simulated_mode]][[i]]$testRes$modelFits[resMode, "Akaike.wt"]
           }
         }
-      }
     }
-  }
+
   
 #This part takes only the required Akaike data from the array and puts it in a format accepted by ggplot:  
   df=data.frame(position=NULL,testedMode=NULL,AIC=NULL) 
@@ -61,7 +57,7 @@ get_AIC_scenario = function(basin, simulated_mode){
     for (testedEvoMode in testedEvoModes){
       df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
                              testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
-                             AIC=AkaikeWtArrayStrat[basin,pos,simulated_mode,testedEvoMode,]))
+                             AIC=AkaikeWtArrayStrat[pos,testedEvoMode,]))
     }
   }
   return(df) #The return, ready for input in ggplot.
