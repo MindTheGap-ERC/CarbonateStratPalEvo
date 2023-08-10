@@ -55,8 +55,8 @@ get_AIC_scenario = function(basin, simulated_mode){
   df=data.frame(position=NULL,testedMode=NULL,AIC=NULL) 
   for (pos in examinedBasinPositions){
     for (testedEvoMode in testedEvoModes){
-      df=rbind(df,data.frame(position=as.factor(rep(pos,length(AkaikeWtArrayStrat[1,1,1,1,]))),
-                             testedEvoMode=rep(testedEvoMode,length(AkaikeWtArrayStrat[1,1,1,1,])),
+      df=rbind(df,data.frame(position=as.factor(rep(pos,noOfTests)),
+                             testedEvoMode=rep(testedEvoMode,noOfTests),
                              AIC=AkaikeWtArrayStrat[pos,testedEvoMode,]))
     }
   }
