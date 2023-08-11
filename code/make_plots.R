@@ -52,7 +52,7 @@ get_AIC_scenario = function(basin, simulated_mode){
 
   
 #This part takes only the required Akaike data from the array and puts it in a format accepted by ggplot:  
-  df=data.frame(position=NULL,testedMode=NULL,AIC=NULL) 
+  df=data.frame() 
   for (pos in examinedBasinPositions){
     for (testedEvoMode in testedEvoModes){
       df=rbind(df,data.frame(position=as.factor(rep(pos,noOfTests)),
@@ -60,6 +60,7 @@ get_AIC_scenario = function(basin, simulated_mode){
                              AIC=AkaikeWtArrayStrat[pos,testedEvoMode,]))
     }
   }
+  
   return(df) #The return, ready for input in ggplot.
 }
 
