@@ -66,22 +66,45 @@ get_AIC_scenario = function(basin, simulated_mode){
   return(df) #The return, ready for input in ggplot.
 }
 
- 
-get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode, scenario){
+
+get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, basin, simulated_mode){
   #' 
   #' @title get AIC from test results for specified number of sampling locations
   #' 
   #' @param no_of_sampl_loc : string, element of noOfSamplingLoc
   #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
   #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
-  #' @param scenario: String, "A" or "B"
+  #' @param basin: String, "A" or "B"
   #' 
   #' @return some data structure that can be used by the function get_AIC_time
   #' 
   stopifnot(no_of_sampl_loc %in% noOfSamplingLoc) # check if data from sampl. location is available
   stopifnot(basin %in% scenarioNames)
   stopifnot(simulated_mode %in% simulatedEvoModes)
-}
+
+#Creating an array ready for all the input data:  
+  AkaikeWtArrayTime <- array(
+    data = NA,
+    dim = c(length(no_of_sampl_loc), length(testedEvoModes), noOfTests),
+    dimnames = list(
+      "number_sampling_loc"= no_of_sampl_loc,
+      "tested_evo_modes" = testedEvoModes,
+      "test" = NULL
+    )
+  )
+  #This part fills the just created array with the Akaike data:
+  for (p in no_of_sampl_loc) {
+        for (resMode in testedEvoModes) {
+          for (i in 1:noOfTests) {
+            AkaikeWtArrayTime[p, resMode, i] <- testResultsTime[[basin]][[p]][[simulated_mode]][[i]]$testRes$modelFits[resMode, "Akaike.wt"]
+          }
+      }
+    }
+
+  
+  return(AkaikeWtArrayTime)
+} 
+
 
 get_AIC_time = function(basin, simulated_mode){
   #' 
