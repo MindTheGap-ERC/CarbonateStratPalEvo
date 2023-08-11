@@ -78,6 +78,8 @@ get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode, scenario){
   #' @return some data structure that can be used by the function get_AIC_time
   #' 
   stopifnot(no_of_sampl_loc %in% noOfSamplingLoc) # check if data from sampl. location is available
+  stopifnot(basin %in% scenarioNames)
+  stopifnot(simulated_mode %in% simulatedEvoModes)
 }
 
 get_AIC_time = function(basin, simulated_mode){
