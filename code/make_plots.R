@@ -29,6 +29,8 @@ get_AIC_scenario = function(basin, simulated_mode){
   #' 
   #' @return An object that can be passed to ggplot to generate boxplots of AIC in strat. domain
 
+  stopifnot(basin %in% scenarioNames)
+  stopifnot(simulated_mode %in% simulatedEvoModes)
 #Creating an array ready for all the input data:
   AkaikeWtArrayStrat <- array( 
     data = NA,
