@@ -74,6 +74,7 @@ get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, simulated_mode, scenario){
   #' @param no_of_sampl_loc : string, element of noOfSamplingLoc
   #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
   #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param scenario: String, "A" or "B"
   #' 
   #' @return some data structure that can be used by the function get_AIC_time
   #' 
