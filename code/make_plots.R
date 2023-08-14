@@ -16,6 +16,7 @@ require("gridExtra")
 #### load data ####
 load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 load("data/R_outputs/results_modes_of_evolution.Rdata")
+load("data/R_outputs/hiatus_info.Rdata")
 
 #### Helper functions ####
 get_AIC_scenario = function(basin, simulated_mode){

@@ -1,8 +1,6 @@
 load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 load("data/R_outputs/results_modes_of_evolution.Rdata")
 
-ageDepthModels[["A"]]$`0.1 km`$distanceToShore
-all_dist = names(ageDepthModels[["A"]])
 
 hiatus_list = list()
 for (scenario in scenarioNames){
@@ -19,6 +17,21 @@ for (scenario in scenarioNames){
                             hiatus_duration = hiat_time)
   }
   hiatus_list[[scenario]] = res_list
+}
+
+compl_matrix = matrix(
+  data = NA,
+  nrow = length(scenarioNames),
+  ncol = length(examinedBasinPositions),
+  dimnames = list("scenario" = scenarioNames,
+                  "basin_position" = examinedBasinPositions)
+)
+
+for (scenario in scenarioNames){
+  for (pos in examinedBasinPositions){
+    time_interval = diff(range(ageDepthModels[[scenario]][[pos]]$time))
+    compl_matrix[scenario, pos] = 1 - sum(hiatus_list[[scenario]][[pos]]$hiatus_duration)/(time_interval)
+  }
 }
 
 save("hiatus_list", file = "./data/R_outputs/hiatus_info.RData")
