@@ -10,7 +10,7 @@ require(paleoTS)
 require(grid)
 require("ggplot2")
 require("RColorBrewer")
-require("ggrepel")  
+require("ggrepel")
 require("gridExtra")
 
 #### load data ####
@@ -130,7 +130,6 @@ get_AIC_time = function(no_of_sampl_loc, basin, simulated_mode){
       df=rbind(df,data.frame(nsp=as.factor(rep(nsp,length(Akaike_time[1,1,]))),
                              testedEvoMode=rep(testedEvoMode,length(Akaike_time[1,1,])),
                              AIC=Akaike_time[nsp,testedEvoMode,]))
-      
     }
   }
   
@@ -152,12 +151,25 @@ Plot_Strat = function(basin, simulated_mode, label){
   #' 
   #' @return A graph, ready to be combined with other graphs in the combined plot.
   #' 
+
+  #Loads in the correct line thicknesses for the graph:
+  if(simulated_mode=="stasis"){
+    highlight=rep(c(0.1,0.1,0.5,0.1),5)
+  }else if(simulated_mode=="Brownian motion"){
+    highlight=rep(c(0.1,0.1,0.1,0.5),5)
+  }else if(simulated_mode=="strong Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1,0.1),5)
+  }else if(simulated_mode=="weak Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1,0.1),5)
+  }
   
   plotS1=ggplot2::ggplot(get_AIC_scenario(basin,simulated_mode), aes(x=position, y=AIC, fill=testedEvoMode)) + 
-    geom_boxplot(outlier.shape = NA,lwd=0.1) +
+    geom_boxplot(outlier.shape = NA,lwd=highlight) +
+    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
     scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),text = element_text(size = 6))+
+    theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
+          text = element_text(size = 6))+
     labs(title = paste(simulated_mode), y="AIC weight", x="Distance from Shore (km)")+
     scale_x_discrete( labels=c("2 km"="2","6 km"="6","8 km"="8","10 km"="10","12 km"="12"))+
     scale_y_continuous(limits=c(0,1))
@@ -179,15 +191,34 @@ Plot_time = function(no_of_sampl_loc, basin, simulated_mode, label){
   #' 
   #' @return A graph, ready to be combined with other graphs in the combined plot.
   #' 
+
+  #Running the function to extract the amount of sample locations:
+  plot_data=get_AIC_time(no_of_sampl_loc, basin, simulated_mode)
+  Mult_high=length(no_of_sampl_loc)
+ 
+  #Loads in the correct line thicknesses for the graph:
+  if(simulated_mode=="stasis"){
+    highlight=rep(c(0.1,0.1,0.5,0.1),Mult_high)
+  }else if(simulated_mode=="Brownian motion"){
+    highlight=rep(c(0.1,0.1,0.1,0.5),Mult_high)
+  }else if(simulated_mode=="strong Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1,0.1),Mult_high)
+  }else if(simulated_mode=="weak Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1,0.1),Mult_high)
+  }
   
-  
-  plotT1=ggplot2::ggplot(get_AIC_time(no_of_sampl_loc, basin, simulated_mode), aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
-    geom_boxplot(outlier.shape = NA,lwd=0.1) +
+  #Plots the plot:
+  plotT1= ggplot2::ggplot(plot_data, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
+    geom_boxplot(outlier.shape = NA,linewidth=highlight) +
+    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
-    scale_fill_brewer(palette="Spectral")+
-    theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), text = element_text(size = 8))+
+    scale_fill_brewer(palette="Spectral")+ 
+    theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), 
+          text = element_text(size = 6))+
     labs(title = paste(simulated_mode), y="AIC weight", x="Number of Sampling Points")+
     scale_y_continuous(limits=c(0,1))
+    
+  plotT1
   
   return(plotT1)
 }
@@ -228,6 +259,8 @@ Legend=get_only_legend(PlotLegend)
 }
 
 #### Figure 4 ####
+#Figure 
+
 #Setting ts_lengths to the correct lengths
 ts_lengths = as.character(ts_length_mat["A",])
 names(ts_lengths) = colnames(ts_length_mat)
@@ -256,7 +289,9 @@ combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4
 }
 
 #### Figure 5 ####
-ts_lengths = as.character(ts_length_mat["B",])
+{
+  #Setting the correct sampling points:
+  ts_lengths = as.character(ts_length_mat["B",])
 names(ts_lengths) = colnames(ts_length_mat)
 
 #The stratigraphic plots:
@@ -281,18 +316,25 @@ combined_plot=grid.arrange(Plot5_1,Plot5_2,Plot5_3,Plot5_4,Plot5_5,Plot5_6,Plot5
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
-
+}
 #### Figure 6 ####
-ts_lengths = noOfSamplingLoc_time
+{
+  #Setting the correct sampling points:
+  ts_lengths = noOfSamplingLoc_time
+  #The plots:
 Plot6_1=Plot_time(ts_lengths,"A","stasis","A")
 Plot6_2=Plot_time(ts_lengths,"A","Brownian motion","B")
 Plot6_3=Plot_time(ts_lengths,"A","weak Brownian drift","C")
 Plot6_4=Plot_time(ts_lengths,"A","strong Brownian drift","D")
 
+#Combining all the plots:
 combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
 
+#Printing the plots plus the legend to .pdf
 {
   pdf(file = paste("figs/R/fig6_raw.pdf"), width=6.5, height = 3.25)
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
+  dev.off()
+}
 }
 
