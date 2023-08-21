@@ -375,32 +375,86 @@ combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
 
 #### Plot ???: Completeness and Distribution of hiatus durations ####
 ## TODO:
-# 1. Mege plots with completeness and hiatus duration distribution. Use the left
-# y axis for completeness nad the right for hiatus duration
-# 2. make unifom y axis scale for hiatus duration between scenarios. This is so
-# the plots for different scenarions are comparable with each other
+# 1. Merge plots with completeness and hiatus duration distribution. Use the left
+# y axis for completeness and the right for hiatus duration
+# 2. make uniform y axis scale for hiatus duration between scenarios. This is so
+# the plots for different scenarios are comparable with each other
 # 3. Adjust x axis. should be real distance from shore (in km) instead of the index as here
-# 4. add legend for hiatus duration & use different line types for hiatus diration.
+# 4. add legend for hiatus duration & use different line types for hiatus duration.
 # should be "first quartile", "median", "third quartile", and "maximum"
-par(mfrow = c(2,2))
-for (scenario in scenarioNames){
-  plot(hiat_measures[[scenario]]$completeness * 100, type = "l", ylab = "Stratigraphic Completeness [%]",
-       xlab = "distance from shore",
-       main = paste0("scenario ", scenario),
-       ylim = c(0,100))
-  
-  plot(hiat_measures[[scenario]]$max_duration_myr,
-       ylim = c(0, max(hiat_measures[[scenario]]$max_duration_myr)),
-       xlab = "distance from shore",
-       ylab = "Hiatus duration [Myr]",
-       type = "l",
-       main = paste0("scenario ", scenario))
-  lines(hiat_measures[[scenario]]$median_duration_myr)
-  lines(hiat_measures[[scenario]]$first_quartile_duration_myr)
-  lines(hiat_measures[[scenario]]$third_quartile_duration_myr)
-}
 
-par(mfrow = c(1,1))
+{
+#Getting all the input data for the graph:
+hiatusA=hiat_measures$A$completeness*100
+hiatus_maxA=hiat_measures$A$max_duration_myr
+hiatus_medianA=hiat_measures$A$median_duration_myr
+hiatus_1st_quartA=hiat_measures$A$first_quartile_duration_myr
+hiatus_3rd_quartA=hiat_measures$A$third_quartile_duration_myr
+xaxis=(1:150)
+
+dfA=data.frame(x=xaxis,y1=hiatusA,y2=hiatus_maxA,y3=hiatus_medianA,y4=hiatus_1st_quartA,y5=hiatus_3rd_quartA)
+
+#The plot for basin A
+Plot_1=ggplot(data = dfA, aes(x=1:150))+
+  geom_line(aes(y=y1), size=1)+
+  geom_line(aes(y=y2*130), colour = "red")+
+  geom_line(aes(y=y3*130), colour = "blue")+
+  geom_line(aes(y=y4*130), colour = "lightblue",linetype = "dashed")+
+  geom_line(aes(y=y5*130), colour = "brown",linetype = "dashed")+
+  labs(tag = "A")+
+  scale_y_continuous(
+    limits=c(0,100),
+    name = "Completeness",
+    sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500),labels = c(seq(0, 12500, by = 2500)/1000000))
+  )+
+  ggtitle(paste("Completeness over scenario A"))+ #for the title
+  xlab("Height (m)")+ # for the x axis label
+  ylab("Completenes")+ # for the y axis label
+  theme_bw()+ #Makes the background white.
+  theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  
+#Getting all the input data for the graph
+hiatusB=hiat_measures$B$completeness*100
+hiatus_maxB=hiat_measures$B$max_duration_myr
+hiatus_medianB=hiat_measures$B$median_duration_myr
+hiatus_1st_quartB=hiat_measures$B$first_quartile_duration_myr
+hiatus_3rd_quartB=hiat_measures$B$third_quartile_duration_myr
+xaxis=(1:150)
+
+dfB=data.frame(x=xaxis,y1=hiatusB,y2=hiatus_maxB,y3=hiatus_medianB,y4=hiatus_1st_quartB,y5=hiatus_3rd_quartB)
+
+#The plot for basin B
+Plot_2=ggplot(data = dfB, aes(x=1:150))+
+  geom_line(aes(y=y1), size=1)+
+  geom_line(aes(y=y2*130), colour = "red")+
+  geom_line(aes(y=y3*130), colour = "blue")+
+  geom_line(aes(y=y4*130), colour = "lightblue",linetype = "dashed")+
+  geom_line(aes(y=y5*130), colour = "brown",linetype = "dashed")+
+  labs(tag = "A")+
+  scale_y_continuous(
+    limits=c(0,100),
+    # Features of the first axis
+    name = "Completeness",
+    # Add a second axis and specify its features
+    sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500),labels = c(seq(0, 12500, by = 2500)/1000000))
+  )+
+  ggtitle(paste("Completeness over scenario B"))+ #for the title
+  xlab("Height (m)")+ # for the x axis label
+  ylab("Completenes")+ # for the y axis label
+  theme_bw()+ #Makes the background white.
+  theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+
+
+#Combining all the plots:
+combined_plot=grid.arrange(Plot_1,Plot_2,ncol=2)
+
+#Printing the plots plus the legend to .pdf
+{
+  pdf(file = paste("figs/R/figUnknown_raw.pdf"), width=6.5, height = 3.25)
+  grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
+  dev.off()
+}
+}
 
 #### Figure 9 ####
 
