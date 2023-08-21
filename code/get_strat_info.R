@@ -60,6 +60,6 @@ for (scenario in scenarioNames){
 }
 
 
-save("hiatus_list","compl_matrix","all_dist", "hiat_distr", file = "./data/R_outputs/hiatus_info.RData")
+save("hiatus_list","compl_matrix","all_dist", "hiat_measures", file = "./data/R_outputs/hiatus_info.RData")
 
 
