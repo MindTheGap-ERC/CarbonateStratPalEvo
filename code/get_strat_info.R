@@ -34,6 +34,29 @@ for (scenario in scenarioNames){
   }
 }
 
-save("hiatus_list","compl_matrix","all_dist", file = "./data/R_outputs/hiatus_info.RData")
+hiat_measures = list()
+for (scenario in scenarioNames){
+  compl = rep(NA, length(all_dist))
+  median_duration_myr = rep(NA, length(all_dist))
+  first_quartile_duration_myr = rep(NA, length(all_dist))
+  third_quartile_duration_myr = rep(NA, length(all_dist))
+  for (i in seq_along(all_dist)){
+    compl[i] = get_completeness(pos = all_dist[i], scenario = scenario)
+    hiat_distr = get_hiatus_distribution(pos = all_dist[i], scenario = scenario)
+    median_duration_myr[i] = median(hiat_distr)
+    first_quartile_duration_myr[i] = quantile(hiat_distr, 0.25)
+    third_quartile_duration_myr[i] = quantile(hiat_distr,0.75)
+    
+  }
+  li = list()
+ li[["completeness"]] = compl
+  li[["median_duration_myr"]] = median_duration_myr
+  li[["first_quartile_duration_myr"]] = first_quartile_duration_myr
+  li[["third_quartile_duration_myr"]] = third_quartile_duration_myr
+  hiat_measures[[scenario]] = li
+}
+
+
+save("hiatus_list","compl_matrix","all_dist", "hiat_distr", file = "./data/R_outputs/hiatus_info.RData")
 
 
