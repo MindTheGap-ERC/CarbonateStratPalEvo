@@ -293,7 +293,7 @@ get_only_legend = function(plot) {
 Legend=get_only_legend(PlotLegend)
 }
 
-#### Figure 4 ####
+#### test_results_scenario_A_raw.pdf ####
 #Figure 
 
 #Setting ts_lengths to the correct lengths
@@ -317,13 +317,13 @@ combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4
 
 #Printing the plots plus the legend to .pdf
 {
-  pdf(file = paste("figs/R/fig4_raw.pdf"), width=6.5, height = 3.25)
+  pdf(file = paste("figs/R/test_results_scenario_A_raw.pdf"), width=6.5, height = 3.25)
   
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
 
-#### Figure 5 ####
+#### test_results_scenario_B_raw ####
 {
   #Setting the correct sampling points:
   ts_lengths = as.character(ts_length_mat["B",])
@@ -346,13 +346,13 @@ combined_plot=grid.arrange(Plot5_1,Plot5_2,Plot5_3,Plot5_4,Plot5_5,Plot5_6,Plot5
 
 #Printing the plots plus the legend to .pdf
 {
-  pdf(file = paste("figs/R/fig5_raw.pdf"), width=6.5, height = 3.25)
+  pdf(file = paste("figs/R/test_results_scenario_B_raw.pdf"), width=6.5, height = 3.25)
   
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
 }
-#### Figure 6 ####
+#### test_results_time_domain_raw.pdf ####
 {
   #Setting the correct sampling points:
   ts_lengths = noOfSamplingLoc_time
@@ -367,13 +367,13 @@ combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
 
 #Printing the plots plus the legend to .pdf
 {
-  pdf(file = paste("figs/R/fig6_raw.pdf"), width=6.5, height = 3.25)
+  pdf(file = paste("figs/R/test_results_time_domain_raw.pdf"), width=6.5, height = 3.25)
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
 }
 
-#### Plot ???: Completeness and Distribution of hiatus durations ####
+#### completeness_and_hiat_duration_raw.pdf ####
 ## TODO:
 # 1. Merge plots with completeness and hiatus duration distribution. Use the left
 # y axis for completeness and the right for hiatus duration
@@ -454,13 +454,13 @@ combined_plot=grid.arrange(Plot_1,Plot_2,ncol=2)
 
 #Printing the plots plus the legend to .pdf
 {
-  pdf(file = paste("figs/R/figUnknown_raw.pdf"), width=6.5, height = 3.25)
+  pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=6.5, height = 3.25)
   grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
   dev.off()
 }
 }
 
-#### Figure 9 ####
+#### equal_completeness_comparison.pdf ####
 
 #Inputs for the correct simulated mode of evolution:
 Mode=myBD
@@ -747,12 +747,12 @@ Deviation=1
     
     #Printing the plots plus the legend to .pdf
     {
-      pdf(file = paste("figs/R/fig9_raw.pdf"), width=6.5, height = 3.25)
+      pdf(file = paste("figs/R/equal_completeness_comparison.pdf"), width=6.5, height = 3.25)
       grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
       dev.off()
     }
   
-#### Plot ???: spatial variety in preservation #### 
+#### spatial_variability_scen_A_sBD.pdf #### 
   #Make figure displaying spatial variability in preservation. Use strong Brownian drift in scenario A
  {  
      #Creates the ADM for platform A
@@ -1557,7 +1557,7 @@ Deviation=1
             theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
         }
         {
-          pdf(file = paste("figs/R/figSpatVari_raw.pdf"), width=6.5, height = 7.5)
+          pdf(file = paste("figs/R/spatial_variability_scen_A_sBD.pdf"), width=6.5, height = 7.5)
           
           multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
           dev.off()
@@ -1566,7 +1566,7 @@ Deviation=1
     }
   }        
 
-    #### Plot ???: variable preservation of evolutionary modes #### 
+#### variable_pres_of_modes_scen_A_6km.pdf #### 
     #Make figure showing variable effects of strat. architectures on preservation of modes. Use scenario A, 6 km offshore
     
      GraphPreserv=function(mode,Mean,Deviation,dist,basin,label1,label2){
