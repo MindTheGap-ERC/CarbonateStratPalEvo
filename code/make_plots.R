@@ -373,3 +373,31 @@ combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
 }
 }
 
+#### Plot ???: Completeness and Distribution of hiatus durations ####
+## TODO:
+# 1. Mege plots with completeness and hiatus duration distribution. Use the left
+# y axis for completeness nad the right for hiatus duration
+# 2. make unifom y axis scale for hiatus duration between scenarios. This is so
+# the plots for different scenarions are comparable with each other
+# 3. Adjust x axis. should be real distance from shore (in km) instead of the index as here
+# 4. add legend for hiatus duration & use different line types for hiatus diration.
+# should be "first quartile", "median", "third quartile", and "maximum"
+par(mfrow = c(2,2))
+for (scenario in scenarioNames){
+  plot(hiat_measures[[scenario]]$completeness * 100, type = "l", ylab = "Stratigraphic Completeness [%]",
+       xlab = "distance from shore",
+       main = paste0("scenario ", scenario),
+       ylim = c(0,100))
+  
+  plot(hiat_measures[[scenario]]$max_duration_myr,
+       ylim = c(0, max(hiat_measures[[scenario]]$max_duration_myr)),
+       xlab = "distance from shore",
+       ylab = "Hiatus duration [Myr]",
+       type = "l",
+       main = paste0("scenario ", scenario))
+  lines(hiat_measures[[scenario]]$median_duration_myr)
+  lines(hiat_measures[[scenario]]$first_quartile_duration_myr)
+  lines(hiat_measures[[scenario]]$third_quartile_duration_myr)
+}
+
+par(mfrow = c(1,1))
