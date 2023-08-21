@@ -767,7 +767,7 @@ Deviation=1
         AMHeight=ageDepthModels$A[[i]]$height # extract strat height
         
         # times where the values of the age model is determined
-        timesOfInterest=seq(0,max(AMTime),length.out=1000)
+        timesOfInterest=seq(0,max(AMTime),length.out=10000)
         
         
         #create age model with hiatuses removed
@@ -956,11 +956,33 @@ Deviation=1
           } 
           #Removing all the times which apear more than once
           adjustAllTimes=allTimes[!duplicated(allTimes)]
-          #Simulating a evolution through all found times
-          allTraitValues1=Mode(adjustAllTimes,Mean,Deviation)
-          allTraitValues2=Mode(adjustAllTimes,Mean,Deviation)
-          allTraitValues3=Mode(adjustAllTimes,Mean,Deviation)
-          allTraitValues4=Mode(adjustAllTimes,Mean,Deviation)
+          
+          simulatedtime=seq(0,2.2, by = 0.001)
+          
+            simulatedTraitValues1=Mode(simulatedtime,Mean,Deviation)
+            simulatedTraitValues2=Mode(simulatedtime,Mean,Deviation)
+            simulatedTraitValues3=Mode(simulatedtime,Mean,Deviation)
+            simulatedTraitValues4=Mode(simulatedtime,Mean,Deviation)
+            
+            AproxTraitValues1=approx(simulatedTraitValues1$time, simulatedTraitValues1$traitValue, adjustAllTimes)
+            AproxTraitValues2=approx(simulatedTraitValues2$time, simulatedTraitValues2$traitValue, adjustAllTimes)
+            AproxTraitValues3=approx(simulatedTraitValues3$time, simulatedTraitValues3$traitValue, adjustAllTimes)
+            AproxTraitValues4=approx(simulatedTraitValues4$time, simulatedTraitValues4$traitValue, adjustAllTimes)
+            
+          allTraitValues1=NA
+          allTraitValues2=NA
+          allTraitValues3=NA
+          allTraitValues4=NA
+        
+          allTraitValues1$time=AproxTraitValues1$x
+          allTraitValues1$traitValue=AproxTraitValues1$y
+          allTraitValues2$time=AproxTraitValues2$x
+          allTraitValues2$traitValue=AproxTraitValues2$y
+          allTraitValues3$time=AproxTraitValues3$x
+          allTraitValues3$traitValue=AproxTraitValues3$y
+          allTraitValues4$time=AproxTraitValues4$x
+          allTraitValues4$traitValue=AproxTraitValues4$y
+          
           
           #2. Making the trait values over time graph#
           #This makes the 5 graphs detectable by ggplot
@@ -1535,7 +1557,7 @@ Deviation=1
             theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
         }
         {
-          pdf(file = paste("figs/R/figVariable_raw.pdf"), width=6.5, height = 7.5)
+          pdf(file = paste("figs/R/figSpatVari_raw.pdf"), width=6.5, height = 7.5)
           
           multiplot(ADM_A,Plot1,NA,PlotTT,Plot2,Plot4,NA,Plot3,Plot5,cols=3) #The multiplot
           dev.off()
@@ -1543,4 +1565,67 @@ Deviation=1
       }
     }
   }        
+
+    #### Plot ???: variable preservation of evolutionary modes #### 
+    #Make figure showing variable effects of strat. architectures on preservation of modes. Use scenario A, 6 km offshore
     
+     GraphPreserv=function(mode,Mean,Deviation,dist,basin,label1,label2){
+
+       TimeInterest=ageDepthModels[[basin]][[dist]]$time
+       
+       simulatedtime=seq(0,2.2, by = 0.001)
+       
+       simulatedTraitValues1=Mode(simulatedtime,Mean,Deviation)
+       simulatedTraitValues2=Mode(simulatedtime,Mean,Deviation)
+       simulatedTraitValues3=Mode(simulatedtime,Mean,Deviation)
+       simulatedTraitValues4=Mode(simulatedtime,Mean,Deviation)
+       
+       AproxTraitValues1=approx(simulatedTraitValues1$time, simulatedTraitValues1$traitValue, TimeInterest)
+       AproxTraitValues2=approx(simulatedTraitValues2$time, simulatedTraitValues2$traitValue, TimeInterest)
+       AproxTraitValues3=approx(simulatedTraitValues3$time, simulatedTraitValues3$traitValue, TimeInterest)
+       AproxTraitValues4=approx(simulatedTraitValues4$time, simulatedTraitValues4$traitValue, TimeInterest)
+       
+       allTraitValues1=NA
+       allTraitValues2=NA
+       allTraitValues3=NA
+       allTraitValues4=NA
+       
+       allTraitValues1$time=AproxTraitValues1$x
+       allTraitValues1$traitValue=AproxTraitValues1$y
+       allTraitValues2$time=AproxTraitValues2$x
+       allTraitValues2$traitValue=AproxTraitValues2$y
+       allTraitValues3$time=AproxTraitValues3$x
+       allTraitValues3$traitValue=AproxTraitValues3$y
+       allTraitValues4$time=AproxTraitValues4$x
+       allTraitValues4$traitValue=AproxTraitValues4$y
+       
+       #2. Making the trait values over time graph#
+       #This makes the 5 graphs detectable by ggplot
+       graphs=NA
+       graphs[1:length(allTraitValues1$traitValue)]=1
+       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues2$traitValue))]=2
+       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues3$traitValue))]=3
+       graphs[(length(graphs)+1):(length(graphs)+length(allTraitValues4$traitValue))]=4
+       #This puts all the values together for use in ggplot
+       full=NA
+       full=c(allTraitValues1$traitValue,allTraitValues2$traitValue,allTraitValues3$traitValue,allTraitValues4$traitValue)
+       #This makes sure the x values are coupled to the heights properly
+       Timespan=NA
+       Timespan=c(rep(allTraitValues1$time,4))
+       #This creates the labels for colours in the graph
+       Label=NA
+       Label=c(rep("run 1",length(allTraitValues1$time)),rep("run 2",length(allTraitValues1$time)),rep("run 3",length(allTraitValues1$time)),rep("run 4",length(allTraitValues1$time)))
+       #Creates a dataframe with all the earlier info
+       df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
+       
+       #The plot for all the four lines, forming one graph.
+       PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+         geom_line(size=1)+
+         labs(tag = label1)+
+         ggtitle("Time Domain")+ #for the title
+         xlab("Time (Myr)")+ # for the x axis label
+         ylab("Trait Value")+ # for the y axis label
+         theme_bw()+ #Makes the background white.
+         theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
+       
+     }
