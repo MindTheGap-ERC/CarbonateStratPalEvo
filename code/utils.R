@@ -258,7 +258,39 @@
   }
 }
 
+get_completeness = function(pos, scenario){
+  #'
+  #'@title Get strat completeness at specific position in basin
+  #'
+  #'@param: String, "A" or "B". Scenario of interest
+  #'@param: String, element of all_dist
+  #'
+  #'@returns numeric, strat. completeness as fraction
+  #'
+  #' @usage get_completeness(pos = "2 km", scenario = "A")
+  #' 
+  
+  time_interval = diff(range(ageDepthModels[[scenario]][[pos]]$time))
+  completeness =  1 - sum(hiatus_list[[scenario]][[pos]]$hiatus_duration)/(time_interval)
+  
+  return(completeness)
+}
 
+get_hiatus_distribution = function(pos, scenario){
+  #'
+  #'@title get distribution of hiatus durations in myr
+  #'
+  #'@param, String, "A", or "B", scenario of interest
+  #'@param string, element of all_dist
+  #'
+  #'@returns numeric vector of hiatus durations in specified basin and dist from shore
+  #'
+  #'@usage get_hiatus_distribution(pos = "2 km", scenario = "A")
+  #'
+  hiat_distr = hiatus_list[[scenario]][[pos]]$hiatus_duration
+  
+  return(hiat_distr)
+}
 
 
 

@@ -1,59 +1,24 @@
 #### Get utility functions
 source("code/utils.R")
 
-#### fix random seed for debugging
+#### fix random seed for repeatability
 set.seed(1)
 
 #### Load required packages
-require(DAIME)
-require(paleoTS)
-require(grid)
+require("DAIME")
+require("paleoTS")
+require("grid")
 require("ggplot2")
 require("RColorBrewer")
 require("ggrepel")
 require("gridExtra")
 
 #### load data ####
-load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
+#load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 load("data/R_outputs/results_modes_of_evolution.Rdata")
 load("data/R_outputs/hiatus_info.Rdata")
 
 #### Helper functions ####
-get_completeness = function(pos, scenario){
-  #'
-  #'@title Get strat completeness at specific position in basin
-  #'
-  #'@param: String, "A" or "B". Scenario of interest
-  #'@param: String, element of all_dist
-  #'
-  #'@returns numeric, strat. completeness as fraction
-  #'
-  #' @usage get_completeness(pos = "2 km", scenario = "A")
-  #' 
-  
-  time_interval = diff(range(ageDepthModels[[scenario]][[pos]]$time))
-  completeness =  1 - sum(hiatus_list[[scenario]][[pos]]$hiatus_duration)/(time_interval)
-  
-  return(completeness)
-}
-
-get_hiatus_distribution = function(pos, scenario){
-  #'
-  #'@title get distribution of hiatus durations in myr
-  #'
-  #'@param, String, "A", or "B", scenario of interest
-  #'@param string, element of all_dist
-  #'
-  #'@returns numeric vector of hiatus durations in specified basin and dist from shore
-  #'
-  #'@usage get_hiatus_distribution(pos = "2 km", scenario = "A")
-  #'
-  hiat_distr = hiatus_list[[scenario]][[pos]]$hiatus_duration
-  
-  return(hiat_distr)
-}
-
-
 get_AIC_scenario = function(basin, simulated_mode){
   
   #' 
