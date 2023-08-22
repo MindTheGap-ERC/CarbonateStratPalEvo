@@ -5,7 +5,7 @@ load("data/R_outputs/results_modes_of_evolution.Rdata")
 hiatus_list = list()
 for (scenario in scenarioNames){
   res_list = list()
-  all_dist = names(ageDepthModels[[scenario]])[1:150]
+  all_dist = head(names(ageDepthModels[[scenario]]),-1)
   for (dista in all_dist){
     adm = ageDepthModels[[scenario]][[dista]]
     hiatus_position = unique(adm$height[duplicated(adm$height)])
