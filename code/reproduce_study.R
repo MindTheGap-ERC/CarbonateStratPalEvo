@@ -20,7 +20,7 @@ if(download_data){
 # - data/matlab_outputs/scenarioB_matlab_outputs.mat
 # - data/matlab_outputs/scenarioA_and_B_matlab_to_R.mat
 # generates files:
-# - ageDepthModelsScenariosAandB.RData
+# - data/R_outputs/ageDepthModelsScenariosAandB.RData
 # file size: < 10 Mb
 process_adms = FALSE
 if(process_adms){
@@ -29,14 +29,13 @@ if(process_adms){
 
 #### run simulations and tests ####
 # requires files:
-# - ageDepthModelsScenariosAandB.RData
+# - data/R_outputs/ageDepthModelsScenariosAandB.RData
 # generates files:
-# - results_modes_of_evolution.RData
+# - data/R_outputs/results_modes_of_evolution.RData
 # file size: < 40 Mb
 # computation time: hours to days!
 run_sim_and_test = FALSE
 if(run_sim_and_test){
-  #! Warning, will take hours to compute
   source("code/simulate_and_test_modes_of_evolution.R")
 }
 

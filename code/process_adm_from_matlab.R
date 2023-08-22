@@ -63,3 +63,5 @@ if (plot_adm){
     main = paste("Scenario ", scenario, ", ", dist, " offshore", sep = "")
   )
 }
+# leave cleaned workspace
+remove(ageDepthModels,scenarioA,scenarioB,scenariosA_and_B_raw_data,rel_ind,i,dist_from_shore,plot_adm)
