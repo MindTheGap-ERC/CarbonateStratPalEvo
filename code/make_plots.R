@@ -258,84 +258,67 @@ get_only_legend = function(plot) {
 Legend=get_only_legend(PlotLegend)
 }
 
-#### test_results_scenario_A_raw.pdf ####
+#### test_results_scenario_A and B_raw.pdf ####
 #Figure 
+make_test_res_strat_plot = function(scenario){
+  #Setting ts_lengths to the correct lengths
+  ts_lengths = as.character(ts_length_mat[scenario,])
+  names(ts_lengths) = colnames(ts_length_mat)
+  
+  #The stratigraphic plots:
+  Plot4_1=Plot_Strat(scenario,"stasis","A")
+  Plot4_2=Plot_Strat(scenario,"Brownian motion","B")
+  Plot4_3=Plot_Strat(scenario,"weak Brownian drift","C")
+  Plot4_4=Plot_Strat(scenario,"strong Brownian drift","D")
+  
+  #The time plots:
+  Plot4_5=Plot_time(ts_lengths,scenario,"stasis","E")
+  Plot4_6=Plot_time(ts_lengths,scenario,"Brownian motion","F")
+  Plot4_7=Plot_time(ts_lengths,scenario,"weak Brownian drift","G")
+  Plot4_8=Plot_time(ts_lengths,scenario,"strong Brownian drift","H")
+  
+  #Combining all the plots:
+  combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
+  
+  #Printing the plots plus the legend to .pdf
 
-#Setting ts_lengths to the correct lengths
-ts_lengths = as.character(ts_length_mat["A",])
-names(ts_lengths) = colnames(ts_length_mat)
-
-#The stratigraphic plots:
-Plot4_1=Plot_Strat("A","stasis","A")
-Plot4_2=Plot_Strat("A","Brownian motion","B")
-Plot4_3=Plot_Strat("A","weak Brownian drift","C")
-Plot4_4=Plot_Strat("A","strong Brownian drift","D")
-
-#The time plots:
-Plot4_5=Plot_time(ts_lengths,"A","stasis","E")
-Plot4_6=Plot_time(ts_lengths,"A","Brownian motion","F")
-Plot4_7=Plot_time(ts_lengths,"A","weak Brownian drift","G")
-Plot4_8=Plot_time(ts_lengths,"A","strong Brownian drift","H")
-
-#Combining all the plots:
-combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
-
-#Printing the plots plus the legend to .pdf
-{
-  pdf(file = paste("figs/R/test_results_scenario_A_raw.pdf"), width=6.5, height = 3.25)
+  file_name = paste("figs/R/test_results_scenario_", scenario, "_raw.pdf", sep = "")
+  pdf(file = file_name , width=6.5, height = 3.25)
   
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
+
 }
 
-#### test_results_scenario_B_raw ####
-{
-  #Setting the correct sampling points:
-  ts_lengths = as.character(ts_length_mat["B",])
-names(ts_lengths) = colnames(ts_length_mat)
-
-#The stratigraphic plots:
-Plot5_1=Plot_Strat("B","stasis","A")
-Plot5_2=Plot_Strat("B","Brownian motion","B")
-Plot5_3=Plot_Strat("B","weak Brownian drift","C")
-Plot5_4=Plot_Strat("B","strong Brownian drift","D")
-
-#The time plots:
-Plot5_5=Plot_time(ts_lengths,"B","stasis","E")
-Plot5_6=Plot_time(ts_lengths,"B","Brownian motion","F")
-Plot5_7=Plot_time(ts_lengths,"B","weak Brownian drift","G")
-Plot5_8=Plot_time(ts_lengths,"B","strong Brownian drift","H")
-
-#Combining all the plots:
-combined_plot=grid.arrange(Plot5_1,Plot5_2,Plot5_3,Plot5_4,Plot5_5,Plot5_6,Plot5_7,Plot5_8, ncol=4)
-
-#Printing the plots plus the legend to .pdf
-{
-  pdf(file = paste("figs/R/test_results_scenario_B_raw.pdf"), width=6.5, height = 3.25)
-  
-  grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
-  dev.off()
+for (scenario in scenarioNames){
+  make_test_res_strat_plot(scenario)
 }
-}
+
+
 #### test_results_time_domain_raw.pdf ####
-{
+make_test_res_time_plot = function(scenario){
+
   #Setting the correct sampling points:
   ts_lengths = noOfSamplingLoc_time
   #The plots:
-Plot6_1=Plot_time(ts_lengths,"A","stasis","A")
-Plot6_2=Plot_time(ts_lengths,"A","Brownian motion","B")
-Plot6_3=Plot_time(ts_lengths,"A","weak Brownian drift","C")
-Plot6_4=Plot_time(ts_lengths,"A","strong Brownian drift","D")
+  Plot6_1=Plot_time(ts_lengths,scenario,"stasis","A")
+  Plot6_2=Plot_time(ts_lengths,scenario,"Brownian motion","B")
+  Plot6_3=Plot_time(ts_lengths,scenario,"weak Brownian drift","C")
+  Plot6_4=Plot_time(ts_lengths,scenario,"strong Brownian drift","D")
+  
+  #Combining all the plots:
+  combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
+  
+  #Printing the plots plus the legend to .pdf
 
-#Combining all the plots:
-combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
-
-#Printing the plots plus the legend to .pdf
-{
-  pdf(file = paste("figs/R/test_results_time_domain_raw.pdf"), width=6.5, height = 3.25)
+  file_name = paste("figs/R/test_results_time_domain_", as.character(scenario), "_raw.pdf", sep = "")
+  pdf(file = file_name, width = 6.5, height = 3.25)
   grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
+
+for (scenario in scenarioNames){
+  make_test_res_time_plot(scenario)
 }
 
 #### completeness_and_hiat_duration_raw.pdf ####
@@ -348,82 +331,75 @@ combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
 # 4. add legend for hiatus duration & use different line types for hiatus duration.
 # should be "first quartile", "median", "third quartile", and "maximum"
 
-{
+
 #Getting all the input data for the graph:
-hiatusA=hiat_measures$A$completeness*100
-hiatus_maxA=hiat_measures$A$max_duration_myr
-hiatus_medianA=hiat_measures$A$median_duration_myr
-hiatus_1st_quartA=hiat_measures$A$first_quartile_duration_myr
-hiatus_3rd_quartA=hiat_measures$A$third_quartile_duration_myr
-xaxis=(1:150)
-
-dfA=data.frame(x=xaxis,y1=hiatusA,y2=hiatus_maxA,y3=hiatus_medianA,y4=hiatus_1st_quartA,y5=hiatus_3rd_quartA)
-
-#The plot for basin A
-Plot_1=ggplot(data = dfA, aes(x=1:150))+
-  geom_line(aes(y=y1), size=1)+
-  geom_line(aes(y=y2*130), colour = "red")+
-  geom_line(aes(y=y3*130), colour = "blue")+
-  geom_line(aes(y=y4*130), colour = "lightblue",linetype = "dashed")+
-  geom_line(aes(y=y5*130), colour = "brown",linetype = "dashed")+
-  labs(tag = "A")+
-  scale_y_continuous(
-    limits=c(0,100),
-    name = "Completeness",
-    sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500),labels = c(seq(0, 12500, by = 2500)/1000000))
-  )+
-  scale_x_continuous(
-    breaks= seq(0, 150, by = 25),labels = c(seq(0, 150, by = 25)/10)
-  )+
-  ggtitle(paste("Completeness over scenario A"))+ #for the title
-  xlab("Distance from shore (km)")+ # for the x axis label
-  ylab("Completenes")+ # for the y axis label
-  theme_bw()+ #Makes the background white.
-  theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+make_hiat_plot = function(scenario){
+  hiatus=hiat_measures[[scenario]]$completeness*100
+  hiatus_max=hiat_measures[[scenario]]$max_duration_myr
+  hiatus_median=hiat_measures[[scenario]]$median_duration_myr
+  hiatus_1st_quart=hiat_measures[[scenario]]$first_quartile_duration_myr
+  hiatus_3rd_quart=hiat_measures[[scenario]]$third_quartile_duration_myr
+  xaxis=(1:150)
   
-#Getting all the input data for the graph
-hiatusB=hiat_measures$B$completeness*100
-hiatus_maxB=hiat_measures$B$max_duration_myr
-hiatus_medianB=hiat_measures$B$median_duration_myr
-hiatus_1st_quartB=hiat_measures$B$first_quartile_duration_myr
-hiatus_3rd_quartB=hiat_measures$B$third_quartile_duration_myr
-xaxis=(1:150)
+  df=data.frame(x=xaxis,y1=hiatus,y2=hiatus_max,y3=hiatus_median,y4=hiatus_1st_quart,y5=hiatus_3rd_quart)
+  title = paste0("Completeness over scenario ", scenario, sep = "")
+  #The plot for basin 
+  plot=ggplot(data = df, aes(x=1:150))+
+    geom_line(aes(y=y1), size=1)+
+    geom_line(aes(y=y2*130), colour = "red")+
+    geom_line(aes(y=y3*130), colour = "blue")+
+    geom_line(aes(y=y4*130), colour = "lightblue",linetype = "dashed")+
+    geom_line(aes(y=y5*130), colour = "brown",linetype = "dashed")+
+    labs(tag = "A")+
+    scale_y_continuous(
+      limits=c(0,100),
+      name = "Completeness",
+      sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500),labels = c(seq(0, 12500, by = 2500)/1000000))
+    )+
+    scale_x_continuous(
+      breaks= seq(0, 150, by = 25),labels = c(seq(0, 150, by = 25)/10)
+    )+
+    ggtitle(title)+ #for the title
+    xlab("Distance from shore (km)")+ # for the x axis label
+    ylab("Completenes")+ # for the y axis label
+    theme_bw()+ #Makes the background white.
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+  
+  return(plot)
+}
 
-dfB=data.frame(x=xaxis,y1=hiatusB,y2=hiatus_maxB,y3=hiatus_medianB,y4=hiatus_1st_quartB,y5=hiatus_3rd_quartB)
-
-#The plot for basin B
-Plot_2=ggplot(data = dfB, aes(x=1:150))+
-  geom_line(aes(y=y1), size=1)+
-  geom_line(aes(y=y2*130), colour = "red")+
-  geom_line(aes(y=y3*130), colour = "blue")+
-  geom_line(aes(y=y4*130), colour = "lightblue", linetype = "dashed")+
-  geom_line(aes(y=y5*130), colour = "brown", linetype = "dashed")+
-  labs(tag = "B")+
-  scale_y_continuous(
-    limits=c(0,100),
-    name = "Completeness",
-    sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500), labels = c(seq(0, 12500, by = 2500)/1000000))
-  )+
-  scale_x_continuous(
-    breaks= seq(0, 150, by = 25),labels = c(seq(0, 150, by = 25)/10)
-  )+
-  ggtitle(paste("Completeness over scenario B"))+ #for the title
-  xlab("Height (m)")+ # for the x axis label
-  ylab("Completenes")+ # for the y axis label
-  theme_bw()+ #Makes the background white.
-  theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
-
-
-#Combining all the plots:
-combined_plot=grid.arrange(Plot_1,Plot_2,ncol=2)
-
-#Printing the plots plus the legend to .pdf
-{
+make_completeness_and_hiat_plot = function(){
+  combined_plot=grid.arrange(make_hiat_plot("A"),make_hiat_plot("B"),ncol=2)
   pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=6.5, height = 3.25)
   grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
   dev.off()
 }
+
+make_completeness_and_hiat_plot()
+
+
+#### Skewness and kurtosis of hiatus duration ####
+require("moments")
+
+skew_list = list()
+for (scenario in scenarioNames){
+  skew_list[[scenario]] = sapply(seq_len(length(all_dist)), function(x) skewness(get_hiatus_distribution(pos = all_dist[x],scenario)) )
 }
+
+plot(NULL, xlim = c(1,150), ylim = c(0,11), main = "Skewness")
+lines(1:150, skew_list[["A"]], col = "red")
+lines(1:150, skew_list[["B"]], col = "black")
+legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
+
+kurt_list = list()
+for (scenario in scenarioNames){
+  kurt_list[[scenario]] = sapply(seq_len(length(all_dist)), function(x) kurtosis(get_hiatus_distribution(pos = all_dist[x],scenario)) )
+}
+
+plot(NULL, xlim = c(1,150), ylim = c(0,20), main = "Kurtosis")
+lines(1:150, kurt_list[["A"]], col = "red")
+lines(1:150, kurt_list[["B"]], col = "black")
+legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
 
 #### equal_completeness_comparison.pdf ####
 
