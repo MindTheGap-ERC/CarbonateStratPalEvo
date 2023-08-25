@@ -404,8 +404,54 @@ legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
 #### equal_completeness_comparison.pdf ####
 
 #Inputs for the correct simulated mode of evolution:
-Mode=myBD
-simulatedmode="Strong Brownian drift"
+make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
+  set.seed(plot_seed)
+  # function generating a plot that compares the same mode of evolution at differnet places in the basin and plots the completeness
+  stopifnot(mode %in% simulatedEvoModes)
+  evo_index = which(mode == simulatedEvoModes )
+  evo_fullname = EvoModes[[evo_index]]$name
+  evo_mode = EvoModes[[evo_index]]$mode
+  evo_params = EvoModes[[evo_index]]$params
+  
+  
+  get_sample_times = function(scenario, pos){
+    sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
+    times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
+  }
+  
+  relevant_times = sort(unique(c(get_sample_times(scenario_1, dist_1),seq(0, max_t, by = 0.001),get_sample_times(scenario_2, dist_2))))
+  
+  lin_list = list()
+  for (i in seq_len(no_of_lineages)){
+    lin_list[[i]] = simulateTraitEvo(relevant_times, evo_mode, evo_params[1], evo_params[2])
+  }
+  
+  make_time_dom_subplot = function(){
+    
+  }
+   make_strat_subplot = function(pos, scenario){
+     completeness = get_completeness(pos, scenario)
+     completeness_percent = signif(completeness, 3) * 100
+     
+   }
+   time_subplot = make_time_dom_subplot()
+  
+   strat_plot_1 = make_strat_subplot(dist_1, scenario_1)
+   strat_plot_2 = make_strat_subplot(dist_2, scenario_2)
+   
+   grid.arrange(time_subplot, strat_plot_1, strat_plot_2)
+}
+
+
+
+
+
+
+# these are the times at which you need to simulate the trait evolution
+
+
+#now you can use simulateTraitEvo
+
 Mean=10
 Deviation=1
 
@@ -694,6 +740,54 @@ Deviation=1
     }
   
 #### spatial_variability_scen_A_sBD.pdf #### 
+    
+  ## write this as a function!!!!
+    
+  make_spat_comparison_plot = function(scenario, mode, no_of_lineages = 3, plot_seed = 1){
+    set.seed(plot_seed)
+    stopifnot(mode %in% simulatedEvoModes)
+    evo_index = which(mode == simulatedEvoModes )
+    evo_fullname = EvoModes[[evo_index]]$name
+    evo_mode = EvoModes[[evo_index]]$mode
+    evo_params = EvoModes[[evo_index]]$params
+    
+    get_sample_times = function(scenario, pos){
+      sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
+      times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
+    }
+    
+    relevant_times = seq(0, maxTimes[[scenario]], 0.001)
+    for (position in examinedBasinPositions){
+      relevant_times = sort(unique(c(relevant_times, get_sample_times(scenario, position))))
+    }
+    lin_list = list()
+    for (i in seq_len(no_of_lineages)){
+      lin_list[[i]] = simulateTraitEvo(relevant_times, evo_mode, evo_params[1], evo_params[2])
+    }
+    make_adm_subplot = function(){
+      
+    }
+    make_pos_subplot = function(pos){
+      stopifnot(pos %in% examinedBasinPositions)
+      
+    }
+    
+    make_time_domain_subplot = function(){
+      
+    }
+    
+    adm_subplot = make_adm_subplot()
+    time_domain_subplot = make_time_domain_subplot()
+    plot_2km = make_pos_subplot("2 km")
+    plot_6km = make_pos_subplot("6 km")
+    plot_8km = make_pos_subplot("8 km")
+    plot_10km = make_pos_subplot("10 km")
+    plot_12km = make_pos_subplot("12 km")
+    
+    grid.arrange(adm_subplot,time_domain_subplot,plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
+    
+    # merge all plots here
+  }
   #Make figure displaying spatial variability in preservation. Use strong Brownian drift in scenario A
  {  
      #Creates the ADM for platform A
@@ -1508,6 +1602,29 @@ Deviation=1
   }        
 
 #### variable_pres_of_modes_scen_A_6km.pdf #### 
+    
+make_pres_of_mode_plot = function(pos, scenario, no_of_lineages = 3, plot_seed = 1){
+  set.seed(plot_seed)
+  get_sample_times = function(scenario, pos){
+    sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
+    times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
+    return(times)
+  }
+  
+  relevant_times = sort(unique(c(get_sample_times(scenario, pos),seq(0, maxTimes[[scenario]], by = 0.001))))
+  lin_list = list()
+  for (i in seq_along(EvoModes)){
+    li = list()
+    for (j in seq_len(no_of_lineages)){
+      li[[j]] = simulateTraitEvo(relevant_times, EvoModes[[i]]$mode, EvoModes[[i]]$params[1], EvoModes[[i]]$params[2])
+    }
+    lin_list[[EvoModes[[i]]$name]] = li
+  }
+  return(lin_list)
+  
+}
+    
+
     #Make figure showing variable effects of strat. architectures on preservation of modes. Use scenario A, 6 km offshore
     
      GraphPreserv=function(mode,Mean,Deviation,dist,basin,label1,label2){
