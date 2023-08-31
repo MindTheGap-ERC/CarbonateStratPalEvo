@@ -743,7 +743,7 @@ Deviation=1
     
   ## write this as a function!!!!
     
-  make_spat_comparison_plot = function(scenario, mode, no_of_lineages = 3, plot_seed = 1){
+  make_spat_comparison_plot = function(scenario, mode, no_of_lineages = 5, plot_seed = 1){
     set.seed(plot_seed)
     stopifnot(mode %in% simulatedEvoModes)
     evo_index = which(mode == simulatedEvoModes )
@@ -764,31 +764,148 @@ Deviation=1
     for (i in seq_len(no_of_lineages)){
       lin_list[[i]] = simulateTraitEvo(relevant_times, evo_mode, evo_params[1], evo_params[2])
     }
-    make_adm_subplot = function(){
-      
+  
+  
+    make_adm_subplot = function(label){
+      {
+        graphpoints=10000
+        adm_list=list()
+        for(position in examinedBasinPositions){
+          AMTime=ageDepthModels[[scenario]][[position]]$time # extract time
+          
+          AMHeight=ageDepthModels[[scenario]][[position]]$height # extract strat height
+          
+          # times where the values of the age model is determined
+          timesOfInterest=seq(0,max(AMTime),length.out=graphpoints)
+          
+          
+          #create age model with hiatuses removed
+          
+          # determine stratigraphic heights of the times "timesOfInterest"
+          AMHiatusesRemoved=pointtransform(points=timesOfInterest, # times that you want to know the strat height of
+                                           xdep=AMTime, # tie points in time of the age model
+                                           ydep=AMHeight, # tie points in strat height of the age model
+                                           direction="time to height", 
+                                           depositionmodel = "age model") 
+          # stratighraphic heights are contained in AMHiatusesRemoved$height
+          # AMHiatusesRemoved$time is a duplicate of timesOfInterest
+          adm_list[[position]]=AMHiatusesRemoved$height
+        }
+        {
+          #This makes the 4 graphs detectable by ggplot
+         graphs=NA
+          for (i in 1:length(examinedBasinPositions)){
+           graphs[(graphpoints*(i-1)+1):(graphpoints*(i))]=(i)
+          }
+          
+          #This puts all the values together for use in ggplot
+          full=vector()
+          for (position in examinedBasinPositions){
+            full=append(full, as.vector(adm_list[[position]]))
+          }
+          #This makes sure the x values are coupled to the heights properly
+          Timespan=vector()
+          for (position in examinedBasinPositions){
+            Timespan=append(Timespan, timesOfInterest)
+          }
+          #This creates the labels for colours in the graph
+          Position=vector()
+          for (i in 1:length(examinedBasinPositions)){
+            Position[(graphpoints*(i-1)+1):(graphpoints*(i))]=examinedBasinPositions[i]
+          }
+          #Creates a dataframe with all the earlier info
+          df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Position)
+        } #Puts everything into the righ format for the graphs.
+        #The plot for all the four lines, forming one graph.
+        ADM_A=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+          geom_path(size=1)+
+          labs(tag = label)+
+          ggtitle("Age-Depth Model")+ #for the title
+          xlab("Time (Myr)")+ # for the x axis label
+          ylab("Height (m)")+ # for the y axis label
+          theme_bw()+ #Makes the background white.
+          scale_colour_brewer(breaks=c( "2 km", '6 km', '8 km', "10 km", "12 km"),palette="Set1")+
+          theme(text = element_text(size = 8), 
+                plot.tag = element_text(face = "bold"), 
+                plot.tag.position = c(0.01, 0.98),
+                plot.title = element_text(size=9), 
+                legend.key.size = unit(1, 'cm'), 
+                legend.key.height = unit(0.1, 'cm'), 
+                legend.key.width = unit(1, 'cm'), 
+                legend.text = element_text(size = 5),
+                legend.title = element_text(size = 5),
+                legend.position = c(0.005, .99),
+                legend.justification = c("left", "top"),
+                legend.box.just = "left",
+                legend.margin = margin(2, 2, 2, 2),
+                legend.box.background = element_rect(color="black", size=0.25)
+          ) 
+        return(ADM_A)
+      }
     }
-    make_pos_subplot = function(pos){
+    
+    make_pos_subplot = function(pos,label){
       stopifnot(pos %in% examinedBasinPositions)
       
+       
     }
     
-    make_time_domain_subplot = function(){
+    make_time_domain_subplot = function(label){
+      
+      #2. Making the trait values over time graph#
+      #This makes the graphs detectable by ggplot
+      graphs=vector()
+      for (i in 1:no_of_lineages){
+        graphs[(length(lin_list[[i]]$time)*(i-1)+1):(length(lin_list[[i]]$time)*(i))]=(i)
+      }
+      #This puts all the values together for use in ggplot
+      full=vector()
+      for (position in 1:no_of_lineages){
+        full=append(full, as.vector(lin_list[[position]]$traitValue))
+      }
+      #This makes sure the x values are coupled to the heights properly
+      Timespan=vector()
+      Timespan=c(rep(relevant_times,no_of_lineages))
+      #This creates the labels for colours in the graph
+      Run=vector()
+      for (i in 1:no_of_lineages){
+        Text=paste("run ", i, sep="")
+        this_run=c(rep(Text,length(relevant_times)))
+        Run=append(Run,this_run)}
+      #Creates a dataframe with all the earlier info
+      df=data.frame(x=Timespan,y=full,variable=graphs,Distance=Run)
+      
+      #The plot for all the four lines, forming one graph.
+      PlotTT=ggplot(data = df, aes(x=x, y=y,col=Distance))+
+        geom_line(size=1)+
+        labs(tag = "B")+
+        ggtitle("Time Domain")+ #for the title
+        xlab("Time (Myr)")+ # for the x axis label
+        ylab("Trait Value")+ # for the y axis label
+        theme_bw()+ #Makes the background white.
+        theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
       
     }
+
     
-    adm_subplot = make_adm_subplot()
-    time_domain_subplot = make_time_domain_subplot()
-    plot_2km = make_pos_subplot("2 km")
-    plot_6km = make_pos_subplot("6 km")
-    plot_8km = make_pos_subplot("8 km")
-    plot_10km = make_pos_subplot("10 km")
-    plot_12km = make_pos_subplot("12 km")
     
-    grid.arrange(adm_subplot,time_domain_subplot,plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
+    adm_subplot = make_adm_subplot("A")
+    time_domain_subplot = make_time_domain_subplot("B")
+    plot_2km = make_pos_subplot("2 km","C")
+    plot_6km = make_pos_subplot("6 km","D")
+    plot_8km = make_pos_subplot("8 km","E")
+    plot_10km = make_pos_subplot("10 km","F")
+    plot_12km = make_pos_subplot("12 km","G")
+    
+    
+    grid.arrange(adm_subplot, time_domain_subplot, plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
     
     # merge all plots here
+    
   }
   #Make figure displaying spatial variability in preservation. Use strong Brownian drift in scenario A
+   
+    
  {  
      #Creates the ADM for platform A
     
@@ -1687,3 +1804,5 @@ make_pres_of_mode_plot = function(pos, scenario, no_of_lineages = 3, plot_seed =
          theme(text = element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), legend.position="none",plot.title = element_text(size=9)) #Changes text size 
        
      }
+     
+     
