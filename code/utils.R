@@ -331,3 +331,18 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     }
   }
 }
+
+get_sample_locations = function(scenario, distance_from_shore_km, distanceBetweenSamples){
+  
+  #' 
+  #' @title determine sampling positions 
+  #' 
+  #' @param scenario: "A" or "B"
+  #' @param distance_from_shore_km : element of all_dist
+  #' @param distanceBetweenSamples : numeric, distance between samples taken in m
+  sample_pos = seq(from = distanceBetweenSamples,
+                   to = max(ageDepthModels[[scenario]][[distance_from_shore_km]]$height),
+                   by = distanceBetweenSamples)
+  
+  return(sample_pos)
+}
