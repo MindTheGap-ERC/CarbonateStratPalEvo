@@ -467,19 +467,34 @@ legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
 make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
   set.seed(plot_seed)
   # function generating a plot that compares the same mode of evolution at differnet places in the basin and plots the completeness
+
+  mode = simulatedEvoModes[4]
+  
   stopifnot(mode %in% simulatedEvoModes)
   evo_index = which(mode == simulatedEvoModes )
   evo_fullname = EvoModes[[evo_index]]$name
   evo_mode = EvoModes[[evo_index]]$mode
   evo_params = EvoModes[[evo_index]]$params
   
+  sample_loc_1 = get_sample_locations(scenario = scenario_1,
+                                      distance_from_shore_km = dist_1,
+                                      distanceBetweenSamples = distanceBetweenSamples)
+  
+  sample_loc_2 = get_sample_locations(scenario = scenario_2,
+                                      distance_from_shore_km = dist_2,
+                                      distanceBetweenSamples = distanceBetweenSamples)
   
   get_sample_times = function(scenario, pos){
     sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
     times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
   }
   
-  relevant_times = sort(unique(c(get_sample_times(scenario_1, dist_1),seq(0, max_t, by = 0.001),get_sample_times(scenario_2, dist_2))))
+  sample_times_1 = get_sample_times(scenario_1, dist_1)
+  sample_times_2 = get_sample_times(scenario_2, dist_2)
+  sim_times = seq(0, max(sapply(c(scenario_1, scenario_2), function(x) maxTimes[[x]])), by = 0.001)
+  
+  relevant_times = sort(unique(c(sample_times_1, sample_times_2, sim_times)))
+  
   
   lin_list = list()
   for (i in seq_len(no_of_lineages)){
@@ -487,317 +502,93 @@ make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2,
   }
   
   make_time_dom_subplot = function(){
+    df = data.frame()
+    for (i in seq_len(no_of_lineages)){
+      df_temp = data.frame(h = sim_times,
+                           val = approx(x = lin_list[[i]]$time,
+                                        y = lin_list[[i]]$traitValue,
+                                        xout = sim_times)$y,
+                           lineage = rep(as.character(i, length(sim_times))))
+      df = rbind(df, df_temp)
+    }
     
+    out_plot = ggplot(data = df, aes(x = h, y = val, col = lineage)) +
+      geom_line() + 
+      theme_bw() +
+      theme(legend.position = "none")
+    return(out_plot)
   }
-   make_strat_subplot = function(pos, scenario){
-     completeness = get_completeness(pos, scenario)
-     completeness_percent = signif(completeness, 3) * 100
-     
-   }
+  
+  make_strat_dom_subplot_1 = function(){
+    completeness = get_completeness(pos = dist_2, scenario = scenario_2)
+    comp = signif(completeness, digits = 4) * 100
+    df = data.frame()
+    for (i in seq_len(no_of_lineages)){
+      df_temp = data.frame(h = sample_loc_1,
+                           val = approx(x = lin_list[[i]]$time,
+                                        y = lin_list[[i]]$traitValue,
+                                        xout = sample_times_1)$y,
+                           lineage = rep(as.character(i, length(sample_loc_1))))
+      df = rbind(df, df_temp)
+    }
+    out_plot = ggplot(data = df, aes(x = h, y = val, col = lineage)) +
+      geom_line() +
+      theme_bw() +
+      theme(legend.position = "none") +
+      ggtitle(paste0(comp))
+    return(out_plot)
+  }
+  
+  make_strat_dom_subplot_2 = function(){
+    df = data.frame()
+    for (i in seq_len(no_of_lineages)){
+      df_temp = data.frame(h = sample_loc_2,
+                           val = approx(x = lin_list[[i]]$time,
+                                        y = lin_list[[i]]$traitValue,
+                                        xout = sample_times_2)$y,
+                           lineage = rep(as.character(i, length(sample_loc_2))))
+      df = rbind(df, df_temp)
+    }
+    
+    completeness = get_completeness(pos = dist_2, scenario = scenario_2)
+    comp = signif(completeness, digits = 4) * 100
+    out_plot = ggplot(data = df, aes(x = h, y = val, col = lineage)) +
+      geom_line() +
+      theme_bw() +
+      theme(legend.position = "none") +
+      ggtitle(paste0(comp))
+    return(out_plot)
+  }
+  
+  
    time_subplot = make_time_dom_subplot()
   
-   strat_plot_1 = make_strat_subplot(dist_1, scenario_1)
-   strat_plot_2 = make_strat_subplot(dist_2, scenario_2)
+   strat_plot_1 = make_strat_dom_subplot_1()
+   strat_plot_2 = make_strat_dom_subplot_2()
    
-   grid.arrange(time_subplot, strat_plot_1, strat_plot_2)
+   file_name = paste("figs/R/pairwise_comp", scenario_1, dist_1, scenario_2, dist_2, mode, ".pdf", sep = "")
+   pdf(file = file_name, width=6.5, height = 7.5)
+   grid.arrange(time_subplot, strat_plot_1, strat_plot_2, nrow = 1)
+   dev.off()
+   
+
 }
 
+make_pairwise_comparison_plot(scenario_1 = "A",
+                              scenario_2 = "B",
+                              dist_1 = "4 km",
+                              dist_2 = "6 km",
+                              mode = "strong Brownian drift",
+                              no_of_lineages = 3,
+                              plot_seed = 1)
 
-# these are the times at which you need to simulate the trait evolution
 
 
-#now you can use simulateTraitEvo
 
-Mean=10
-Deviation=1
-Mode="strong Brownian drift"
-  #1. The forming of a full evolutionary record over time at all sampled locations.#
-
-    myTraitValues=c() #Creating vector myTraitValues
-    myTraitValues$time=c() #Creating vector myTraitValues$time.
-    allTimes=c() #Creating vector allTimes
-    for(i in 1:120){ #Values here are the places in the basin for which the evolution is completely simulated
-      #Retrieving necessary values:
-      p="A"
-      AMTimeA=ageDepthModels[[p]][[i]]$time # extract time
-      AMHeightA=ageDepthModels[[p]][[i]]$height # extract strat height
-       #Calculating height steps every 0,5 meter.
-      myHeightsOfObservationsA=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-      
-       p="B"
-      AMTimeB=ageDepthModels[[p]][[i]]$time # extract time
-      AMHeightB=ageDepthModels[[p]][[i]]$height # extract strat height
-      #Calculating height steps every 0,5 meter.
-      myHeightsOfObservationsB=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by = 0.5)
-      
-      #Adjusting values to remove duplicates:
-      adjustAMHeightA=AMHeightA[!duplicated(AMHeightA)] #Adjust height by removing duplicates
-      adjustAMTimeA=AMTimeA[!duplicated(AMHeightA)] #Adjust time by removing values where height is duplicated
-      adjustAMHeightB=AMHeightB[!duplicated(AMHeightB)] #Adjust height by removing duplicates
-      adjustAMTimeB=AMTimeB[!duplicated(AMHeightB)] #Adjust time by removing values where height is duplicated
-      
-      
-      #Transforming the times of observation into stratigraphic height.
-      transValA=pointtransform(points= myHeightsOfObservationsA,
-                              xdep=adjustAMHeightA,
-                              ydep=adjustAMTimeA,
-                              direction="height to time", 
-                              depositionmodel = "age model")
-      
-      transValB=pointtransform(points= myHeightsOfObservationsB,
-                              xdep=adjustAMHeightB,
-                              ydep=adjustAMTimeB,
-                              direction="height to time", 
-                              depositionmodel = "age model")
-      
-      #Adds all the transformd times together to formed all the times which would be found by sampling facies at similar distances
-      allTimes=c(allTimes,transValA$time,transValB$time)
-    } 
-    allTimes=sort(allTimes)
-    #Removing all the times which apear more than once
-    adjustAllTimes=allTimes[!duplicated(allTimes)]
-    #Simulating a evolution through all found times
-    allTraitValues1=myBD(adjustAllTimes,Mean,Deviation)
-    allTraitValues2=myBD(adjustAllTimes,Mean,Deviation)
-    allTraitValues3=myBD(adjustAllTimes,Mean,Deviation)
-    allTraitValues4=myBD(adjustAllTimes,Mean,Deviation)
-  #Plotting the drift at 2km in basin A  
-{
-  p="A"
-     wantedDist=20  
-      for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
-        #Retrieving necessary values:
-        AMTime=ageDepthModels[[p]][[i]]$time # extract time
-        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-        #Calculating height steps every 0,5 meter.
-        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
-        
-        #Adjusting values to remove duplicates:
-        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
-        
-        #Transforming the times of observation into stratigraphic height.
-        transVal=pointtransform(points= myHeightsOfObservations,
-                                xdep=adjustAMHeight,
-                                ydep=adjustAMTime,
-                                direction="height to time", 
-                                depositionmodel = "age model")
-        #Finding the locations of the simulated evolution over time made before
-        sameTime1=match(transVal$time,allTraitValues1$time)
-        sameTime2=match(transVal$time,allTraitValues2$time)
-        sameTime3=match(transVal$time,allTraitValues3$time)
-        sameTime4=match(transVal$time,allTraitValues4$time)
-        #Making the vector to put all the values in
-        traitValueUncalibrated1=0
-        traitValueUncalibrated2=0
-        traitValueUncalibrated3=0
-        traitValueUncalibrated4=0
-        #Retrieving all the required values form the simulated evolutions
-        for (i in sameTime1){
-          traitValueUncalibrated1=append(traitValueUncalibrated1,allTraitValues1$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue1=traitValueUncalibrated1[-1]
-        
-        for (i in sameTime2){
-          traitValueUncalibrated2=append(traitValueUncalibrated2,allTraitValues2$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue2=traitValueUncalibrated2[-1]
-        
-        for (i in sameTime3){
-          traitValueUncalibrated3=append(traitValueUncalibrated3,allTraitValues3$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue3=traitValueUncalibrated3[-1]
-        
-        for (i in sameTime4){
-          traitValueUncalibrated4=append(traitValueUncalibrated4,allTraitValues4$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue4=traitValueUncalibrated4[-1]
-        
-        
-        #Calculating traitvalues over time and adding time and height to myTraitValues.
-        myTraitValues1=c()#Creating the vector so that all other values get inputted correctly
-        myTraitValues2=c()
-        myTraitValues3=c()
-        myTraitValues4=c()
-        
-        myTraitValues1$traitValue=traitValue1 #Inputting Brownian drift
-        myTraitValues2$traitValue=traitValue2
-        myTraitValues3$traitValue=traitValue3 
-        myTraitValues4$traitValue=traitValue4 
-        
-        myTraitValues1$height=myHeightsOfObservations #Adding the respective heights to the list
-        myTraitValues2$height=myHeightsOfObservations
-        myTraitValues3$height=myHeightsOfObservations
-        myTraitValues4$height=myHeightsOfObservations
-        
-        myTraitValues1$time=transVal$time #adding the respective times to the list
-        myTraitValues2$time=transVal$time
-        myTraitValues3$time=transVal$time
-        myTraitValues4$time=transVal$time
-        
-        
-        # Making the trait values over time graph
-        #This makes the 5 graphs detectable by ggplot  
-        graphs=NA
-        graphs[1:length(myTraitValues1$traitValue)]=1
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$traitValue))]=2
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues3$traitValue))]=3
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues4$traitValue))]=4
-        #This puts all the values together for use in ggplot
-        full=NA
-        full=c(myTraitValues1$traitValue,myTraitValues2$traitValue,myTraitValues3$traitValue,myTraitValues4$traitValue)
-        #This makes sure the x values are coupled to the heights properly
-        Timespan=NA
-        Timespan=c(myTraitValues1$height,myTraitValues2$height,myTraitValues3$height,myTraitValues4$height)
-        #This creates the labels for colours in the graph
-        Label=c(rep("run 1",length(myTraitValues1$traitValue)),rep("run 2",length(myTraitValues2$traitValue)),rep("run 3",length(myTraitValues3$traitValue)),rep("run 4",length(myTraitValues4$traitValue)))
-        #Creates a dataframe with all the earlier info
-        df2=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
-        return(df2)
-      }
-      
-      #The plot for all the four lines, forming one graph.
-      Plot9_1=ggplot(data = df2, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
-        labs(tag = "A")+
-        ggtitle(paste("Scenario A, ", as.character(wantedDist/10), " km,", sep="", " 32,7% completeness"))+ #for the title
-        xlab("Height (m)")+ # for the x axis label
-        ylab("Trait Value")+ # for the y axis label
-        scale_y_continuous(limit=c(0,30))+
-        theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
-    }  
-    
-   #Plotting the drift at 6 km in basin B
-    {
-      p="B"
-      wantedDist=60  
-      for (i in wantedDist){ #Value here is the point in the basis at which the graph is formed
-        #Retrieving necessary values:
-        AMTime=ageDepthModels[[p]][[i]]$time # extract time
-        AMHeight=ageDepthModels[[p]][[i]]$height # extract strat height
-        #Calculating height steps every 0,5 meter.
-        myHeightsOfObservations=seq(0.5,max(ageDepthModels[[p]][[i]]$height)-(max(ageDepthModels[[p]][[i]]$height)/200),by=0.5)
-        
-        #Adjusting values to remove duplicates:
-        adjustAMHeight=AMHeight[!duplicated(AMHeight)] #Adjust height by removing duplicates
-        adjustAMTime=AMTime[!duplicated(AMHeight)] #Adjust time by removing values where height is duplicated
-        
-        #Transforming the times of observation into stratigraphic height.
-        transVal=pointtransform(points= myHeightsOfObservations,
-                                xdep=adjustAMHeight,
-                                ydep=adjustAMTime,
-                                direction="height to time", 
-                                depositionmodel = "age model")
-        #Finding the locations of the simulated evolution over time made before
-        sameTime1=match(transVal$time,allTraitValues1$time)
-        sameTime2=match(transVal$time,allTraitValues2$time)
-        sameTime3=match(transVal$time,allTraitValues3$time)
-        sameTime4=match(transVal$time,allTraitValues4$time)
-        #Making the vector to put all the values in
-        traitValueUncalibrated1=0
-        traitValueUncalibrated2=0
-        traitValueUncalibrated3=0
-        traitValueUncalibrated4=0
-        #Retrieving all the required values form the simulated evolutions
-        for (i in sameTime1){
-          traitValueUncalibrated1=append(traitValueUncalibrated1,allTraitValues1$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue1=traitValueUncalibrated1[-1]
-        
-        for (i in sameTime2){
-          traitValueUncalibrated2=append(traitValueUncalibrated2,allTraitValues2$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue2=traitValueUncalibrated2[-1]
-        
-        for (i in sameTime3){
-          traitValueUncalibrated3=append(traitValueUncalibrated3,allTraitValues3$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue3=traitValueUncalibrated3[-1]
-        
-        for (i in sameTime4){
-          traitValueUncalibrated4=append(traitValueUncalibrated4,allTraitValues4$traitValue[i])
-        }
-        #Removing the first value which was only there to allow the input in the for-loop.
-        traitValue4=traitValueUncalibrated4[-1]
-        
-        
-        #Calculating traitvalues over time and adding time and height to myTraitValues.
-        myTraitValues1=c()#Creating the vector so that all other values get inputted correctly
-        myTraitValues2=c()
-        myTraitValues3=c()
-        myTraitValues4=c()
-        
-        myTraitValues1$traitValue=traitValue1 #Inputting Brownian drift
-        myTraitValues2$traitValue=traitValue2
-        myTraitValues3$traitValue=traitValue3 
-        myTraitValues4$traitValue=traitValue4 
-        
-        myTraitValues1$height=myHeightsOfObservations #Adding the respective heights to the list
-        myTraitValues2$height=myHeightsOfObservations
-        myTraitValues3$height=myHeightsOfObservations
-        myTraitValues4$height=myHeightsOfObservations
-        
-        myTraitValues1$time=transVal$time #adding the respective times to the list
-        myTraitValues2$time=transVal$time
-        myTraitValues3$time=transVal$time
-        myTraitValues4$time=transVal$time
-        
-        
-        #Making the trait values over time graph
-        #This makes the 5 graphs detectable by ggplot  
-        graphs=NA
-        graphs[1:length(myTraitValues1$traitValue)]=1
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues2$traitValue))]=2
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues3$traitValue))]=3
-        graphs[(length(graphs)+1):(length(graphs)+length(myTraitValues4$traitValue))]=4
-        #This puts all the values together for use in ggplot
-        full=NA
-        full=c(myTraitValues1$traitValue,myTraitValues2$traitValue,myTraitValues3$traitValue,myTraitValues4$traitValue)
-        #This makes sure the x values are coupled to the heights properly
-        Timespan=NA
-        Timespan=c(myTraitValues1$height,myTraitValues2$height,myTraitValues3$height,myTraitValues4$height)
-        #This creates the labels for colours in the graph
-        Label=c(rep("run 1",length(myTraitValues1$traitValue)),rep("run 2",length(myTraitValues2$traitValue)),rep("run 3",length(myTraitValues3$traitValue)),rep("run 4",length(myTraitValues4$traitValue)))
-        #Creates a dataframe with all the earlier info
-        df3=data.frame(x=Timespan,y=full,variable=graphs,Distance=Label)
-        return(df3)
-      }
-      
-      
-      #The plot for all the four lines, forming one graph.
-      Plot9_2=ggplot(data = df3, aes(x=x, y=y,col=Distance))+
-        geom_line(size=1)+
-        labs(tag = "B")+
-        ggtitle(paste("Scenario B,", as.character(wantedDist/10), " km,", sep="", " 34,5% completeness"))+ #for the title
-        xlab("Height (m)")+ # for the x axis label
-        ylab("Trait Value")+ # for the y axis label
-        scale_y_continuous(limit=c(0,30))+
-        theme_bw()+ #Makes the background white.
-        theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
-      
-}
-
-    #Combining all the plots:
-    combined_plot=grid.arrange(Plot9_1,Plot9_2,ncol=2)
-    
-    #Printing the plots plus the legend to .pdf
-    {
-      pdf(file = paste("figs/R/equal_completeness_comparison.pdf"), width=6.5, height = 3.25)
-      grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
-      dev.off()
-    }
   
 #### spatial_variability_scen_A_sBD.pdf #### 
     
-  ## write this as a function!!!!
+
     
   make_spat_comparison_plot = function(scenario, mode, no_of_lineages = 5, plot_seed = 1){
     set.seed(plot_seed)
