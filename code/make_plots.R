@@ -18,6 +18,16 @@ require("gridExtra")
 load("data/R_outputs/results_modes_of_evolution.Rdata")
 #load("data/R_outputs/hiatus_info.Rdata")
 
+#### Constants ####
+strat_label = "Stratigraphic Height [m]"
+time_label = "Time [Myr]"
+trait_label = "Trait Value"
+time_res_myr = 0.001
+AICw_label = "AIC weight"
+sampling_points_label = "Number of Sampling Points"
+distance_from_shore_label = "Distance from Shore [km]"
+default_width = 6.5
+
 #### Helper functions ####
 get_AIC_scenario = function(basin, simulated_mode){
   
@@ -258,50 +268,54 @@ get_only_legend = function(plot) {
 Legend=get_only_legend(PlotLegend)
 }
 
-#### Comparison modes of evolution ####
+#### Comparison modes of evolution in time domain ####
 
-
-make_evo_mode_plot = function(name, scenario, no_of_lineages = 3, plot_seed = 1){
-  #' 
-  #' @title create plots of evo modes in time domain
-  #' 
-  #' @param name: name of simulated evo mode
-  #' @param scenario: "A" or "B"
-  #' @param no_of_lineages: integer
-  #' 
-  #' @return an object to generate ggplot
-  #' 
-  set.seed(plot_seed)
-  max_time = maxTimes[[scenario]]
-  evo_index = which(name == simulatedEvoModes)
-  mode = EvoModes[[evo_index]]$mode
-  params = EvoModes[[evo_index]]$params
-  time_res_myr = 0.001
-  times = seq(0, max_time, by = time_res_myr)
-  df = data.frame()
-  for (i in seq_len(no_of_lineages)){
-    trait_sim = simulateTraitEvo(t = times, mode = mode, params[1], params[2])
-    df_2 = data.frame(t = trait_sim$time, val = trait_sim$traitValue, run = rep(as.character(i), length(time)))
-    df = rbind(df, df_2)
-  }
-  ret_plot = ggplot2::ggplot(df, aes(x = t, y = val, color = run)) +
-    geom_line()+
-    theme_bw()
-  
-  return(ret_plot)
-}
-
-make_evo_mode_comparison_time_domain = function(scenario, no_of_lineages = 3){
+plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, plot_seed = 1){
   
   #' 
   #' @title compare all simulated evo modes in time domain
   #' 
   #' @param scenario: "A" or "B"
   #' @param no_of_lineages: integer
+  #' @param plot_seed: seed for random numer generator
   #' 
+  make_evo_mode_plot = function(name, scenario, label, no_of_lineages, plot_seed){
+    #' 
+    #' @title create plots of evo modes in time domain
+    #' 
+    #' @param name: name of simulated evo mode
+    #' @param scenario: "A" or "B"
+    #' @param label: label to be shown at top left corner
+    #' @param no_of_lineages: integer
+    #' 
+    #' @return an object to generate ggplot
+    #' 
+    set.seed(plot_seed)
+    max_time = maxTimes[[scenario]]
+    evo_index = which(name == simulatedEvoModes)
+    mode = EvoModes[[evo_index]]$mode
+    params = EvoModes[[evo_index]]$params
+    times = seq(0, max_time, by = time_res_myr)
+    df = data.frame()
+    for (i in seq_len(no_of_lineages)){
+      trait_sim = simulateTraitEvo(t = times, mode = mode, params[1], params[2])
+      df_2 = data.frame(t = trait_sim$time, val = trait_sim$traitValue, run = rep(as.character(i), length(time)))
+      df = rbind(df, df_2)
+    }
+    ret_plot = ggplot2::ggplot(df, aes(x = t, y = val, color = run)) +
+      geom_line()+
+      theme_bw() +
+      xlab(time_label) +
+      ylab(trait_label) +
+      theme(legend.position = "none") +
+      labs(tag = label)
+    
+    return(ret_plot)
+  }
+  
   plot_list = list()
   for (i in seq_along(simulatedEvoModes)){
-    plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, no_of_lineages)
+    plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, LETTERS[i], no_of_lineages, plot_seed)
   }
   file_name = paste("figs/R/evo_mode_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
   pdf(file = file_name , width=6.5, height = 3.25)
@@ -310,16 +324,11 @@ make_evo_mode_comparison_time_domain = function(scenario, no_of_lineages = 3){
   dev.off()
 }
 
-sapply(scenarioNames, function(x) make_evo_mode_comparison_time_domain(scenario = x, no_of_lineages = 3))
+sapply(scenarioNames, function(x) plot_comparison_evo_modes_time_domain(scenario = x, no_of_lineages = 3, plot_seed = 1))
 
 
 #### test_results_scenario_A and B_raw.pdf ####
 
-
-
-
-
-#Figure 
 make_test_res_strat_plot = function(scenario){
   #Setting ts_lengths to the correct lengths
   ts_lengths = as.character(ts_length_mat[scenario,])
@@ -350,9 +359,8 @@ make_test_res_strat_plot = function(scenario){
 
 }
 
-for (scenario in scenarioNames){
-  make_test_res_strat_plot(scenario)
-}
+
+sapply(scenarioNames, function(scenario) make_test_res_strat_plot(scenario))
 
 
 #### test_results_time_domain_raw.pdf ####
@@ -377,11 +385,11 @@ make_test_res_time_plot = function(scenario){
   dev.off()
 }
 
-for (scenario in scenarioNames){
-  make_test_res_time_plot(scenario)
-}
 
-#### completeness_and_hiat_duration_raw.pdf ####
+sapply(scenarioNames, function(scenario) make_test_res_time_plot(scenario))
+
+
+#### completeness and hiatus duration ####
 ## TODO:
 # 1. Merge plots with completeness and hiatus duration distribution. Use the left
 # y axis for completeness and the right for hiatus duration
@@ -391,46 +399,43 @@ for (scenario in scenarioNames){
 # 4. add legend for hiatus duration & use different line types for hiatus duration.
 # should be "first quartile", "median", "third quartile", and "maximum"
 
-
+all_dist_raw = seq(from = 0.1, to = 15, by = 0.1)
 #Getting all the input data for the graph:
-make_hiat_plot = function(scenario){
-  hiatus=hiat_measures[[scenario]]$completeness*100
+make_hiat_plot = function(scenario, y_resc, label){
+  compl=hiat_measures[[scenario]]$completeness*100
   hiatus_max=hiat_measures[[scenario]]$max_duration_myr
   hiatus_median=hiat_measures[[scenario]]$median_duration_myr
   hiatus_1st_quart=hiat_measures[[scenario]]$first_quartile_duration_myr
   hiatus_3rd_quart=hiat_measures[[scenario]]$third_quartile_duration_myr
-  xaxis=(1:150)
-  
-  df=data.frame(x=xaxis,y1=hiatus,y2=hiatus_max,y3=hiatus_median,y4=hiatus_1st_quart,y5=hiatus_3rd_quart)
-  title = paste0("Completeness over scenario ", scenario, sep = "")
+
+  df = data.frame(x = rep(all_dist_raw, 5),
+                    y = c(compl, hiatus_max/ y_resc * 100, hiatus_median / y_resc * 100, hiatus_1st_quart / y_resc * 100, hiatus_3rd_quart / y_resc * 100 ),
+                    type = c(rep("comp", length(all_dist_raw)), rep("hiat_max", length(all_dist_raw)), rep("hiat_median", length(all_dist_raw)), rep("hiat_1st", length(all_dist_raw)), rep("hiat_3rd", length(all_dist_raw))))
+  title = paste0("Completeness in scenario ", scenario, sep = "")
   #The plot for basin 
-  plot=ggplot(data = df, aes(x=1:150))+
-    geom_line(aes(y=y1), size=1)+
-    geom_line(aes(y=y2*130), colour = "red")+
-    geom_line(aes(y=y3*130), colour = "blue")+
-    geom_line(aes(y=y4*130), colour = "lightblue",linetype = "dashed")+
-    geom_line(aes(y=y5*130), colour = "brown",linetype = "dashed")+
-    labs(tag = "A")+
+  plot=ggplot(data = df, aes(x=x, y = y, col = type)) +
+    geom_line() +
+    labs(tag = label)+
     scale_y_continuous(
       limits=c(0,100),
-      name = "Completeness",
-      sec.axis = sec_axis(~.*130, name="Hiatus duration (Myr)", breaks= seq(0, 12500, by = 2500),labels = c(seq(0, 12500, by = 2500)/1000000))
-    )+
-    scale_x_continuous(
-      breaks= seq(0, 150, by = 25),labels = c(seq(0, 150, by = 25)/10)
+      name = "Completeness [%]",
+      sec.axis = sec_axis(~./y_resc * 100, name="Hiatus duration [Myr]", breaks= seq(0, 100 * 100 / y_resc, length.out = 4), labels = seq(0, y_resc, length.out = 4))
     )+
     ggtitle(title)+ #for the title
-    xlab("Distance from shore (km)")+ # for the x axis label
-    ylab("Completenes")+ # for the y axis label
+    xlab(distance_from_shore_label)+ # for the x axis label
+    ylab("Completeness [%]")+ # for the y axis label
     theme_bw()+ #Makes the background white.
-    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),legend.position="none",plot.title = element_text(size=9)) #Changes text size
+    theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98)) +
+    theme(legend.position = c(0.1, 0.85))
   
   return(plot)
 }
 
 make_completeness_and_hiat_plot = function(){
-  combined_plot=grid.arrange(make_hiat_plot("A"),make_hiat_plot("B"),ncol=2)
-  pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=6.5, height = 3.25)
+  y_resc = max(sapply(scenarioNames, function(scenario) max(hiat_measures[[scenario]]$max_duration_myr)))
+  y_resc = ceiling(y_resc * 100)/ 100
+  combined_plot=grid.arrange(make_hiat_plot("A", y_resc, "A"),make_hiat_plot("B", y_resc, "B"),ncol=2)
+  pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=default_width, height = 3.25)
   grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
   dev.off()
 }
@@ -461,14 +466,12 @@ lines(1:150, kurt_list[["A"]], col = "red")
 lines(1:150, kurt_list[["B"]], col = "black")
 legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
 
-#### equal_completeness_comparison.pdf ####
-
-#Inputs for the correct simulated mode of evolution:
-make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
+#### equal completeness comparison ####
+title_size = 10
+plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
   set.seed(plot_seed)
   # function generating a plot that compares the same mode of evolution at differnet places in the basin and plots the completeness
 
-  mode = simulatedEvoModes[4]
   
   stopifnot(mode %in% simulatedEvoModes)
   evo_index = which(mode == simulatedEvoModes )
@@ -501,7 +504,10 @@ make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2,
     lin_list[[i]] = simulateTraitEvo(relevant_times, evo_mode, evo_params[1], evo_params[2])
   }
   
-  make_time_dom_subplot = function(){
+  ymax =  max(sapply(seq_len(no_of_lineages), function(i) max(lin_list[[i]]$traitValue)))
+  ymin =  min(sapply(seq_len(no_of_lineages), function(i) min(lin_list[[i]]$traitValue)))
+  
+  make_time_dom_subplot = function(label, header){
     df = data.frame()
     for (i in seq_len(no_of_lineages)){
       df_temp = data.frame(h = sim_times,
@@ -515,13 +521,19 @@ make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2,
     out_plot = ggplot(data = df, aes(x = h, y = val, col = lineage)) +
       geom_line() + 
       theme_bw() +
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      xlab(time_label) +
+      ylab(trait_label) +
+      ggtitle(header) +
+      labs(tag = label) +
+      ylim(c(ymin, ymax)) +
+      theme(plot.title = element_text(size = title_size))
     return(out_plot)
   }
   
-  make_strat_dom_subplot_1 = function(){
-    completeness = get_completeness(pos = dist_2, scenario = scenario_2)
-    comp = signif(completeness, digits = 4) * 100
+  make_strat_dom_subplot_1 = function(label){
+    completeness = get_completeness(pos = dist_1, scenario = scenario_1)
+    comp = signif(completeness, digits = 3) * 100
     df = data.frame()
     for (i in seq_len(no_of_lineages)){
       df_temp = data.frame(h = sample_loc_1,
@@ -535,11 +547,16 @@ make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2,
       geom_line() +
       theme_bw() +
       theme(legend.position = "none") +
-      ggtitle(paste0(comp))
+      ggtitle(paste0(comp, " % Completeness")) +
+      labs(tag = label) +
+      xlab(strat_label) + 
+      ylab(trait_label) +
+      ylim(c(ymin, ymax)) + 
+      theme(plot.title = element_text(size = title_size))
     return(out_plot)
   }
   
-  make_strat_dom_subplot_2 = function(){
+  make_strat_dom_subplot_2 = function(label){
     df = data.frame()
     for (i in seq_len(no_of_lineages)){
       df_temp = data.frame(h = sample_loc_2,
@@ -551,32 +568,37 @@ make_pairwise_comparison_plot = function(scenario_1, scenario_2, dist_1, dist_2,
     }
     
     completeness = get_completeness(pos = dist_2, scenario = scenario_2)
-    comp = signif(completeness, digits = 4) * 100
+    comp = signif(completeness, digits = 3) * 100
     out_plot = ggplot(data = df, aes(x = h, y = val, col = lineage)) +
       geom_line() +
       theme_bw() +
       theme(legend.position = "none") +
-      ggtitle(paste0(comp))
+      ggtitle(paste0(comp, " % Completeness")) +
+      labs(tag = label) +
+      xlab(strat_label) +
+      ylab(trait_label) +
+      ylim(c(ymin, ymax)) +
+      theme(plot.title = element_text(size = title_size))
     return(out_plot)
   }
   
   
-   time_subplot = make_time_dom_subplot()
+   time_subplot = make_time_dom_subplot(label = "A", header = "Time Domain")
   
-   strat_plot_1 = make_strat_dom_subplot_1()
-   strat_plot_2 = make_strat_dom_subplot_2()
+   strat_plot_1 = make_strat_dom_subplot_1(label = "B")
+   strat_plot_2 = make_strat_dom_subplot_2(label = "C")
    
    file_name = paste("figs/R/pairwise_comp", scenario_1, dist_1, scenario_2, dist_2, mode, ".pdf", sep = "")
-   pdf(file = file_name, width=6.5, height = 7.5)
+   pdf(file = file_name, width=default_width, height = 4)
    grid.arrange(time_subplot, strat_plot_1, strat_plot_2, nrow = 1)
    dev.off()
    
 
 }
 
-make_pairwise_comparison_plot(scenario_1 = "A",
+plot_pairwise_comparison(scenario_1 = "A",
                               scenario_2 = "B",
-                              dist_1 = "4 km",
+                              dist_1 = "2 km",
                               dist_2 = "6 km",
                               mode = "strong Brownian drift",
                               no_of_lineages = 3,
@@ -586,11 +608,11 @@ make_pairwise_comparison_plot(scenario_1 = "A",
 
 
   
-#### spatial_variability_scen_A_sBD.pdf #### 
+#### Spatial variability in preservation #### 
     
 
     
-  make_spat_comparison_plot = function(scenario, mode, no_of_lineages = 5, plot_seed = 1){
+  plot_spat_comparison = function(scenario, mode, no_of_lineages = 3, plot_seed = 1){
     set.seed(plot_seed)
     stopifnot(mode %in% simulatedEvoModes)
     evo_index = which(mode == simulatedEvoModes )
@@ -603,7 +625,7 @@ make_pairwise_comparison_plot(scenario_1 = "A",
       times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
     }
     
-    sim_times = seq(0, maxTimes[[scenario]], 0.001)
+    sim_times = seq(0, maxTimes[[scenario]], time_res_myr)
     sample_times = list()
     sample_heights = list()
     for (i in seq_along(examinedBasinPositions)){
@@ -635,7 +657,11 @@ make_pairwise_comparison_plot(scenario_1 = "A",
       }
       
       out_plot = ggplot( data = df, aes(x = t, y = val, col = lineage)) + 
-        geom_line()
+        geom_line() +
+        theme_bw() +
+        xlab(time_label) +
+        ylab(trait_label) +
+        theme(legend.position = "none") 
       
       return(out_plot)
     }
@@ -652,7 +678,11 @@ make_pairwise_comparison_plot(scenario_1 = "A",
         df = rbind(df, df_temp)
       }
       outplot = ggplot( data = df, aes(x = h, y = val, col = lineage)) + 
-        geom_line()
+        geom_line() +
+        theme_bw() +
+        xlab(strat_label) +
+        ylab(trait_label) +
+        theme(legend.position = "none") 
       return(outplot)
     }
     
@@ -675,9 +705,11 @@ make_pairwise_comparison_plot(scenario_1 = "A",
                              distance = rep(dist, length(ageDepthModels[[scenario]][[dist]]$time)))
         df = rbind(df, df_temp)
       }
-      ret_plot = ggplot2::ggplot(df, aes(x = t, y = h, col = distance)) +
+     suppressWarnings( { ret_plot = ggplot2::ggplot(df, aes(x = t, y = h, col = distance)) +
         geom_line() + 
-        theme_bw()
+        theme_bw() + 
+        xlab(time_label) +
+        ylab(strat_label) } )
       return(ret_plot)
     }
     
@@ -701,7 +733,7 @@ make_pairwise_comparison_plot(scenario_1 = "A",
   
   for (scenario in scenarioNames){
     for (mode in simulatedEvoModes){
-      make_spat_comparison_plot(scenario = scenario,
+      plot_spat_comparison(scenario = scenario,
                                 mode = mode,
                                 no_of_lineages = 3,
                                 plot_seed = 1)
@@ -747,7 +779,9 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
     plot_list[["strat"]] = ggplot2::ggplot(data = strat_df, aes(x = h, y = val, col = lineage)) +
       geom_line() +
       theme_bw() +
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      xlab(strat_label) +
+      ylab(trait_label)
     
     time_df = data.frame()
     for (i in seq_len(no_of_lineages)){
@@ -760,7 +794,9 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
     plot_list[["time"]] = ggplot2::ggplot(data = time_df, aes(x = t, y = val, col = lineage)) +
       geom_line() +
       theme_bw() + 
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      xlab(time_label) +
+      ylab(trait_label)
     
     return(plot_list)
   }
