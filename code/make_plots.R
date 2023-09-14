@@ -19,6 +19,7 @@ load("data/R_outputs/results_modes_of_evolution.Rdata")
 #load("data/R_outputs/hiatus_info.Rdata")
 
 #### Constants ####
+all_dist_raw = seq(from = 0.1, to = 15, by = 0.1)
 strat_label = "Stratigraphic Height [m]"
 time_label = "Time [Myr]"
 trait_label = "Trait Value"
@@ -27,6 +28,13 @@ AICw_label = "AIC weight"
 sampling_points_label = "Number of Sampling Points"
 distance_from_shore_label = "Distance from Shore [km]"
 default_width = 6.5
+axis_label_size = 6
+tick_size = 6
+evo_mode_lwds = c(0.05,0.5,0.5,0.5)
+title_size = 10
+adm_palette = RColorBrewer::brewer.pal(name = "PuOr", n = 9)[-c(4:7)]
+lineage_palette = "Set1"
+hiat_palette = c("black", rev(RColorBrewer::brewer.pal(name = "OrRd", n = 5)[-1]))
 
 #### Helper functions ####
 get_AIC_scenario = function(basin, simulated_mode){
@@ -148,7 +156,7 @@ get_AIC_time = function(no_of_sampl_loc, basin, simulated_mode){
 }
 
 
-Plot_Strat = function(basin, simulated_mode, label){
+plot_AIC_strat = function(basin, simulated_mode, label){
   #' 
   #' @title plots AIC values in boxplots for the stratigraphic domain
   #'
@@ -180,14 +188,14 @@ Plot_Strat = function(basin, simulated_mode, label){
     scale_fill_brewer(palette="Spectral")+
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
           text = element_text(size = 6))+
-    labs(title = paste(simulated_mode), y="AIC weight", x="Distance from Shore (km)")+
+    labs(title = stringr::str_to_title(simulated_mode), y=AICw_label, x=distance_from_shore_label)+
     scale_x_discrete( labels=c("2 km"="2","6 km"="6","8 km"="8","10 km"="10","12 km"="12"))+
     scale_y_continuous(limits=c(0,1))
   
   return(plotS1)
 }
 
-Plot_time = function(no_of_sampl_loc, basin, simulated_mode, label){
+plot_AIC_time = function(no_of_sampl_loc, basin, simulated_mode, label){
   #' 
   #' @title plots AIC values in boxplots for the stratigraphic domain
   #' 
@@ -225,10 +233,9 @@ Plot_time = function(no_of_sampl_loc, basin, simulated_mode, label){
     scale_fill_brewer(palette="Spectral")+ 
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), 
           text = element_text(size = 6))+
-    labs(title = paste(simulated_mode), y="AIC weight", x="Number of Sampling Points")+
+    labs(title = stringr::str_to_title(simulated_mode), y=AICw_label, x=sampling_points_label)+
     scale_y_continuous(limits=c(0,1))
     
-  plotT1
   
   return(plotT1)
 }
@@ -308,7 +315,8 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
       xlab(time_label) +
       ylab(trait_label) +
       theme(legend.position = "none") +
-      labs(tag = label)
+      labs(tag = label) +
+      scale_color_brewer(palette=lineage_palette)
     
     return(ret_plot)
   }
@@ -318,7 +326,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
     plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, LETTERS[i], no_of_lineages, plot_seed)
   }
   file_name = paste("figs/R/evo_mode_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=6.5, height = 3.25)
+  pdf(file = file_name , width=default_width, height = 3.25)
   
   combined_plot = grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
   dev.off()
@@ -335,16 +343,16 @@ make_test_res_strat_plot = function(scenario){
   names(ts_lengths) = colnames(ts_length_mat)
   
   #The stratigraphic plots:
-  Plot4_1=Plot_Strat(scenario,"stasis","A")
-  Plot4_2=Plot_Strat(scenario,"Brownian motion","B")
-  Plot4_3=Plot_Strat(scenario,"weak Brownian drift","C")
-  Plot4_4=Plot_Strat(scenario,"strong Brownian drift","D")
+  Plot4_1=plot_AIC_strat(scenario,"stasis","A")
+  Plot4_2=plot_AIC_strat(scenario,"Brownian motion","B")
+  Plot4_3=plot_AIC_strat(scenario,"weak Brownian drift","C")
+  Plot4_4=plot_AIC_strat(scenario,"strong Brownian drift","D")
   
   #The time plots:
-  Plot4_5=Plot_time(ts_lengths,scenario,"stasis","E")
-  Plot4_6=Plot_time(ts_lengths,scenario,"Brownian motion","F")
-  Plot4_7=Plot_time(ts_lengths,scenario,"weak Brownian drift","G")
-  Plot4_8=Plot_time(ts_lengths,scenario,"strong Brownian drift","H")
+  Plot4_5=plot_AIC_time(ts_lengths,scenario,"stasis","E")
+  Plot4_6=plot_AIC_time(ts_lengths,scenario,"Brownian motion","F")
+  Plot4_7=plot_AIC_time(ts_lengths,scenario,"weak Brownian drift","G")
+  Plot4_8=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","H")
   
   #Combining all the plots:
   combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
@@ -369,10 +377,10 @@ make_test_res_time_plot = function(scenario){
   #Setting the correct sampling points:
   ts_lengths = noOfSamplingLoc_time
   #The plots:
-  Plot6_1=Plot_time(ts_lengths,scenario,"stasis","A")
-  Plot6_2=Plot_time(ts_lengths,scenario,"Brownian motion","B")
-  Plot6_3=Plot_time(ts_lengths,scenario,"weak Brownian drift","C")
-  Plot6_4=Plot_time(ts_lengths,scenario,"strong Brownian drift","D")
+  Plot6_1=plot_AIC_time(ts_lengths,scenario,"stasis","A")
+  Plot6_2=plot_AIC_time(ts_lengths,scenario,"Brownian motion","B")
+  Plot6_3=plot_AIC_time(ts_lengths,scenario,"weak Brownian drift","C")
+  Plot6_4=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","D")
   
   #Combining all the plots:
   combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
@@ -399,7 +407,11 @@ sapply(scenarioNames, function(scenario) make_test_res_time_plot(scenario))
 # 4. add legend for hiatus duration & use different line types for hiatus duration.
 # should be "first quartile", "median", "third quartile", and "maximum"
 
-all_dist_raw = seq(from = 0.1, to = 15, by = 0.1)
+hiat_labels = c("Completeness",
+                "Maximum hiatus duration",
+                "Median hiatus duration",
+                "1st quartile of hiatus durations",
+                "3rd quartile of hiatus durations")
 #Getting all the input data for the graph:
 make_hiat_plot = function(scenario, y_resc, label){
   compl=hiat_measures[[scenario]]$completeness*100
@@ -426,7 +438,10 @@ make_hiat_plot = function(scenario, y_resc, label){
     ylab("Completeness [%]")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98)) +
-    theme(legend.position = c(0.1, 0.85))
+    theme(legend.position = c(0.1, 0.85)) +
+    theme(legend.key.size = unit(0.3, "cm")) +
+    theme(legend.title = element_blank()) +
+    scale_color_manual(labels = hiat_labels,values = hiat_palette)
   
   return(plot)
 }
@@ -434,45 +449,21 @@ make_hiat_plot = function(scenario, y_resc, label){
 make_completeness_and_hiat_plot = function(){
   y_resc = max(sapply(scenarioNames, function(scenario) max(hiat_measures[[scenario]]$max_duration_myr)))
   y_resc = ceiling(y_resc * 100)/ 100
-  combined_plot=grid.arrange(make_hiat_plot("A", y_resc, "A"),make_hiat_plot("B", y_resc, "B"),ncol=2)
   pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=default_width, height = 3.25)
-  grid.arrange(combined_plot, ncol = 1, heights = c(10, 1))  #The multiplot
+  grid.arrange(make_hiat_plot("A", y_resc, "A"),make_hiat_plot("B", y_resc, "B"),ncol=2)
   dev.off()
 }
 
 make_completeness_and_hiat_plot()
 
 
-#### Skewness and kurtosis of hiatus duration ####
-require("moments")
 
-skew_list = list()
-for (scenario in scenarioNames){
-  skew_list[[scenario]] = sapply(seq_len(length(all_dist)), function(x) skewness(get_hiatus_distribution(pos = all_dist[x],scenario)) )
-}
-
-plot(NULL, xlim = c(1,150), ylim = c(0,11), main = "Skewness")
-lines(1:150, skew_list[["A"]], col = "red")
-lines(1:150, skew_list[["B"]], col = "black")
-legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
-
-kurt_list = list()
-for (scenario in scenarioNames){
-  kurt_list[[scenario]] = sapply(seq_len(length(all_dist)), function(x) kurtosis(get_hiatus_distribution(pos = all_dist[x],scenario)) )
-}
-
-plot(NULL, xlim = c(1,150), ylim = c(0,20), main = "Kurtosis")
-lines(1:150, kurt_list[["A"]], col = "red")
-lines(1:150, kurt_list[["B"]], col = "black")
-legend("topleft", col = c("red", "black"), legend = c("A", "B"), lty = 1)
 
 #### equal completeness comparison ####
-title_size = 10
+
 plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
   set.seed(plot_seed)
-  # function generating a plot that compares the same mode of evolution at differnet places in the basin and plots the completeness
 
-  
   stopifnot(mode %in% simulatedEvoModes)
   evo_index = which(mode == simulatedEvoModes )
   evo_fullname = EvoModes[[evo_index]]$name
@@ -527,7 +518,10 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
       ggtitle(header) +
       labs(tag = label) +
       ylim(c(ymin, ymax)) +
-      theme(plot.title = element_text(size = title_size))
+      theme(plot.title = element_text(size = title_size)) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
+      scale_color_brewer(palette=lineage_palette)
     return(out_plot)
   }
   
@@ -552,7 +546,10 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
       xlab(strat_label) + 
       ylab(trait_label) +
       ylim(c(ymin, ymax)) + 
-      theme(plot.title = element_text(size = title_size))
+      theme(plot.title = element_text(size = title_size)) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
+      scale_color_brewer(palette=lineage_palette)
     return(out_plot)
   }
   
@@ -578,7 +575,10 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
       xlab(strat_label) +
       ylab(trait_label) +
       ylim(c(ymin, ymax)) +
-      theme(plot.title = element_text(size = title_size))
+      theme(plot.title = element_text(size = title_size)) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
+      scale_color_brewer(palette=lineage_palette)
     return(out_plot)
   }
   
@@ -589,7 +589,7 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
    strat_plot_2 = make_strat_dom_subplot_2(label = "C")
    
    file_name = paste("figs/R/pairwise_comp", scenario_1, dist_1, scenario_2, dist_2, mode, ".pdf", sep = "")
-   pdf(file = file_name, width=default_width, height = 4)
+   pdf(file = file_name, width=default_width, height = 3)
    grid.arrange(time_subplot, strat_plot_1, strat_plot_2, nrow = 1)
    dev.off()
    
@@ -597,19 +597,20 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
 }
 
 plot_pairwise_comparison(scenario_1 = "A",
-                              scenario_2 = "B",
-                              dist_1 = "2 km",
-                              dist_2 = "6 km",
-                              mode = "strong Brownian drift",
-                              no_of_lineages = 3,
-                              plot_seed = 1)
+                        scenario_2 = "B",
+                        dist_1 = "2 km",
+                        dist_2 = "6 km",
+                        mode = "strong Brownian drift",
+                        no_of_lineages = 3,
+                        plot_seed = 1)
 
 
 
 
   
 #### Spatial variability in preservation #### 
-    
+### Work on the arrangement here! 1strow ADM, followed by 2 cols of trait sims
+# check with joiurnal
 
     
   plot_spat_comparison = function(scenario, mode, no_of_lineages = 3, plot_seed = 1){
@@ -645,7 +646,7 @@ plot_pairwise_comparison(scenario_1 = "A",
                                              evo_params[2])
     }
     
-    make_time_domain_subplot = function(){
+    make_time_domain_subplot = function(label){
       df = data.frame()
       for (i in seq_len(no_of_lineages)){
         df_temp = data.frame(t = sim_times,
@@ -657,38 +658,46 @@ plot_pairwise_comparison(scenario_1 = "A",
       }
       
       out_plot = ggplot( data = df, aes(x = t, y = val, col = lineage)) + 
-        geom_line() +
+        geom_line(lwd = evo_mode_lwds[evo_index]) +
         theme_bw() +
         xlab(time_label) +
         ylab(trait_label) +
-        theme(legend.position = "none") 
+        theme(legend.position = "none")  +
+        labs(tag = label) +
+        theme(axis.title = element_text(size = axis_label_size)) +
+        theme(axis.text = element_text(size = tick_size)) +
+        scale_color_brewer(palette=lineage_palette)
       
       return(out_plot)
     }
   
   
-    make_pos_subplot = function(pos){
+    make_pos_subplot = function(pos, label){
       df = data.frame()
       for (i in seq_len(no_of_lineages)){
-        df_temp = data.frame(h = sample_heights[[i]],
+        df_temp = data.frame(h = sample_heights[[which(pos == examinedBasinPositions)]],
                              val = approx(x = trait_val_list[[i]]$time,
                                           y = trait_val_list[[i]]$traitValue,
-                                          xout = sample_times[[i]])$y,
-                              lineage = rep(as.character(i), length(sample_times[[i]])))
+                                          xout = sample_times[[which(pos == examinedBasinPositions)]])$y,
+                              lineage = rep(as.character(i), length(sample_times[[which(pos == examinedBasinPositions)]])))
         df = rbind(df, df_temp)
       }
       outplot = ggplot( data = df, aes(x = h, y = val, col = lineage)) + 
-        geom_line() +
+        geom_line(lwd = evo_mode_lwds[evo_index]) +
         theme_bw() +
         xlab(strat_label) +
         ylab(trait_label) +
-        theme(legend.position = "none") 
+        theme(legend.position = "none") +
+        labs(tag = label) +
+        theme(axis.title = element_text(size = axis_label_size)) +
+        theme(axis.text = element_text(size = tick_size)) +
+        scale_color_brewer(palette=lineage_palette)
       return(outplot)
     }
     
 
   
-    make_adm_subplot = function(scenario, distances_from_shore_km){
+    make_adm_subplot = function(scenario, distances_from_shore_km, label){
       #' 
       #' @title plot adms at differnet positions in basin
       #' 
@@ -709,18 +718,24 @@ plot_pairwise_comparison(scenario_1 = "A",
         geom_line() + 
         theme_bw() + 
         xlab(time_label) +
-        ylab(strat_label) } )
+        ylab(strat_label) +
+       labs(tag = label) +
+       theme(axis.title = element_text(size = axis_label_size)) +
+       theme(axis.text = element_text(size = tick_size)) +
+       theme(legend.position = c(0.1, 0.85)) +
+       theme(legend.key.size = unit(0.1, "cm")) +
+       scale_color_manual(values=adm_palette)} )
       return(ret_plot)
     }
     
     
-    adm_subplot = make_adm_subplot(scenario, examinedBasinPositions)
-    time_domain_subplot = make_time_domain_subplot()
-    plot_2km = make_pos_subplot("2 km")
-    plot_6km = make_pos_subplot("6 km")
-    plot_8km = make_pos_subplot("8 km")
-    plot_10km = make_pos_subplot("10 km")
-    plot_12km = make_pos_subplot("12 km")
+    adm_subplot = make_adm_subplot(scenario, examinedBasinPositions, label = "A")
+    time_domain_subplot = make_time_domain_subplot(label = "B")
+    plot_2km = make_pos_subplot("2 km", label = "C")
+    plot_6km = make_pos_subplot("6 km", label = "D")
+    plot_8km = make_pos_subplot("8 km", label = "E")
+    plot_10km = make_pos_subplot("10 km", label = "F")
+    plot_12km = make_pos_subplot("12 km", label  = "G")
     
     file_name = paste("figs/R/spatial_variability_scen_", scenario, mode, ".pdf", sep = "")
     pdf(file = file_name, width=6.5, height = 7.5)
@@ -746,18 +761,27 @@ plot_pairwise_comparison(scenario_1 = "A",
 #### variable_pres_of_different modes #### 
     
 make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_seed = 1){
+  #'
+  #'@title plot variable preservation of modes
+  #'
+  #'@description plots preservation of evo modes at 
+  #'
+  #'@param pos: distance from shore, e.g. "2 km"
+  #'@param scenario: "A" or "B"
+  #'@param no_of_lineages: integer
+  #'@param plot_seed: seed for random number generator
+  #'
+  #'
   set.seed(plot_seed)
-  get_sample_times = function(scenario, pos){
-    sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
-    times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
-    return(times)
-  }
-  sample_height = get_sample_locations(scenario = scenario, distance_from_shore_km = pos, distanceBetweenSamples = distanceBetweenSamples)
+
+  sample_height = get_sample_locations(scenario = scenario,
+                                       distance_from_shore_km = pos,
+                                       distanceBetweenSamples = distanceBetweenSamples)
   sample_times = get_sample_times(scenario, pos)
-  sim_times = seq(0, maxTimes[[scenario]], by = 0.001)
+  sim_times = seq(0, maxTimes[[scenario]], by = time_res_myr)
   relevant_times = sort(unique(c(sample_times, sim_times)))
   
-  compare_evo_modes_time_strat_plot = function(name, no_of_lineages = 3){
+  compare_evo_modes_time_strat_plot = function(name, labels, lwd, no_of_lineages = 3){
     evo_index = which(name == simulatedEvoModes)
     mode = EvoModes[[evo_index]]$mode
     params = EvoModes[[evo_index]]$params
@@ -771,43 +795,57 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
     strat_df = data.frame()
     for (i in seq_len(no_of_lineages)){
       df_temp = data.frame(h = sample_height,
-                           val  = approx(x = trait_list[[i]]$time, y = trait_list[[i]]$traitValue, xout = sample_times)$y,
+                           val  = approx(x = trait_list[[i]]$time,
+                                         y = trait_list[[i]]$traitValue,
+                                         xout = sample_times)$y,
                            lineage = rep(as.character(i), length(sample_height)))
       strat_df = rbind(strat_df,df_temp)
     }
     
     plot_list[["strat"]] = ggplot2::ggplot(data = strat_df, aes(x = h, y = val, col = lineage)) +
-      geom_line() +
+      geom_line(lwd = lwd) +
       theme_bw() +
       theme(legend.position = "none") +
       xlab(strat_label) +
-      ylab(trait_label)
+      ylab(trait_label) +
+      labs(tag = labels[1]) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size))
     
     time_df = data.frame()
     for (i in seq_len(no_of_lineages)){
       df_temp = data.frame(t = sim_times,
-                           val  = approx(x = trait_list[[i]]$time, y = trait_list[[i]]$traitValue, xout = sim_times)$y,
+                           val  = approx(x = trait_list[[i]]$time,
+                                         y = trait_list[[i]]$traitValue,
+                                         xout = sim_times)$y,
                            lineage = rep(as.character(i), length(sim_times)))
       time_df = rbind(time_df,df_temp)
     }
     
     plot_list[["time"]] = ggplot2::ggplot(data = time_df, aes(x = t, y = val, col = lineage)) +
-      geom_line() +
+      geom_line(lwd = lwd) +
       theme_bw() + 
       theme(legend.position = "none") +
       xlab(time_label) +
-      ylab(trait_label)
+      ylab(trait_label) +
+      labs(tag = labels[2]) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
+      scale_color_brewer(palette=lineage_palette)
     
     return(plot_list)
   }
   
   comb_list = list()
-  for (name in simulatedEvoModes){
-    comb_list[[name]] = compare_evo_modes_time_strat_plot(name, no_of_lineages = 3)
+  for (i in seq_along(simulatedEvoModes)){
+    comb_list[[simulatedEvoModes[i]]] = compare_evo_modes_time_strat_plot(name = simulatedEvoModes[i],
+                                                          labels = LETTERS[c(i,i+4)],
+                                                          lwd = evo_mode_lwds[i],
+                                                          no_of_lineages = 3)
   }
   
   file_name = paste("figs/R/comparison_pres_of_modes", scenario," " , pos, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=6.5, height = 3.25)
+  pdf(file = file_name , width=default_width, height = 3.25)
   combined_plot = grid.arrange(comb_list$stasis$strat,
                                comb_list$`Brownian motion`$strat,
                                comb_list$`weak Brownian drift`$strat,

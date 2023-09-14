@@ -346,3 +346,9 @@ get_sample_locations = function(scenario, distance_from_shore_km, distanceBetwee
   
   return(sample_pos)
 }
+
+get_sample_times = function(scenario, pos){
+  sample_height = seq(distanceBetweenSamples, max(ageDepthModels[[scenario]][[pos]]$height), by = distanceBetweenSamples)
+  times = approx(x = ageDepthModels[[scenario]][[pos]]$height, ageDepthModels[[scenario]][[pos]]$time, xout = sample_height,ties = mean)$y
+  return(times)
+}
