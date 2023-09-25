@@ -1,9 +1,6 @@
 #### Get utility functions
 source("code/utils.R")
 
-#### fix random seed for repeatability
-set.seed(1)
-
 #### Load required packages
 require("DAIME")
 require("paleoTS")
@@ -14,16 +11,17 @@ require("ggrepel")
 require("gridExtra")
 
 #### load data ####
-#load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
+
 load("data/R_outputs/results_modes_of_evolution.Rdata")
-#load("data/R_outputs/hiatus_info.Rdata")
+load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
+load("data/R_outputs/parameters_for_tests.Rdata")
+
 
 #### Constants ####
-all_dist_raw = seq(from = 0.1, to = 15, by = 0.1)
+
 strat_label = "Stratigraphic Height [m]"
 time_label = "Time [Myr]"
 trait_label = "Trait Value"
-time_res_myr = 0.001
 AICw_label = "AIC weight"
 sampling_points_label = "Number of Sampling Points"
 distance_from_shore_label = "Distance from Shore [km]"
@@ -398,14 +396,6 @@ sapply(scenarioNames, function(scenario) make_test_res_time_plot(scenario))
 
 
 #### completeness and hiatus duration ####
-## TODO:
-# 1. Merge plots with completeness and hiatus duration distribution. Use the left
-# y axis for completeness and the right for hiatus duration
-# 2. make uniform y axis scale for hiatus duration between scenarios. This is so
-# the plots for different scenarios are comparable with each other
-# 3. Adjust x axis. should be real distance from shore (in km) instead of the index as here
-# 4. add legend for hiatus duration & use different line types for hiatus duration.
-# should be "first quartile", "median", "third quartile", and "maximum"
 
 hiat_labels = c("Completeness",
                 "Maximum hiatus duration",
