@@ -404,11 +404,6 @@ sapply(scenarioNames, function(scenario) make_test_res_time_plot(scenario))
 
 #### Plot completeness and hiatus duration ####
 
-hiat_labels = c("Completeness",
-                "Maximum hiatus duration",
-                "Median hiatus duration",
-                "1st quartile of hiatus durations",
-                "3rd quartile of hiatus durations")
 #Getting all the input data for the graph:
 make_hiat_plot = function(scenario, y_resc, label){
   compl=hiat_measures[[scenario]]$completeness*100
@@ -418,8 +413,22 @@ make_hiat_plot = function(scenario, y_resc, label){
   hiatus_3rd_quart=hiat_measures[[scenario]]$third_quartile_duration_myr
 
   df = data.frame(x = rep(all_dist_raw, 5),
-                    y = c(compl, hiatus_max/ y_resc * 100, hiatus_median / y_resc * 100, hiatus_1st_quart / y_resc * 100, hiatus_3rd_quart / y_resc * 100 ),
-                    type = c(rep("comp", length(all_dist_raw)), rep("hiat_max", length(all_dist_raw)), rep("hiat_median", length(all_dist_raw)), rep("hiat_1st", length(all_dist_raw)), rep("hiat_3rd", length(all_dist_raw))))
+                    y = c(compl,
+                          hiatus_max/ y_resc * 100,
+                          hiatus_median / y_resc * 100,
+                          hiatus_1st_quart / y_resc * 100,
+                          hiatus_3rd_quart / y_resc * 100 ),
+                    type = factor(c(rep("Completeness", length(all_dist_raw)), 
+                                    rep("Maximum hiatus duration", length(all_dist_raw)),
+                                    rep("Median hiatus duration", length(all_dist_raw)),
+                                    rep("1st quartile of hiatus durations", length(all_dist_raw)),
+                                    rep("3rd quartile of hiatus durations", length(all_dist_raw))),
+                                  levels = c("Completeness",
+                                             "Maximum hiatus duration",  
+                                             "3rd quartile of hiatus durations",
+                                             "Median hiatus duration",
+                                             "1st quartile of hiatus durations"
+                                            )))
   title = paste0("Completeness in scenario ", scenario, sep = "")
   #The plot for basin 
   plot=ggplot(data = df, aes(x=x, y = y, col = type)) +
@@ -435,10 +444,12 @@ make_hiat_plot = function(scenario, y_resc, label){
     ylab("Completeness [%]")+ # for the y axis label
     theme_bw()+ #Makes the background white.
     theme(text = element_text(size = 6), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98)) +
-    theme(legend.position = c(0.1, 0.85)) +
+    theme(legend.position = c(0.3, 0.85)) +
     theme(legend.key.size = unit(0.3, "cm")) +
     theme(legend.title = element_blank()) +
-    scale_color_manual(labels = hiat_labels,values = hiat_palette)
+    xlim(c(0, max_dist_plot_km)) +
+    scale_color_manual(values = hiat_palette) +
+    theme(legend.text = element_text(size = legend_text_size))
   
   return(plot)
 }
