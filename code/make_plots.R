@@ -29,6 +29,12 @@ title_size = 10
 adm_palette = RColorBrewer::brewer.pal(name = "PuOr", n = 9)[-c(4:7)]
 lineage_palette = "Set1"
 hiat_palette = c("black", rev(RColorBrewer::brewer.pal(name = "OrRd", n = 5)[-1]))
+default_width_fp_in = 170 / 25.4 # width for  full page fig in inch
+default_width_fp_in = 85 / 25.4 # width for  full page fig in inch
+
+AIC_palette = "Spectral"
+max_dist_plot_km = 13
+legend_text_size = 6
 
 #### Helper functions ####
 get_AIC_scenario = function(basin, simulated_mode){
@@ -179,7 +185,7 @@ plot_AIC_strat = function(basin, simulated_mode, label){
     geom_boxplot(outlier.shape = NA,lwd=highlight) +
     geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
-    scale_fill_brewer(palette="Spectral")+
+    scale_fill_brewer(palette=AIC_palette)+
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
           text = element_text(size = 6))+
     labs(title = stringr::str_to_title(simulated_mode), y=AICw_label, x=distance_from_shore_label)+
@@ -224,7 +230,7 @@ plot_AIC_time = function(no_of_sampl_loc, basin, simulated_mode, label){
     geom_boxplot(outlier.shape = NA,linewidth=highlight) +
     geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
-    scale_fill_brewer(palette="Spectral")+ 
+    scale_fill_brewer(palette=AIC_palette)+ 
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), 
           text = element_text(size = 6))+
     labs(title = stringr::str_to_title(simulated_mode), y=AICw_label, x=sampling_points_label)+
@@ -311,7 +317,11 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
       ylab(trait_label) +
       theme(legend.position = "none") +
       labs(tag = label) +
-      scale_color_brewer(palette=lineage_palette)
+      scale_color_brewer(palette=lineage_palette) +
+      theme(plot.title = element_text(size = title_size)) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size - tick_size)) +
+      ggtitle(stringr::str_to_title(name))
     
     return(ret_plot)
   }
@@ -321,7 +331,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
     plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, LETTERS[i], no_of_lineages, plot_seed)
   }
   file_name = paste("figs/R/comparison_evo_modes_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=default_width, height = 3.25)
+  pdf(file = file_name , width=default_width_fp_in, height = 3.25)
   
   combined_plot = grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
   dev.off()
