@@ -2,13 +2,9 @@
 source("code/utils.R")
 
 #### Load required packages
-require("DAIME")
-require("paleoTS")
-require("grid")
+
 require("ggplot2")
-require("RColorBrewer")
-require("ggrepel")
-require("gridExtra")
+
 
 #### load data ####
 
@@ -282,7 +278,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
   #' 
   #' @param scenario: "A" or "B"
   #' @param no_of_lineages: integer
-  #' @param plot_seed: seed for random numer generator
+  #' @param plot_seed: seed for random number generator
   #' 
   make_evo_mode_plot = function(name, scenario, label, no_of_lineages, plot_seed){
     #' 
@@ -292,8 +288,9 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
     #' @param scenario: "A" or "B"
     #' @param label: label to be shown at top left corner
     #' @param no_of_lineages: integer
+    #' @param plot_seed seed for the simulations
     #' 
-    #' @return an object to generate ggplot
+    #' @return an object to generate plot
     #' 
     set.seed(plot_seed)
     max_time = maxTimes[[scenario]]
@@ -308,7 +305,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
       df = rbind(df, df_2)
     }
     ret_plot = ggplot2::ggplot(df, aes(x = t, y = val, color = run)) +
-      geom_line()+
+      geom_line(lwd = evo_mode_lwds[evo_index])+
       theme_bw() +
       xlab(time_label) +
       ylab(trait_label) +
@@ -323,7 +320,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
   for (i in seq_along(simulatedEvoModes)){
     plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, LETTERS[i], no_of_lineages, plot_seed)
   }
-  file_name = paste("figs/R/evo_mode_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
+  file_name = paste("figs/R/comparison_evo_modes_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
   pdf(file = file_name , width=default_width, height = 3.25)
   
   combined_plot = grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
@@ -333,7 +330,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
 sapply(scenarioNames, function(x) plot_comparison_evo_modes_time_domain(scenario = x, no_of_lineages = 3, plot_seed = 1))
 
 
-#### test_results_scenario_A and B_raw.pdf ####
+#### plot AIC weights for scenario A & B  ####
 
 make_test_res_strat_plot = function(scenario){
   #Setting ts_lengths to the correct lengths
@@ -369,7 +366,7 @@ make_test_res_strat_plot = function(scenario){
 sapply(scenarioNames, function(scenario) make_test_res_strat_plot(scenario))
 
 
-#### test_results_time_domain_raw.pdf ####
+#### plot AIC weights of tests in time domain ####
 make_test_res_time_plot = function(scenario){
 
   #Setting the correct sampling points:
@@ -395,7 +392,7 @@ make_test_res_time_plot = function(scenario){
 sapply(scenarioNames, function(scenario) make_test_res_time_plot(scenario))
 
 
-#### completeness and hiatus duration ####
+#### Plot completeness and hiatus duration ####
 
 hiat_labels = c("Completeness",
                 "Maximum hiatus duration",
@@ -449,7 +446,7 @@ make_completeness_and_hiat_plot()
 
 
 
-#### equal completeness comparison ####
+#### Pairwise comparison ####
 
 plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode, no_of_lineages = 3, plot_seed = 1){
   set.seed(plot_seed)
@@ -598,7 +595,7 @@ plot_pairwise_comparison(scenario_1 = "A",
 
 
   
-#### Spatial variability in preservation #### 
+#### Spatial variability in preservation across basin #### 
 ### Work on the arrangement here! 1strow ADM, followed by 2 cols of trait sims
 # check with joiurnal
 
@@ -727,7 +724,7 @@ plot_pairwise_comparison(scenario_1 = "A",
     plot_10km = make_pos_subplot("10 km", label = "F")
     plot_12km = make_pos_subplot("12 km", label  = "G")
     
-    file_name = paste("figs/R/spatial_variability_scen_", scenario, mode, ".pdf", sep = "")
+    file_name = paste("figs/R/spatial_variability_scen_", scenario, "_", mode, ".pdf", sep = "")
     pdf(file = file_name, width=6.5, height = 7.5)
     grid.arrange(adm_subplot, time_domain_subplot, plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
     dev.off()
@@ -748,7 +745,7 @@ plot_pairwise_comparison(scenario_1 = "A",
       
 
     
-#### variable_pres_of_different modes #### 
+####  Variable preservation of different modes of evolution #### 
     
 make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_seed = 1){
   #'
@@ -776,6 +773,7 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
     mode = EvoModes[[evo_index]]$mode
     params = EvoModes[[evo_index]]$params
     trait_list = list()
+    lwd = evo_mode_lwds[evo_index]
     for ( i in seq_len(no_of_lineages)){
       trait_list[[i]] = simulateTraitEvo(t = relevant_times, mode = mode, params[1], params[2])
     }
@@ -800,7 +798,8 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
       ylab(trait_label) +
       labs(tag = labels[1]) +
       theme(axis.title = element_text(size = axis_label_size)) +
-      theme(axis.text = element_text(size = tick_size))
+      theme(axis.text = element_text(size = tick_size)) +
+      scale_color_brewer(palette=lineage_palette)
     
     time_df = data.frame()
     for (i in seq_len(no_of_lineages)){
@@ -834,7 +833,7 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
                                                           no_of_lineages = 3)
   }
   
-  file_name = paste("figs/R/comparison_pres_of_modes", scenario," " , pos, "_raw.pdf", sep = "")
+  file_name = paste("figs/R/comparison_pres_of_modes_scenario_", scenario," " , pos, "_raw.pdf", sep = "")
   pdf(file = file_name , width=default_width, height = 3.25)
   combined_plot = grid.arrange(comb_list$stasis$strat,
                                comb_list$`Brownian motion`$strat,
