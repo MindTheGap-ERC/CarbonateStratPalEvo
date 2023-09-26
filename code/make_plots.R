@@ -320,7 +320,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
       scale_color_brewer(palette=lineage_palette) +
       theme(plot.title = element_text(size = title_size)) +
       theme(axis.title = element_text(size = axis_label_size)) +
-      theme(axis.text = element_text(size - tick_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
       ggtitle(stringr::str_to_title(name))
     
     return(ret_plot)
