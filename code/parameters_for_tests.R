@@ -43,7 +43,7 @@ simulatedEvoModes <- sapply(EvoModes, function(x) x$name)
 
 specimensPerSample <- 100 # no of specimens found at one sampling site
 interPopVar <- 0.1 # variance in traits at one sampling location around the simulated mean trait value
-noOfTests <- 1 # no of tests performed per basin position
+noOfTests <- 100 # no of tests performed per basin position
 
 examinedBasinPositions <- c("2 km", "6 km", "8 km", "10 km", "12 km") # distance from shore in km where the tests will be performed
 distanceBetweenSamples <- 1 # m between sampling sites in the section
