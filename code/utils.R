@@ -1,5 +1,18 @@
 ## Utility functions
 
+### Contents:
+# myNormStasis : simulate evol. stasis of lineage
+# myBD : simulate lineage evolving according to Brownian drift and special cases (Brownian motion)
+# simulateTraitEvo : simulate trait evolution of a lineage
+# getSampleAge : for sample locations, determine their time of deposition
+# getTraitValInStrat : simulate trait evolution in strat domain
+# testModesOfEvolStrat : identify modes of evolution in stratigraphic domain
+# testModesOfEvolTime : identify modes of evolution in time domain
+# get_completeness : Get strat. completeness at specific position in basin
+# get_hiatus_distribution : get distribution of hiatus durations in myr
+# get_sample_locations : determine sampling positions 
+# get_sample_times : determine timing of samples taken as specified basin position
+
 myNormStasis <- function(t,
                          mean = 0,
                          sd = 1) {
@@ -66,7 +79,7 @@ simulateTraitEvo <- function(t,
                              mode,
                              ...) {
   
-  #' @title simulate trait evolution of a lienage
+  #' @title simulate trait evolution of a lineage
   #' 
   #' @param t: time where the lineage is sampled
   #' @param mode: string, either "BD" (brownian drift) or "Stasis"(stasis)\
