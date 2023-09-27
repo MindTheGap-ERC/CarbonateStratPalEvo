@@ -1,21 +1,20 @@
-load("scenarioA_matlab_outputs.mat") %% load model outputs of scenario A
-close all % close all figures saved in file
+load("scenarioA_glob_matlab_outputs.mat") %% load model outputs of scenario A
 
 %% Extract Age Depth Models of Scenario A
 pos_in_strike_dir = 5; % get adm at 5th grid cell in strike dir
 [scenarioA_adm_along_dip, scenarioA_time]=get_adms_along_dip(pos_in_strike_dir,glob); % extract position
 scenarioA_sea_level=glob.SL; % get sea level curve of scenario A
-clear glob stats
+clear glob
 
 %%
-load("scenarioB_matlab_outputs.mat") %% load model outputs of scenario B
-close all % close all figues saved in file
+load("scenarioB_glob_matlab_outputs.mat") %% load model outputs of scenario B
+
 %% 
 pos_in_strike_dir = 5;
 [scenarioB_adm_along_dip, scenarioB_time]=get_adms_along_dip(pos_in_strike_dir,glob); % extract position
 scenarioB_sea_level=glob.SL; % get sea level curve of scenario A
 %%
-clear glob stats
+clear glob
 save('scenarioA_and_B_matlab_to_R.mat','scenarioA_adm_along_dip','scenarioB_adm_along_dip','scenarioA_time','scenarioB_time',"scenarioA_sea_level","scenarioB_sea_level")
 
 %%
