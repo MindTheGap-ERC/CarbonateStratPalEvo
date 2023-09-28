@@ -4,6 +4,7 @@ source("code/utils.R")
 #### Load required packages
 
 require("ggplot2")
+require("gridExtra")
 
 
 #### load data ####
@@ -273,6 +274,7 @@ get_only_legend = function(plot) {
   theme(legend.position = "bottom" )
 
 Legend=get_only_legend(PlotLegend)
+dev.off()
 }
 
 #### Comparison modes of evolution in time domain ####
@@ -875,4 +877,51 @@ for (scenario in scenarioNames) {
     make_var_pres_of_modes_plot(pos = pos, scenario = scenario, no_of_lineages = 3, plot_seed = 1)
   }
 }
-    
+
+#### plot adms from both scenarios ####
+
+make_adm_comparison_plot = function(){
+  make_adm_subplot = function(scenario, distances_from_shore_km, label){
+    #' 
+    #' @title plot adms at differnet positions in basin
+    #' 
+    #' @param scenario: "A" or "B"
+    #' @param distances_from_shore_km: vector, subset of all_dist
+    #' 
+    #' @return a ggplot object
+    df = data.frame()
+    for (dist in distances_from_shore_km){
+      df_temp = data.frame(t = ageDepthModels[[scenario]][[dist]]$time,
+                           h = replace(ageDepthModels[[scenario]][[dist]]$height,
+                                       duplicated(ageDepthModels[[scenario]][[dist]]$height),
+                                       NA),
+                           distance = rep(dist, length(ageDepthModels[[scenario]][[dist]]$time)))
+      df = rbind(df, df_temp)
+    }
+    suppressWarnings( { ret_plot = ggplot2::ggplot(df, aes(x = t, y = h, col = distance)) +
+      geom_line() + 
+      theme_bw() + 
+      xlab(time_label) +
+      ylab(strat_label) +
+      labs(tag = label) +
+      theme(axis.title = element_text(size = axis_label_size)) +
+      theme(axis.text = element_text(size = tick_size)) +
+      theme(legend.position = c(0.1, 0.85)) +
+      theme(legend.key.size = unit(0.1, "cm")) +
+      scale_color_manual(values=adm_palette)} )
+    return(ret_plot)
+  }
+  
+  scena_A_admplot = make_adm_subplot(scenario  = "A", distances_from_shore_km = examinedBasinPositions, label = "A")
+  scena_B_admplot = make_adm_subplot(scenario  = "B", distances_from_shore_km = examinedBasinPositions, label = "B")
+  
+  file_name = paste("figs/R/comparison_adms_both_scenario.pdf", sep = "")
+  pdf(file = file_name , width=default_width_fp_in, height = 3.25)
+  combined_plot = grid.arrange(scena_A_admplot, scena_B_admplot, ncol = 2)
+  
+  dev.off()
+  
+}
+
+make_adm_comparison_plot()
+
