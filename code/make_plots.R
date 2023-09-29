@@ -4,7 +4,6 @@ source("code/utils.R")
 #### Load required packages
 
 require("ggplot2")
-require("gridExtra")
 
 
 #### load data ####
@@ -22,7 +21,6 @@ trait_label = "Trait Value"
 AICw_label = "AIC weight"
 sampling_points_label = "Number of Sampling Points"
 distance_from_shore_label = "Distance from Shore [km]"
-default_width = 6.5
 axis_label_size = 6
 tick_size = 6
 evo_mode_lwds = c(0.05,0.5,0.5,0.5)
@@ -31,7 +29,7 @@ adm_palette = RColorBrewer::brewer.pal(name = "PuOr", n = 9)[-c(4:7)]
 lineage_palette = "Set1"
 hiat_palette = c("black", rev(RColorBrewer::brewer.pal(name = "OrRd", n = 5)[-1]))
 default_width_fp_in = 170 / 25.4 # width for  full page fig in inch
-default_width_fp_in = 85 / 25.4 # width for  full page fig in inch
+default_width_hp_in = 85 / 25.4 # width for  half page fig in inch
 
 AIC_palette = "Spectral"
 max_dist_plot_km = 13
@@ -335,7 +333,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
   file_name = paste("figs/R/comparison_evo_modes_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
   pdf(file = file_name , width=default_width_fp_in, height = 3.25)
   
-  combined_plot = grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
+  combined_plot = gridExtra::grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
   dev.off()
 }
 
@@ -362,14 +360,14 @@ make_test_res_strat_plot = function(scenario){
   Plot4_8=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","H")
   
   #Combining all the plots:
-  combined_plot=grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
+  combined_plot=gridExtra::grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
   
   #Printing the plots plus the legend to .pdf
 
   file_name = paste("figs/R/test_results_scenario_", scenario, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=6.5, height = 3.25)
+  pdf(file = file_name , width=default_width_fp_in, height = 3.25)
   
-  grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
+  gridExtra::grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 
 }
@@ -390,13 +388,13 @@ make_test_res_time_plot = function(scenario){
   Plot6_4=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","D")
   
   #Combining all the plots:
-  combined_plot=grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
+  combined_plot=gridExtra::grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
   
   #Printing the plots plus the legend to .pdf
 
   file_name = paste("figs/R/test_results_time_domain_", as.character(scenario), "_raw.pdf", sep = "")
-  pdf(file = file_name, width = 6.5, height = 3.25)
-  grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
+  pdf(file = file_name, width = default_width_fp_in, height = 3.25)
+  gridExtra::grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
 
@@ -459,8 +457,8 @@ make_hiat_plot = function(scenario, y_resc, label){
 make_completeness_and_hiat_plot = function(){
   y_resc = max(sapply(scenarioNames, function(scenario) max(hiat_measures[[scenario]]$max_duration_myr)))
   y_resc = ceiling(y_resc * 100)/ 100
-  pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=default_width, height = 3.25)
-  grid.arrange(make_hiat_plot("A", y_resc, "A"),make_hiat_plot("B", y_resc, "B"),ncol=2)
+  pdf(file = paste("figs/R/completeness_and_hiat_duration_raw.pdf"), width=default_width_fp_in, height = 3.25)
+  gridExtra::grid.arrange(make_hiat_plot("A", y_resc, "A"),make_hiat_plot("B", y_resc, "B"),ncol=2)
   dev.off()
 }
 
@@ -599,8 +597,8 @@ plot_pairwise_comparison = function(scenario_1, scenario_2, dist_1, dist_2, mode
    strat_plot_2 = make_strat_dom_subplot_2(label = "C")
    
    file_name = paste("figs/R/pairwise_comp", scenario_1, dist_1, scenario_2, dist_2, mode, ".pdf", sep = "")
-   pdf(file = file_name, width=default_width, height = 3)
-   grid.arrange(time_subplot, strat_plot_1, strat_plot_2, nrow = 1)
+   pdf(file = file_name, width=default_width_fp_in, height = 3)
+   gridExtra::grid.arrange(time_subplot, strat_plot_1, strat_plot_2, nrow = 1)
    dev.off()
    
 
@@ -748,8 +746,8 @@ plot_pairwise_comparison(scenario_1 = "A",
     plot_12km = make_pos_subplot("12 km", label  = "G")
     
     file_name = paste("figs/R/spatial_variability_scen_", scenario, "_", mode, ".pdf", sep = "")
-    pdf(file = file_name, width=6.5, height = 7.5)
-    grid.arrange(adm_subplot, time_domain_subplot, plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
+    pdf(file = file_name, width=default_width_fp_in, height = 7.5)
+    gridExtra::grid.arrange(adm_subplot, time_domain_subplot, plot_2km, plot_6km, plot_8km, plot_10km, plot_12km)
     dev.off()
     
     # merge all plots here
@@ -857,8 +855,8 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
   }
   
   file_name = paste("figs/R/comparison_pres_of_modes_scenario_", scenario," " , pos, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=default_width, height = 3.25)
-  combined_plot = grid.arrange(comb_list$stasis$strat,
+  pdf(file = file_name , width=default_width_fp_in, height = 3.25)
+  combined_plot = gridExtra::grid.arrange(comb_list$stasis$strat,
                                comb_list$`Brownian motion`$strat,
                                comb_list$`weak Brownian drift`$strat,
                                comb_list$`strong Brownian drift`$strat,
@@ -917,7 +915,7 @@ make_adm_comparison_plot = function(){
   
   file_name = paste("figs/R/comparison_adms_both_scenario.pdf", sep = "")
   pdf(file = file_name , width=default_width_fp_in, height = 3.25)
-  combined_plot = grid.arrange(scena_A_admplot, scena_B_admplot, ncol = 2)
+  combined_plot = gridExtra::grid.arrange(scena_A_admplot, scena_B_admplot, ncol = 2)
   
   dev.off()
   
