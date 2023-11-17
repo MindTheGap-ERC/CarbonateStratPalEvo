@@ -32,7 +32,7 @@ default_width_fp_in = 170 / 25.4 # width for  full page fig in inch
 default_width_hp_in = 85 / 25.4 # width for  half page fig in inch
 
 AIC_palette = "Spectral"
-max_dist_plot_km = 13
+max_dist_plot_km = max_rel_distance_km
 legend_text_size = 6
 
 #### Helper functions ####
