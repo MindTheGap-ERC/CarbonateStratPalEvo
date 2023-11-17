@@ -85,6 +85,9 @@ for (scenario in scenarioNames){
 }
 
 #### statistical measures of hiatus durations ####
+
+max_rel_distance_km = 13 # maximum distance observed
+
 hiat_measures = list()
 for (scenario in scenarioNames){
   compl = rep(NA, length(all_dist))
@@ -107,10 +110,15 @@ for (scenario in scenarioNames){
   li[["first_quartile_duration_myr"]] = first_quartile_duration_myr
   li[["third_quartile_duration_myr"]] = third_quartile_duration_myr
   li[["max_duration_myr"]] = max_duration_myr
+  li[["mean_completeness"]] = mean(compl[all_dist_raw  <= max_rel_distance_km])
+  li[["loc_min_completeness"]] = all_dist[all_dist_raw <= max_rel_distance_km][which.min(compl[all_dist_raw <= max_rel_distance_km])]
+  li[["max_to_median_hiat_ratio"]] = li$max_duration_myr / li$median_duration_myr
+  li[["mean_max_to_median_hiat_ratio"]] = mean(li$max_to_median_hiat_ratio[all_dist_raw <= max_rel_distance_km])
+  li[["mean_median_duration_myr"]] = mean(li$median_duration_myr[all_dist_raw <= max_rel_distance_km])
   hiat_measures[[scenario]] = li
 }
 
-
+mean_ratio_max_hiat_dur = mean(hiat_measures$A$max_duration_myr[all_dist_raw <= max_rel_distance_km] / hiat_measures$B$max_duration_myr[all_dist_raw <= max_rel_distance_km])
 
 #### save outputs ####
 save(ageDepthModels,
@@ -124,6 +132,8 @@ save(ageDepthModels,
      max_dist_from_shore_km,
      min_dist_from_shore_km,
      time_res_myr,
+     max_rel_distance_km,
+     mean_ratio_max_hiat_dur,
      file = "data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
 
 
