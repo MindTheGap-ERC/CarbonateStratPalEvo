@@ -69,7 +69,9 @@ From here, you can continue to inspect the generated data or generate the plots 
 
 ## 2. Inspection of provided data
 
-All produced data is in the folder _/data/_. For a detailed description of the data structure and contents see the file _/data/R_outputs/codebook.md_ (for outputs from R) and _/data/matlab_outputs/codebook.md_ (for outputs from matlab)
+All produced data is in the folder _/data/_. For a detailed description of the data structure and contents see the file _/data/R_outputs/codebook.md_ (for outputs from R) and _/data/matlab_outputs/codebook.md_ (for outputs from matlab).
+
+R outputs can be visualized using the scripts in _code/visualize_data.R_.
 
 ## 3. Reproduction of figures
 
