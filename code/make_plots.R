@@ -17,9 +17,10 @@ load("data/R_outputs/parameters_for_tests.Rdata")
 
 strat_label = "Stratigraphic Height [m]"
 time_label = "Time [Myr]"
+time_domain = "Time Domain"
 trait_label = "Trait Value"
 AICw_label = "AIC weight"
-sampling_points_label = "Number of Sampling Points"
+sampling_points_label = "Time Series Length"
 distance_from_shore_label = "Distance from Shore [km]"
 axis_label_size = 6
 tick_size = 6
@@ -331,7 +332,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
     plot_list[[i]] = make_evo_mode_plot(name = simulatedEvoModes[[i]], scenario, LETTERS[i], no_of_lineages, plot_seed)
   }
   file_name = paste("figs/R/comparison_evo_modes_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
-  pdf(file = file_name , width=default_width_fp_in, height = 3.25)
+  pdf(file = file_name , width=default_width_fp_in)
   
   combined_plot = gridExtra::grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
   dev.off()
@@ -670,11 +671,14 @@ plot_pairwise_comparison(scenario_1 = "A",
         theme_bw() +
         xlab(time_label) +
         ylab(trait_label) +
+        ggtitle(time_domain) +
         theme(legend.position = "none")  +
         labs(tag = label) +
         theme(axis.title = element_text(size = axis_label_size)) +
         theme(axis.text = element_text(size = tick_size)) +
-        scale_color_brewer(palette=lineage_palette)
+        scale_color_brewer(palette=lineage_palette) +
+        theme(plot.title = element_text(size=10))
+
       
       return(out_plot)
     }
@@ -695,11 +699,13 @@ plot_pairwise_comparison(scenario_1 = "A",
         theme_bw() +
         xlab(strat_label) +
         ylab(trait_label) +
+        ggtitle(paste0(pos, " Offshore")) +
         theme(legend.position = "none") +
         labs(tag = label) +
         theme(axis.title = element_text(size = axis_label_size)) +
         theme(axis.text = element_text(size = tick_size)) +
-        scale_color_brewer(palette=lineage_palette)
+        scale_color_brewer(palette=lineage_palette) +
+        theme(plot.title = element_text(size=10))
       return(outplot)
     }
     
@@ -730,9 +736,13 @@ plot_pairwise_comparison(scenario_1 = "A",
        labs(tag = label) +
        theme(axis.title = element_text(size = axis_label_size)) +
        theme(axis.text = element_text(size = tick_size)) +
-       theme(legend.position = c(0.1, 0.85)) +
+       theme(legend.position = c(0.21, 0.765)) +
        theme(legend.key.size = unit(0.1, "cm")) +
-       scale_color_manual(values=adm_palette)} )
+       theme(legend.box.margin = margin()) +
+       theme(legend.title = element_text(size = 10)) +
+       theme(legend.text = element_text(size = 8)) +
+       scale_color_manual(values=adm_palette)} ) +
+       theme(plot.title = element_text(size=10))
       return(ret_plot)
     }
     
@@ -904,9 +914,12 @@ make_adm_comparison_plot = function(){
       labs(tag = label) +
       theme(axis.title = element_text(size = axis_label_size)) +
       theme(axis.text = element_text(size = tick_size)) +
-      theme(legend.position = c(0.1, 0.85)) +
+      theme(legend.position = c(0.2, 0.8)) +
       theme(legend.key.size = unit(0.1, "cm")) +
-      scale_color_manual(values=adm_palette)} )
+      scale_color_manual(values=adm_palette) +
+      ggtitle(paste0("Scenario " , scenario)) +
+      theme(plot.title = element_text(size=10))
+    } )
     return(ret_plot)
   }
   
