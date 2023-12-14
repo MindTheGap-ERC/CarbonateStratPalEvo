@@ -18,7 +18,14 @@ There are multiple ways to reproduce and repeat the study:
 2. Inspection of the provided data
 3. Reproduction of figures alone
 
-Each point is described separately, and can be performed independentof the others
+Each point is described separately, and can be performed independent of the others.
+
+To get started, download all required data from OSF. For this, open the RProject as described in the README, and run the following in R:
+
+```r
+source("code/utils.R")
+get_data_from_osf(link = "https://osf.io/zbpwa/")
+```
 
 ## 1. Full reproduction of data
 
@@ -69,14 +76,7 @@ From here, you can continue to inspect the generated data or generate the plots 
 
 ## 2. Inspection of provided data
 
-First, download the supporting data from the Open Science Framework (OSF) by running the following code in R
-
-```r
-source("code/utils.R")
-get_data_from_osf(link = "https://osf.io/zbpwa/")
-```
-
-All downloaded data is in the folder _/data/_. For a detailed description of the data structure and contents see the file _/data/R_outputs/codebook.md_ (for outputs from R) and _/data/matlab_outputs/codebook.md_ (for outputs from matlab).
+All data is in the folder _/data/_. For a detailed description of the data structure and contents see the file _/data/R_outputs/codebook.md_ (for outputs from R) and _/data/matlab_outputs/codebook.md_ (for outputs from matlab).
 
 R outputs can be visualized using the scripts in _code/visualize_data.R_.
 
