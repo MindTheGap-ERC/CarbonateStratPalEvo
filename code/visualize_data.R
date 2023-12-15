@@ -1,8 +1,5 @@
 ## Visualize Data ##
 
-#### Load packages ####
-require(paleoTS)
-
 #### Load R outputs ####
 load("data/R_outputs/results_modes_of_evolution.Rdata")
 load("data/R_outputs/ageDepthModelsScenariosAandB.Rdata")
@@ -49,7 +46,7 @@ plot(x = testResultsStrat[[scenario]][[dist]][[evo_mode]][[run_no]]$inputData$ti
      main = paste(evo_mode, "scenario", scenario, dist, "offshore ; run no. ", run_no))
 
 ## plot paleoTS object derived from trait evolution in the section
-plot(testResultsStrat[[scenario]][[dist]][[evo_mode]][[run_no]]$paleots)
+paleoTS:::plot.paleoTS(testResultsStrat[[scenario]][[dist]][[evo_mode]][[run_no]]$paleots)
 
 #### Simulated lineages sampled only in the time domain ####
 scenario = "A"
@@ -70,4 +67,4 @@ plot(x = testResultsTime[[scenario]][[no_of_loc]][[evo_mode]][[run_no]]$inputDat
      main = paste0(evo_mode, "scenario", scenario, no_of_loc, "sampling locations, run no. ", run_no),
      type = "l")
 ## paleoTS objects
-plot(testResultsTime[[scenario]][[no_of_loc]][[evo_mode]][[run_no]]$paleots)
+paleoTS:::plot.paleoTS(testResultsTime[[scenario]][[no_of_loc]][[evo_mode]][[run_no]]$paleots)
