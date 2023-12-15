@@ -45,6 +45,6 @@ vignettes/*.pdf
 *.pdf
 
 # data folder
-data/*
+#data/*
 
 
