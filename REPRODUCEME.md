@@ -20,13 +20,6 @@ There are multiple ways to reproduce and repeat the study:
 
 Each point is described separately, and can be performed independent of the others.
 
-To get started, download all required data from OSF. For this, open the RProject as described in the README, and run the following in R:
-
-```r
-source("code/utils.R")
-get_data_from_osf(link = "https://osf.io/zbpwa/")
-```
-
 ## 1. Full reproduction of data
 
 ### 1.1 Simulate carbonate platform in CarboCATLite
