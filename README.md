@@ -1,6 +1,6 @@
 # CarboStratPalEvo
 
-Repository for the manuscript "Identification of the mode of evolution in incomplete carbonate successions".
+Supplementary code for "Identification of the mode of evolution in incomplete carbonate successions", [DOI: 10.1101/2023.12.18.572098](https://doi.org/10.1101/2023.12.18.572098).
 
 ## Authors
 
@@ -78,6 +78,12 @@ See REPRODUCEME file for more info on running code and examining data.
 ## Copyright
 
 Copyright 2023 Utrecht University
+
+## Citation
+
+To cite this repository, please use
+
+* Hohmann, N., Koelewijn, J. R., Burgess, P., & Jarochowska, E. (2023). Supplementary code for "Identification of the Mode of Evolution in Incomplete Carbonate Successions" (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.10390267
 
 ## License
 
