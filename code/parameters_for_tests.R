@@ -25,15 +25,10 @@ EvoModes[[2]] <- list(
   params = c(0, 1)
 ) # BM with mean zero and variance 1
 EvoModes[[3]] <- list(
-  name = "weak Brownian drift",
+  name = "Brownian drift",
   mode = "BD",
   params = c(5, 1)
 ) # BD with drift 5 and variance 1
-EvoModes[[4]] <- list(
-  name = "strong Brownian drift",
-  mode = "BD",
-  params = c(10, 1)
-) # BD with drift 10 and variance 1
 
 # extract names of the simulated evolutionary modes
 simulatedEvoModes <- sapply(EvoModes, function(x) x$name)
