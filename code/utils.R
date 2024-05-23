@@ -212,10 +212,9 @@ testModesOfEvolStrat <- function(distBetweenSamples,
     w.grw <- paleoTS::fitSimple(fossilTimeSeries, model = "GRW") # General Random walk (Brownian drift)
     w.urw <- paleoTS::fitSimple(fossilTimeSeries, model = "URW") # Unbiased Random Walk (Brownian motion)
     w.stat <- paleoTS::fitSimple(fossilTimeSeries, model = "Stasis") # Stasis
-    w.ou <- paleoTS::fitSimple(fossilTimeSeries, model = "OU") # Ornstein-Uhlenbeck model
     
     # This compares the models, the most likely model has the highest akaike.wt and the smallest AICc values.
-    compared <- paleoTS::compareModels(w.grw, w.urw, w.stat, w.ou, silent = TRUE, sort = FALSE)
+    compared <- paleoTS::compareModels(w.grw, w.urw, w.stat, silent = TRUE, sort = FALSE)
     
     # store test results and input data
     testRes <- list(
@@ -286,16 +285,11 @@ testModesOfEvolTime <- function(maxTime,
       y = fossilTimeSeries,
       model = "Stasis"
     ) # Stasis
-    w.ou <- paleoTS::fitSimple(
-      y = fossilTimeSeries,
-      model = "OU"
-    ) # Ornstein-Uhlenbeck model
     
     # This compares the models, the most likely model has the highest akaike.wt and the smallest AICc values.
     compared <- paleoTS::compareModels(w.grw,
                                        w.urw,
                                        w.stat,
-                                       w.ou,
                                        silent = TRUE,
                                        sort = FALSE
     )
