@@ -181,7 +181,6 @@ plot_AIC_strat = function(basin, simulated_mode, label){
   
   plotS1=ggplot2::ggplot(get_AIC_scenario(basin,simulated_mode), aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA,lwd=highlight) +
-    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
     scale_fill_brewer(palette=AIC_palette)+
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
@@ -224,7 +223,6 @@ plot_AIC_time = function(no_of_sampl_loc, basin, simulated_mode, label){
   #Plots the plot:
   plotT1= ggplot2::ggplot(plot_data, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA,linewidth=highlight) +
-    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
     scale_fill_brewer(palette=AIC_palette)+ 
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), 
