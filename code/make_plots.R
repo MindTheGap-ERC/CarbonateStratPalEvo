@@ -383,12 +383,12 @@ make_test_res_time_plot = function(scenario){
   Plot6_3=plot_AIC_time(ts_lengths,scenario,"Brownian drift","C")
   
   #Combining all the plots:
-  combined_plot=gridExtra::grid.arrange(Plot6_1,Plot6_2,Plot6_3, ncol=2)
+  combined_plot=gridExtra::grid.arrange(Plot6_1,Plot6_2,Plot6_3, ncol=1)
   
   #Printing the plots plus the legend to .pdf
 
   file_name = paste("figs/R/test_results_time_domain_", as.character(scenario), "_raw.pdf", sep = "")
-  pdf(file = file_name, width = default_width_fp_in, height = 3.25)
+  pdf(file = file_name, width = default_width_fp_in, height = 6)
   gridExtra::grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
@@ -853,7 +853,7 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
   comb_list = list()
   for (i in seq_along(simulatedEvoModes)){
     comb_list[[simulatedEvoModes[i]]] = compare_evo_modes_time_strat_plot(name = simulatedEvoModes[i],
-                                                          labels = LETTERS[c(i,i+4)],
+                                                          labels = LETTERS[c(i,i+3)],
                                                           lwd = evo_mode_lwds[i],
                                                           no_of_lineages = 3)
   }
@@ -862,12 +862,10 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
   pdf(file = file_name , width=default_width_fp_in, height = 3.25)
   combined_plot = gridExtra::grid.arrange(comb_list$stasis$strat,
                                comb_list$`Brownian motion`$strat,
-                               comb_list$`weak Brownian drift`$strat,
-                               comb_list$`strong Brownian drift`$strat,
+                               comb_list$`Brownian drift`$strat,
                                comb_list$stasis$time,
                                comb_list$`Brownian motion`$time,
-                               comb_list$`weak Brownian drift`$time,
-                               comb_list$`strong Brownian drift`$time,
+                               comb_list$`Brownian drift`$time,
                                nrow = 2)
   
   dev.off()
