@@ -160,8 +160,8 @@ plot_AIC_strat = function(basin, simulated_mode, label){
   #' 
   #' @title plots AIC values in boxplots for the stratigraphic domain
   #'
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param simulated_mode: "stasis", "Brownian motion", or "Brownian drift", 
+  #' True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' @param basin: String, "A" or "B"
   #' @param label: the label you want attached to the plot, String,"A" to "Z"
   #' 
@@ -172,18 +172,15 @@ plot_AIC_strat = function(basin, simulated_mode, label){
 
   #Loads in the correct line thicknesses for the graph:
   if(simulated_mode=="stasis"){
-    highlight=rep(c(0.1,0.1,0.5,0.1),5)
+    highlight=rep(c(0.1,0.5,0.1),5)
   }else if(simulated_mode=="Brownian motion"){
-    highlight=rep(c(0.1,0.1,0.1,0.5),5)
-  }else if(simulated_mode=="strong Brownian drift"){
-    highlight=rep(c(0.5,0.1,0.1,0.1),5)
-  }else if(simulated_mode=="weak Brownian drift"){
-    highlight=rep(c(0.5,0.1,0.1,0.1),5)
+    highlight=rep(c(0.1,0.1,0.5),5)
+  }else if(simulated_mode=="Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1),5)
   }
   
   plotS1=ggplot2::ggplot(get_AIC_scenario(basin,simulated_mode), aes(x=position, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA,lwd=highlight) +
-    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
     scale_fill_brewer(palette=AIC_palette)+
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98),
@@ -200,8 +197,8 @@ plot_AIC_time = function(no_of_sampl_loc, basin, simulated_mode, label){
   #' @title plots AIC values in boxplots for the stratigraphic domain
   #' 
   #'@param no_of_sampl_loc : string, element of noOfSamplingLoc
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param simulated_mode: "stasis", "Brownian motion", "Brownian drift", 
+  #'  True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' @param basin: String, "A" or "B"
   #' @param label: the label you want attached to the plot, String,"A" to "Z"
   #' 
@@ -216,19 +213,16 @@ plot_AIC_time = function(no_of_sampl_loc, basin, simulated_mode, label){
  
   #Loads in the correct line thicknesses for the graph:
   if(simulated_mode=="stasis"){
-    highlight=rep(c(0.1,0.1,0.5,0.1),Mult_high)
+    highlight=rep(c(0.1,0.5,0.1),Mult_high)
   }else if(simulated_mode=="Brownian motion"){
-    highlight=rep(c(0.1,0.1,0.1,0.5),Mult_high)
-  }else if(simulated_mode=="strong Brownian drift"){
-    highlight=rep(c(0.5,0.1,0.1,0.1),Mult_high)
-  }else if(simulated_mode=="weak Brownian drift"){
-    highlight=rep(c(0.5,0.1,0.1,0.1),Mult_high)
+    highlight=rep(c(0.1,0.1,0.5),Mult_high)
+  }else if(simulated_mode=="Brownian drift"){
+    highlight=rep(c(0.5,0.1,0.1),Mult_high)
   }
   
   #Plots the plot:
   plotT1= ggplot2::ggplot(plot_data, aes(x=nsp, y=AIC, fill=testedEvoMode)) + 
     geom_boxplot(outlier.shape = NA,linewidth=highlight) +
-    geom_hline(yintercept = 0.9, linetype = "dashed", linewidth=0.1)+
     labs(tag = label)+
     scale_fill_brewer(palette=AIC_palette)+ 
     theme(legend.position="none", plot.title =element_text(size = 8), plot.tag = element_text(face = "bold"), plot.tag.position = c(0.01, 0.98), 
@@ -334,7 +328,7 @@ plot_comparison_evo_modes_time_domain = function(scenario, no_of_lineages = 3, p
   file_name = paste("figs/R/comparison_evo_modes_time_domain_scenario_", scenario, "_raw.pdf", sep = "")
   pdf(file = file_name , width=default_width_fp_in)
   
-  combined_plot = gridExtra::grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]], plot_list[[4]])
+  combined_plot = gridExtra::grid.arrange(plot_list[[1]], plot_list[[2]], plot_list[[3]])
   dev.off()
 }
 
@@ -351,17 +345,16 @@ make_test_res_strat_plot = function(scenario){
   #The stratigraphic plots:
   Plot4_1=plot_AIC_strat(scenario,"stasis","A")
   Plot4_2=plot_AIC_strat(scenario,"Brownian motion","B")
-  Plot4_3=plot_AIC_strat(scenario,"weak Brownian drift","C")
-  Plot4_4=plot_AIC_strat(scenario,"strong Brownian drift","D")
+  Plot4_3=plot_AIC_strat(scenario,"Brownian drift","C")
   
   #The time plots:
-  Plot4_5=plot_AIC_time(ts_lengths,scenario,"stasis","E")
-  Plot4_6=plot_AIC_time(ts_lengths,scenario,"Brownian motion","F")
-  Plot4_7=plot_AIC_time(ts_lengths,scenario,"weak Brownian drift","G")
-  Plot4_8=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","H")
+  Plot4_5=plot_AIC_time(ts_lengths,scenario,"stasis","D")
+  Plot4_6=plot_AIC_time(ts_lengths,scenario,"Brownian motion","E")
+  Plot4_7=plot_AIC_time(ts_lengths,scenario,"Brownian drift","F")
+
   
   #Combining all the plots:
-  combined_plot=gridExtra::grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_4,Plot4_5,Plot4_6,Plot4_7,Plot4_8, ncol=4)
+  combined_plot=gridExtra::grid.arrange(Plot4_1,Plot4_2,Plot4_3,Plot4_5,Plot4_6,Plot4_7, ncol=3)
   
   #Printing the plots plus the legend to .pdf
 
@@ -385,16 +378,15 @@ make_test_res_time_plot = function(scenario){
   #The plots:
   Plot6_1=plot_AIC_time(ts_lengths,scenario,"stasis","A")
   Plot6_2=plot_AIC_time(ts_lengths,scenario,"Brownian motion","B")
-  Plot6_3=plot_AIC_time(ts_lengths,scenario,"weak Brownian drift","C")
-  Plot6_4=plot_AIC_time(ts_lengths,scenario,"strong Brownian drift","D")
+  Plot6_3=plot_AIC_time(ts_lengths,scenario,"Brownian drift","C")
   
   #Combining all the plots:
-  combined_plot=gridExtra::grid.arrange(Plot6_1,Plot6_2,Plot6_3,Plot6_4, ncol=2)
+  combined_plot=gridExtra::grid.arrange(Plot6_1,Plot6_2,Plot6_3, ncol=1)
   
   #Printing the plots plus the legend to .pdf
 
   file_name = paste("figs/R/test_results_time_domain_", as.character(scenario), "_raw.pdf", sep = "")
-  pdf(file = file_name, width = default_width_fp_in, height = 3.25)
+  pdf(file = file_name, width = default_width_fp_in, height = 6)
   gridExtra::grid.arrange(combined_plot, Legend, nrow = 2, heights = c(10, 1))  #The multiplot
   dev.off()
 }
@@ -609,7 +601,7 @@ plot_pairwise_comparison(scenario_1 = "A",
                         scenario_2 = "B",
                         dist_1 = "2 km",
                         dist_2 = "6 km",
-                        mode = "strong Brownian drift",
+                        mode = "Brownian drift",
                         no_of_lineages = 3,
                         plot_seed = 1)
 
@@ -859,7 +851,7 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
   comb_list = list()
   for (i in seq_along(simulatedEvoModes)){
     comb_list[[simulatedEvoModes[i]]] = compare_evo_modes_time_strat_plot(name = simulatedEvoModes[i],
-                                                          labels = LETTERS[c(i,i+4)],
+                                                          labels = LETTERS[c(i,i+3)],
                                                           lwd = evo_mode_lwds[i],
                                                           no_of_lineages = 3)
   }
@@ -868,12 +860,10 @@ make_var_pres_of_modes_plot = function(pos, scenario, no_of_lineages = 3, plot_s
   pdf(file = file_name , width=default_width_fp_in, height = 3.25)
   combined_plot = gridExtra::grid.arrange(comb_list$stasis$strat,
                                comb_list$`Brownian motion`$strat,
-                               comb_list$`weak Brownian drift`$strat,
-                               comb_list$`strong Brownian drift`$strat,
+                               comb_list$`Brownian drift`$strat,
                                comb_list$stasis$time,
                                comb_list$`Brownian motion`$time,
-                               comb_list$`weak Brownian drift`$time,
-                               comb_list$`strong Brownian drift`$time,
+                               comb_list$`Brownian drift`$time,
                                nrow = 2)
   
   dev.off()
