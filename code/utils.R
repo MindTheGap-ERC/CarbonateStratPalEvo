@@ -403,6 +403,6 @@ get_data_from_osf = function(link){
   #' @param link url to the (public) url
   my_project <- osfr::osf_retrieve_node(link)
   my_files <- osfr::osf_ls_files(my_project)
-  osfr::osf_download(my_files, recurse = TRUE, conflicts = "overwrite", progress = TRUE)
+  osfr::osf_download(my_files, path = "data/" , recurse = TRUE, conflicts = "overwrite", progress = TRUE)
   return(invisible())
 }
