@@ -43,8 +43,7 @@ get_AIC_scenario = function(basin, simulated_mode){
   #' @title Get AIC vals from model output for plotting
   #' 
   #' @param basin: "A" or "B": the scenario of interest. 
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param simulated_mode: "stasis", "Brownian motion", or "Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' 
   #' @return An object that can be passed to ggplot to generate boxplots of AIC in strat. domain
 
@@ -91,8 +90,7 @@ get_AIC_no_of_sampl_loc= function(no_of_sampl_loc, basin, simulated_mode){
   #' @title get AIC from test results for specified number of sampling locations
   #' 
   #' @param no_of_sampl_loc : string, element of noOfSamplingLoc
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param simulated_mode: "stasis", "Brownian motion", or "Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' @param basin: String, "A" or "B"
   #' 
   #' @return some data structure that can be used by the function get_AIC_time
@@ -129,8 +127,7 @@ get_AIC_time = function(no_of_sampl_loc, basin, simulated_mode){
   #' @title Get AIC vals from model output for plotting
   #' 
   #'  @param no_of_sampl_loc : string, element of noOfSamplingLoc
-  #' @param simulated_mode: "stasis", "Brownian motion", "weak Brownian drift", 
-  #' or "strong Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
+  #' @param simulated_mode: "stasis", "Brownian motion", or "Brownian drift". True (= simulated) mode of evolution for which AIC is supposed to be extracted
   #' @param basin: String, "A" or "B"
   #' 
   #' @description combine outputs from the function get_AIC_no_of_sampl_loc
