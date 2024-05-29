@@ -40,6 +40,7 @@ source("code/utils.R")
 get_data_from_osf(link = "https://osf.io/zbpwa/")
 ```
 
+Mac users may need to install GNU Fortran 12.2 compiler from [Development Tools](https://cran.r-project.org/bin/macosx/tools/).
 See REPRODUCEME file for more info on running code and examining data.
 
 ## Repository Structure
