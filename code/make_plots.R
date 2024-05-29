@@ -369,6 +369,20 @@ make_test_res_strat_plot = function(scenario){
 
 sapply(scenarioNames, function(scenario) make_test_res_strat_plot(scenario))
 
+##### Evidence ratio: example from one case #####
+# Extracted from Scenario A, position at 
+A_BW <- get_AIC_scenario("A","Brownian motion")
+A_BW <- A_BW[A_BW == "6 km",]
+A_BW <- as.data.frame(cbind(A_BW[1:100,3], A_BW[101:200,3]))
+colnames(A_BW) <- c("GRW","URW")
+A_BW$ratio <- A_BW$URW/A_BW$GRW
+
+ggplot2::ggplot(A_BW, aes(ratio)) + 
+  geom_histogram(color="blue", fill="white")+
+  labs(x = "AICc(URW)/AICc(GRW)", 
+       y = "Count")+
+  geom_vline(aes(xintercept=1),
+             color="red", linetype="dashed", size=1)
 
 #### plot AIC weights of tests in time domain ####
 make_test_res_time_plot = function(scenario){
