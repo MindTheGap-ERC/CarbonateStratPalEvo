@@ -380,6 +380,7 @@ ggplot2::ggplot(A_BW, aes(ratio)) +
        y = "Count")+
   geom_vline(aes(xintercept=1),
              color="red", linetype="dashed", size=1)
+ggsave("figs/R/evidence_ration_A_bm.pdf")
 
 #### plot AIC weights of tests in time domain ####
 make_test_res_time_plot = function(scenario){
