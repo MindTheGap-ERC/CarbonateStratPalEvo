@@ -35,7 +35,7 @@ Open the Rproject file "CarbonateStratPalEvo.Rproj" in *Rstudio*. This will boot
 renv::restore()
 ```
 
-This will install all required packages and their dependencies needed in the project. Last, download all required data from OSF by running the following in R:
+This will install all required packages and their dependencies needed in the project. Last, download all required data from OSF by running the following in the R console:
 
 ```r
 source("code/utils.R")
