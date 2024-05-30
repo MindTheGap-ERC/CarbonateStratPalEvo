@@ -1,6 +1,6 @@
 # CarboStratPalEvo
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11348504.svg)](https://doi.org/10.5281/zenodo.11348504)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11394049.svg)](https://doi.org/10.5281/zenodo.11394049)
 
 Supplementary code for "Identification of the mode of evolution in incomplete carbonate successions", [DOI: 10.1101/2023.12.18.572098](https://doi.org/10.1101/2023.12.18.572098).
 
@@ -86,7 +86,7 @@ Copyright 2023 Utrecht University
 
 To cite this repository, please use
 
-* Hohmann, N., Koelewijn, J. R., Burgess, P., & Jarochowska, E. (2024). Supplementary code for "Identification of the Mode of Evolution in Incomplete Carbonate Successions" (v1.1.0). Zenodo. https://doi.org/10.5281/zenodo.11348504
+* Hohmann, N., Koelewijn, J. R., Burgess, P., & Jarochowska, E. (2024). Supplementary code for "Identification of the Mode of Evolution in Incomplete Carbonate Successions" (v1.1.2). Zenodo. https://doi.org/10.5281/zenodo.11394049
 
 ## License
 
